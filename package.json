@@ -13,7 +13,6 @@
     "babel-preset-react-app": "^5.0.2",
     "bfj": "6.1.1",
     "case-sensitive-paths-webpack-plugin": "2.1.2",
-    "chalk": "2.4.1",
     "css-loader": "1.0.0",
     "dotenv": "6.0.0",
     "dotenv-expand": "4.2.0",
@@ -21,9 +20,6 @@
     "eslint-config-react-app": "^3.0.3",
     "eslint-loader": "2.1.1",
     "eslint-plugin-flowtype": "2.50.1",
-    "eslint-plugin-import": "2.14.0",
-    "eslint-plugin-jsx-a11y": "6.1.1",
-    "eslint-plugin-react": "7.11.1",
     "file-loader": "2.0.0",
     "fs-extra": "7.0.0",
     "html-webpack-plugin": "4.0.0-alpha.2",
@@ -55,7 +51,10 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "lint": "eslint --fix \"src/**/*{js, jsx}\"",
+    "format": "prettier \"src/**/*.{js, jsx, css, html, json}\"",
+    "format:check": "prettier --list-different  \"src/**/*{js, jsx, css, json}\""
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -106,5 +105,15 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "chalk": "^2.4.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-prettier": "^3.0.0",
+    "eslint-plugin-react": "^7.11.1",
+    "prettier": "^1.14.3"
   }
 }
