@@ -1,0 +1,19 @@
+{
+  "name": "thor-ah-frontend",
+  "version": "1.0.0",
+  "description": "Authors' Haven Client App",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm runt est"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andela/thor-ah-frontend.git"
+  },
+  "author": "Thor Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andela/thor-ah-frontend/issues"
+  },
+  "homepage": "https://github.com/andela/thor-ah-frontend#readme"
+}
