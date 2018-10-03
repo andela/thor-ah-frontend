@@ -1,8 +1,12 @@
+[![Build Status](https://travis-ci.org/andela/thor-ah-frontend.svg?branch=develop)](https://travis-ci.org/andela/thor-ah-frontend)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/4a442c739c5d70ee29f2/test_coverage)](https://codeclimate.com/github/andela/thor-ah-frontend/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/4a442c739c5d70ee29f2/maintainability)](https://codeclimate.com/github/andela/thor-ah-frontend/maintainability)
 
-This is the client app for the Authors' Haven project. 
+This is the client app for the Authors' Haven project.
 Built with React
 
 ## Table of Contents
+
 - Folder Structure
 - Available scripts
 
