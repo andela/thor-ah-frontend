@@ -1,29 +1,22 @@
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import React, { Fragment } from 'react'
-
-import LandingPage from './containers/LandingPage';
-import NavBar from './components/NavBar';
-import Footer from './components/Footer';
+// components
 import ProfilePage from './containers/ProfilePage';
 import ArticlePage from './containers/ArticlePage';
-
-const Sample = () => (
-  <div className="landing-page">
-    <h1>This is just a sample page for routes</h1>
-  </div>
-)
+import Homepage from './containers/Home/Home';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 
 const AppRoutes = () => (
   <Router>
     <Fragment>
-      <NavBar />
-      <Route exact path='/' component={ LandingPage }/>
-      <Route exact path='/sample' component={ Sample }/>
+      <Header />
+      <Route exact path='/' component={Homepage} />
       <Route path='/profile/user' component={ ProfilePage }/>
       <Route exact path='/article' component={ ArticlePage }/>
       <Footer />
     </Fragment>
   </Router>
-)
+);
 
 export default AppRoutes;

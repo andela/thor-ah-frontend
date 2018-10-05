@@ -46,6 +46,7 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-tabs": "^2.3.0",
+    "react-icons": "^3.1.0",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
@@ -64,8 +65,8 @@
     "build": "node scripts/build.js",
     "test": "jest --verbose --coverage",
     "lint": "eslint ./src/**/*.{js,jsx} --fix",
-    "format": "prettier \"src/**/*.{js, jsx, css, html, json}\"",
-    "format:check": "prettier --list-different  \"src/**/*{js, jsx, css, json}\""
+    "format": "prettier src/**/*.{js,jsx,css,html,json}",
+    "format:check": "prettier --list-different  src/**/*{js,jsx,css,json}"
   },
   "eslintConfig": {
     "extends": "react-app"
