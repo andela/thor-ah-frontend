@@ -4,11 +4,22 @@ import { Link } from 'react-router-dom';
 import { GoKebabVertical, GoX } from 'react-icons/go';
 // styles
 import styles from './header.module.scss';
+import signupStyle from '../../containers/Signup/SignUp.module.css'
+import Signup from '../../containers/Signup/SignUp'
 
 class AuthMenu extends Component {
   constructor(props) {
     super(props);
     this.triggerMobileCategory = this.triggerMobileCategory.bind(this);
+
+    this.state = {
+      showModal: false
+    }
+  }
+
+  toggleModal = () => {
+    const { showModal } = this.state;
+    this.setState({ showModal: !showModal })
   }
 
   triggerMobileCategory() {
@@ -16,17 +27,35 @@ class AuthMenu extends Component {
     triggerCategory(mobileCategory === 'visible' ? 'hidden' : 'visible');
   }
 
+  signUpModal() {
+    return (<div id={signupStyle.container} style={{ 'overflowY': 'auto' }}>
+      <button className={signupStyle.modalClose} type="button" onClick={this.toggleModal}>
+        <span className={signupStyle.xIcon}>
+          <GoX />
+        </span>
+      </button>
+      <Signup toggleModal={this.toggleModal} />
+    </div>)
+  }
+
   render() {
+    const { showModal } = this.state;
+    let modal = null;
+    if (showModal) {
+      modal = this.signUpModal();
+    }
+
     const { mobileCategory } = this.props;
     return (
       <div className={styles.links}>
         <ul>
           <li><Link to="/login">Login</Link></li>
-          <li><Link to="/register">Register</Link></li>
+          <li><button type='button' className={signupStyle.transparentBtn} onClick={this.toggleModal}>Register</button></li>
         </ul>
-        <button className={styles.mobileMenuCtrl} onClick={ this.triggerMobileCategory } type="button">
-          { mobileCategory === 'visible' ? <GoX /> : <GoKebabVertical /> }
+        <button className={styles.mobileMenuCtrl} onClick={this.triggerMobileCategory} type="button">
+          {mobileCategory === 'visible' ? <GoX /> : <GoKebabVertical />}
         </button>
+        {modal}
       </div>
     );
   }

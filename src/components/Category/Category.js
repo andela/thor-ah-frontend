@@ -21,18 +21,17 @@ class Category extends Component {
 
   render() {
     const { categories } = this.state;
-    const { mobileCategory, windowWidth } = this.props
-    console.log(windowWidth);
+    const { mobileCategory } = this.props
     const categoryStyle = {
       display: mobileCategory === 'visible' ? 'block' : 'none',
     }
     return (
-      <div className={ `${styles.category}`  } style={ categoryStyle }>
+      <div className={`${styles.category}`} style={categoryStyle}>
         <ul>
-          { categories.map(category => {
+          {categories.map(category => {
             const { id, name } = category;
             return (
-              <li key={id}><Link to={ `/articles/categories/${name.toLowerCase()}` }>{ name }</Link></li>
+              <li key={id}><Link to={`/articles/categories/${name.toLowerCase()}`}>{name}</Link></li>
             );
           })}
         </ul>

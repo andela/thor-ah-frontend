@@ -5,7 +5,7 @@ import styles from './home.module.scss';
 import HeroFeatured from '../../components/HeroFeatured/HeroFeatured';
 import HomeArticles from '../../components/HomeArticles/HomeArticles';
 
-class Home extends Component  {
+class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -13,7 +13,7 @@ class Home extends Component  {
 
   render() {
     return (
-      <div className={ styles.home }>
+      <div className={styles.home}>
         <HeroFeatured />
         <HomeArticles />
       </div>

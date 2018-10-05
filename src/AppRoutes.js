@@ -8,19 +8,14 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import ProtectedRoute from './containers/ProtectedRoute';
 
-const Login = () => (
-  <div><h1>Login page</h1></div>
-);
-
 const AppRoutes = () => (
   <Router>
     <Fragment>
       <Header />
       <Route exact path='/' component={Homepage} />
-      <Route path='/login' component={ Login }/>
       {/* protected routes can be rendered using the ProtectedRoutes component */}
-      <ProtectedRoute path='/article' component={ ArticlePage }/>
-      <ProtectedRoute path='/profile/user' component={ ProfilePage }/>
+      <ProtectedRoute path='/article' component={ArticlePage} />
+      <ProtectedRoute path='/profile/user' component={ProfilePage} />
       <Footer />
     </Fragment>
   </Router>
