@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from '../containers/SignIn/SignIn.module.css';
+import styles from '../containers/Signup/SignUp.module.css';
 
 export default function SocialSignup() {
     return (

@@ -36,11 +36,11 @@ class Header extends Component {
           </Link>
         </div>
         <div className={styles.header_category}>
-          <Category mobileCategory={ mobileCategory } />
+          <Category mobileCategory={mobileCategory} />
         </div>
         <div className={styles.header_half}>
           <Search />
-          {authenticated ? <Menu user={user} /> : <AuthMenu triggerCategory= { this.triggerMobileCategory } mobileCategory={ mobileCategory } /> }
+          {authenticated ? <Menu user={user} /> : <AuthMenu triggerCategory={this.triggerMobileCategory} mobileCategory={mobileCategory} />}
         </div>
       </header>
     );

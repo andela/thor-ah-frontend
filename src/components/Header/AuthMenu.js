@@ -5,6 +5,8 @@ import { GoKebabVertical, GoX } from 'react-icons/go';
 // styles
 import styles from './header.module.scss';
 import Signin from '../../containers/SignIn/SignIn'
+import signupStyle from '../../containers/Signup/SignUp.module.css'
+import Signup from '../../containers/Signup/SignUp'
 
 class AuthMenu extends Component {
   constructor(props) {
@@ -26,24 +28,39 @@ class AuthMenu extends Component {
     triggerCategory(mobileCategory === 'visible' ? 'hidden' : 'visible');
   }
 
+  signUpModal() {
+    return (<div id={signupStyle.container} style={{ 'overflowY': 'auto' }}>
+      <button className={signupStyle.modalClose} type="button" onClick={this.toggleModal}>
+        <span className={signupStyle.xIcon}>
+          <GoX />
+        </span>
+      </button>
+      <Signup toggleModal={this.toggleModal} />
+    </div>)
+  }
+
   render() {
     const { showModal } = this.state;
     let modal = null;
+    let signupModal = null;
     if (showModal) {
       modal = <Signin toggleModal={this.toggleModal} />;
+      signupModal = this.signUpModal();
     }
 
     const { mobileCategory } = this.props;
     return (
       <div className={styles.links}>
         <ul>
-          <li> 
+          <li>
             <button className={styles.transparentBtn} type="button" onClick={this.toggleModal}> Login</button>
           </li>
           <li><Link to="/register">Register</Link></li>
+          <li><Link to="/login">Login</Link></li>
+          <li><button type='button' className={signupStyle.transparentBtn} onClick={this.toggleModal}>Register</button></li>
         </ul>
-        <button className={styles.mobileMenuCtrl} onClick={ this.triggerMobileCategory } type="button">
-          { mobileCategory === 'visible' ? <GoX /> : <GoKebabVertical /> }
+        <button className={styles.mobileMenuCtrl} onClick={this.triggerMobileCategory} type="button">
+          {mobileCategory === 'visible' ? <GoX /> : <GoKebabVertical />}
         </button>
         {modal}
       </div>
