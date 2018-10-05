@@ -1,0 +1,21 @@
+.articles {
+  padding: 30px 15px;
+  display: block;
+
+  & > div {
+    display: none !important;
+    transition: .5s ease-in-out;
+
+    &::after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+
+    &.active {
+      display: grid !important;
+      grid-template-columns: auto auto auto auto;
+      grid-gap: 20px;
+    }
+  }
+}
