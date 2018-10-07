@@ -12,6 +12,7 @@ const NavBar = () => (
       </p>
       <Link to='/' className="App-link"> Home </Link>
       <Link to='/sample' className="App-link"> sample </Link>
+      <Link to='/create-article' className="App-link"> Create Article</Link>
     </header>
   </Fragment>
 )
