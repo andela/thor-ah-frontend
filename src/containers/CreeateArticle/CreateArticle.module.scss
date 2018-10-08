@@ -1,9 +1,66 @@
+.createArticle {
+  max-width: 600px;
+  display: grid;
+  justify-items: center;
+  margin: 40px auto;
+
+  .articleTitle {
+    padding: 0.5em;
+    font-size: 1.5em;
+    margin-bottom: 1em;
+    background: #f9f9f9;
+    width: 500px;
+    border: none;
+    font-weight: bold;
+    -webkit-appearance: none;
+    outline: none;
+  }
+
+  .buttonGroup {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    justify-items: center;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 2px;
+    z-index: 2;
+    box-sizing: border-box;
+    padding: 0.5em;
+
+    button {
+      background: transparent;
+      border: none;
+      font-size: 1em;
+      outline: none;
+    }
+  }
+}
+
 .textEditor {
   min-height: 500px;
-  padding: 30px;
-  max-width: 500px;
-  margin: 60px auto;
-  background: #F9F9F9;
+  padding: 1.8em;
+  margin: 30px 0;
+  background: #f9f9f9;
   line-height: 25px;
-  font-family: Georgia,Cambria,"Times New Roman",Times,serif;
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+  box-sizing: border-box;
+  border-radius: 10px;
+  cursor: text;
+  margin-bottom: 2em;
+  box-sizing: border-box;
+}
+
+.articleTitle::placeholder {
+  color: rgb(201, 201, 201);
+}
+
+.publishButton {
+  padding: 10px 30px;
+  background: #c40018;
+  border: none;
+  color: #fff;
+  font-size: 0.8em;
+  border-radius: 4px;
+  -webkit-appearance: none;
+  outline: none;
 }

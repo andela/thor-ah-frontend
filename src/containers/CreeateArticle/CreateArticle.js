@@ -1,21 +1,59 @@
 import React, { Component } from "react";
-import { EditorState, RichUtils } from "draft-js";
-import Editor from "draft-js-plugins-editor";
+import { RichUtils } from "draft-js";
+import Editor, {
+  createEditorStateWithText,
+  composeDecorators
+} from "draft-js-plugins-editor";
+import createLinkifyPlugin from "draft-js-linkify-plugin";
+import createHighlightPlugin from "draft-js-highlight-plugin";
+import createLinkPlugin from "draft-js-anchor-plugin";
 import createImagePlugin from "draft-js-image-plugin";
+import createAlignmentPlugin from "draft-js-alignment-plugin";
+import createFocusPlugin from "draft-js-focus-plugin";
+import createResizeablePlugin from "draft-js-resizeable-plugin";
+import createBlockDndPlugin from "draft-js-drag-n-drop-plugin";
+import createDragNDropUploadPlugin from "@mikeljames/draft-js-drag-n-drop-upload-plugin";
 import styles from "./CreateArticle.module.scss";
-import createHighlightPlugin from "./plugins/highlighPlugin";
-import addLinkPlugin from "./plugins/linkPlugin";
-import mediaBlockRenderer from "./entities/mediaBlockRenderer";
 
-const highlighPlugin = createHighlightPlugin();
-const imagePlugin = createImagePlugin();
+const highlightPlugin = createHighlightPlugin({
+  background: "#fffe0d",
+  color: "#000",
+  padding: "0.3em 0.4em"
+});
+const linkPlugin = createLinkPlugin();
+const linkifyPlugin = createLinkifyPlugin();
+const focusPlugin = createFocusPlugin();
+const resizeablePlugin = createResizeablePlugin();
+const blockDndPlugin = createBlockDndPlugin();
+const alignmentPlugin = createAlignmentPlugin();
+
+const decorator = composeDecorators(
+  resizeablePlugin.decorator,
+  alignmentPlugin.decorator,
+  focusPlugin.decorator,
+  blockDndPlugin.decorator
+);
+
+const imagePlugin = createImagePlugin({ decorator });
+
+const dragNDropFileUploadPlugin = createDragNDropUploadPlugin({
+  addImage: imagePlugin.addImage
+});
 
 class CreateArticle extends Component {
   state = {
-    editorState: EditorState.createEmpty()
+    editorState: createEditorStateWithText("Share your thoughts")
   };
 
-  plugins = [highlighPlugin, addLinkPlugin, imagePlugin];
+  plugins = [
+    highlightPlugin,
+    linkPlugin,
+    linkifyPlugin,
+    imagePlugin,
+    focusPlugin,
+    resizeablePlugin,
+    dragNDropFileUploadPlugin
+  ];
 
   onChange = editorState => {
     this.setState({
@@ -23,42 +61,18 @@ class CreateArticle extends Component {
     });
   };
 
-  onAddLink = () => {
-    const { editorState } = this.state;
-    const selection = editorState.getSelection();
-    const link = window.prompt("Paste the link");
-    if (!link) {
-      this.onChange(RichUtils.toggleLink(editorState, selection, null));
-      return "handled";
-    }
-    const content = editorState.getCurrentContent();
-    const contentWithEntity = content.createEntity("LINK", "MUTABLE", {
-      url: link
-    });
-    const newEditorState = EditorState.push(
-      editorState,
-      contentWithEntity,
-      "create-entity"
-    );
-    const entityKey = contentWithEntity.getLastCreatedEntityKey();
-    this.onChange(RichUtils.toggleLink(newEditorState, selection, entityKey));
-    return "handled";
+  focus = () => {
+    this.editor.focus();
   };
-
-  // onAddImage = event => {
-  //   event.preventDefault();
-  //   const { editorState } = this.state;
-  //   const urlValue = window.prompt("Paste Image Link");
-  // };
 
   handleKeyCommand = command => {
     const { editorState } = this.state;
     const newState = RichUtils.handleKeyCommand(editorState, command);
     if (newState) {
       this.onChange(newState);
-      return "handled";
+      return true;
     }
-    return "not-handled";
+    return false;
   };
 
   onItalicClick = () => {
@@ -89,34 +103,39 @@ class CreateArticle extends Component {
   render() {
     const { editorState } = this.state;
     return (
-      <div className={styles.textEditor}>
-        <div className={styles.buttonGroup}>
-          <button onClick={this.onBoldClick} type="button">
-            B
-          </button>
-          <button onClick={this.onItalicClick} type="button">
-            <em>I</em>
-          </button>
-          <button onClick={this.onUnderlineClick} type="button">
-            U
-          </button>
-          <button onClick={this.onHighlight} type="button">
-            H
-          </button>
-          <button onClick={this.onStrikeThroughClick} type="button">
-            abc
-          </button>
-          <button id="link-url" onClick={this.onAddLink} type="button">
-            <i className="material-icons">attach_link</i>
-          </button>
+      <div className={styles.createArticle}>
+        <div>
+          <input placeholder="Title" className={styles.articleTitle} />
+          <div className={styles.buttonGroup}>
+            <button onClick={this.onBoldClick} type="button">
+              <strong>B</strong>
+            </button>
+            <button onClick={this.onItalicClick} type="button">
+              <em>I</em>
+            </button>
+            <button onClick={this.onHighlight} type="button">
+              H
+            </button>
+            <button onClick={this.onStrikeThroughClick} type="button">
+              abc
+            </button>
+            <button onClick={this.onUnderlineClick} type="button">
+              U
+            </button>
+          </div>
+          <div className={styles.textEditor}>
+            <Editor
+              editorState={editorState}
+              handleKeyCommand={this.handleKeyCommand}
+              onChange={this.onChange}
+              plugins={this.plugins}
+              ref={element => {
+                this.editor = element;
+              }}
+            />
+          </div>
+          <button type="button" className={styles.publishButton}>Publish</button>
         </div>
-        <Editor
-          editorState={editorState}
-          onChange={this.onChange}
-          handleKeyCommand={this.handleKeyCommand}
-          plugins={this.plugins}
-          blockRendererFn={mediaBlockRenderer}
-        />
       </div>
     );
   }
