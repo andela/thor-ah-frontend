@@ -8,19 +8,13 @@ class Search extends Component {
     this.state = {
       searchActive: 0
     };
+    this.processEvent = this.processEvent.bind(this);
   }
 
   processEvent(e) {
-    console.log(e);
     e.preventDefault();
     const { searchActive } = this.state;
     this.setState({ searchActive: !searchActive });
-  }
-
-  logChange(e) {
-    e.preventDefault();
-    const { searchActive } = this.state;
-    console.log(searchActive);
   }
 
   render() {
@@ -33,7 +27,7 @@ class Search extends Component {
       <div className={ styles.search }>
         <form>
           <input type="text" placeholder="Search here" className={styles.search_input} style={ inputStyle } />
-          <button className={ styles.search_submit } type="submit" onClick={ this.processEvent.bind(this) }><FaSearch /></button>
+          <button className={ styles.search_submit } type="submit" onClick={ this.processEvent }><FaSearch /></button>
         </form>
       </div>
     );

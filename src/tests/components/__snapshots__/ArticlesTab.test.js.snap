@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`create a snapshot 1`] = `
+<div
+  className="homeTab"
+>
+  <ul>
+    <li
+      className="active"
+    >
+      <button
+        data-tab="featured"
+        onClick={[Function]}
+        type="button"
+      >
+        Featured Articles
+      </button>
+    </li>
+    <li
+      className=""
+    >
+      <button
+        data-tab="collections"
+        onClick={[Function]}
+        type="button"
+      >
+        Collections
+      </button>
+    </li>
+    <li
+      className=""
+    >
+      <button
+        data-tab="recommended"
+        onClick={[Function]}
+        type="button"
+      >
+        Most Recommended
+      </button>
+    </li>
+  </ul>
+</div>
+`;

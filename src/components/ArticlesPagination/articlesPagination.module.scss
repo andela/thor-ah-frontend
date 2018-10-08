@@ -30,6 +30,10 @@ $red: #C40018;
     border: 1px solid #FBFBFB;
     padding: 20px 10px 15px 10px;
 
+    @media only screen and (max-width: 600px) {
+      padding: 10px 10px 5px 10px;
+    }
+
     li {
       & {
         width: 30px;
