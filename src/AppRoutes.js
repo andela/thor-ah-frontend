@@ -5,6 +5,7 @@ import LandingPage from './containers/LandingPage';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import ProfilePage from './containers/ProfilePage';
+import ArticlePage from './containers/ArticlePage';
 
 const Sample = () => (
   <div className="landing-page">
@@ -19,6 +20,7 @@ const AppRoutes = () => (
       <Route exact path='/' component={ LandingPage }/>
       <Route exact path='/sample' component={ Sample }/>
       <Route path='/profile/user' component={ ProfilePage }/>
+      <Route exact path='/article' component={ ArticlePage }/>
       <Footer />
     </Fragment>
   </Router>

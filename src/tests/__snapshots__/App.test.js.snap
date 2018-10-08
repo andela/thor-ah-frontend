@@ -20,21 +20,25 @@ exports[`create a snapshot 1`] = `
       href="/"
       onClick={[Function]}
     >
-       Home 
+       Home
     </a>
     <a
       className="App-link"
       href="/sample"
       onClick={[Function]}
     >
-       sample 
+       sample
     </a>
     <a
       className="App-link"
       href="/profile/user"
       onClick={[Function]}
     >
-       profile 
+       profile
+      href="/article"
+      onClick={[Function]}
+    >
+       Article Page
     </a>
   </header>
   <div
