@@ -1,7 +1,14 @@
 import React from 'react';
-import profileImage from '../../assets/images/ksolo.jpg';
-import styles from './UserBio.module.scss';
+
+// components
 import UserFollow from '../UserFollow/UserFollow';
+
+// styles
+import styles from './UserBio.module.scss';
+
+// images
+import profileImage from '../../assets/images/ksolo.jpg';
+
 
 const UserBio = () => (
   <div className={ styles.profileHeader }>

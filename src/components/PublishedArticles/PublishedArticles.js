@@ -1,20 +1,22 @@
 import React, { Fragment } from 'react';
+
+// styles
 import styles from '../UserProfileTabs/UserProfileTabs.module.scss';
-import apple from '../../assets/images/apple.jpg';
-import andela from '../../assets/images/andela.png';
-import microsoft from '../../assets/images/microsoft.png';
+
+// images
+import appleImage from '../../assets/images/apple.jpg';
+import andelaImage from '../../assets/images/andela.png';
+import microsoftImage from '../../assets/images/microsoft.png';
 
 const PublishedArticles = () => (
   <Fragment>
     <a href="/favorites">
       <div className={ styles.articlesGrid }>
         <div>
-          <img src={ andela } alt="andela" className={ styles.articleImage }/>
+          <img src={ andelaImage } alt="andela" className={ styles.articleImage }/>
         </div>
         <div className={ styles.articleContents }>
-          <div>
-            <h1> The EPIC Story </h1>
-          </div>
+          <h1> The EPIC Story </h1>
           <div>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. 
@@ -35,12 +37,10 @@ const PublishedArticles = () => (
     <a href="/favorites">
       <div className={ styles.articlesGrid }>
         <div>
-          <img src={ apple } alt="andela" className={ styles.articleImage }/>
+          <img src={ appleImage } alt="andela" className={ styles.articleImage }/>
         </div>
         <div className={ styles.articleContents }>
-          <div>
-            <h1> Apple Technology </h1>
-          </div>
+          <h1> Apple Technology </h1>
           <div>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. 
@@ -61,12 +61,10 @@ const PublishedArticles = () => (
     <a href="/favorites">
       <div className={ styles.articlesGrid }>
         <div>
-          <img src={ microsoft } alt="andela" className={ styles.articleImage }/>
+          <img src={ microsoftImage } alt="andela" className={ styles.articleImage }/>
         </div>
         <div className={ styles.articleContents }>
-          <div>
-            <h1> Microsoft Technology </h1>
-          </div>
+          <h1> Microsoft Technology </h1>
           <div>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. 

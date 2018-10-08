@@ -1,5 +1,6 @@
 import React from 'react';
 
+// components
 import UserBio from '../components/UserBio/UserBio';
 import UserProfiletabs from '../components/UserProfileTabs/UserProfileTabs';
 

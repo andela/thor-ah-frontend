@@ -17,6 +17,8 @@
     "css-loader": "1.0.0",
     "dotenv": "6.0.0",
     "dotenv-expand": "4.2.0",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.6.0",
     "eslint": "5.6.0",
     "eslint-config-react-app": "^3.0.3",
     "eslint-loader": "2.1.1",
@@ -59,7 +61,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js",
+    "test": "jest --verbose --coverage",
     "lint": "eslint ./src/**/*.{js,jsx} --fix",
     "format": "prettier \"src/**/*.{js, jsx, css, html, json}\"",
     "format:check": "prettier --list-different  \"src/**/*{js, jsx, css, json}\""

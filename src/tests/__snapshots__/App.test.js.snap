@@ -10,7 +10,7 @@ exports[`create a snapshot 1`] = `
     <img
       alt="logo"
       className="App-logo"
-      src="logo.svg"
+      src={Object {}}
     />
     <p>
       Authors Haven App is live
