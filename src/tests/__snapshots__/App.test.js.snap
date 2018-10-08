@@ -29,6 +29,13 @@ exports[`create a snapshot 1`] = `
     >
        sample 
     </a>
+    <a
+      className="App-link"
+      href="/profile/user"
+      onClick={[Function]}
+    >
+       profile 
+    </a>
   </header>
   <div
     className="landing-page"

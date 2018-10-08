@@ -4,6 +4,7 @@ import React, { Fragment } from 'react'
 import LandingPage from './containers/LandingPage';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
+import ProfilePage from './containers/ProfilePage';
 
 const Sample = () => (
   <div className="landing-page">
@@ -17,6 +18,7 @@ const AppRoutes = () => (
       <NavBar />
       <Route exact path='/' component={ LandingPage }/>
       <Route exact path='/sample' component={ Sample }/>
+      <Route path='/profile/user' component={ ProfilePage }/>
       <Footer />
     </Fragment>
   </Router>

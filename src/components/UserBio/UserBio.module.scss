@@ -1,0 +1,112 @@
+// Variables
+$padding: 5px;
+$tab: 600px;
+$desktop-small: 900px;
+$desktop-large: 1100px;
+
+// MIXINS.
+@mixin tab {
+  @media (min-width: #{$tab}) {
+    @content;
+  }
+}
+
+@mixin desktop-small {
+  @media (min-width: #{$desktop-small}) and (max-width: 1099px) {
+    @content;
+  }
+}
+
+@mixin desktop-large {
+  @media (min-width: #{$desktop-large}) {
+    @content;
+  }
+}
+
+.profileHeader {
+  text-align: center;
+  border-radius: 20px;
+  padding: $padding * 2;
+  margin-bottom: 30px;
+
+  .profileImage {
+    width: 115px;
+    border-radius: 50%;
+    margin: 20px auto 5px auto;
+  }
+
+  .userNames {
+    display: block;
+    font-family: 'PT Sans';
+    font-size: 1.6em;
+    font-weight: bold;
+  }
+
+  .bioDiv {
+    padding: $padding;
+
+    .userBio {
+      font-family: 'PT Sans';
+      font-size: 1em;
+      
+      @include desktop-small {
+        margin: auto;
+        width: 70%;
+      }
+
+      @include desktop-large {
+        margin: auto;
+        width: 60%;
+      }
+    }
+
+    .socialMedia {
+      align-items: center;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      padding: $padding * 2 $padding;
+      margin: auto;
+      width: 30%;
+
+      @include tab {
+        margin: auto;
+        width: 20%;
+      }
+
+      @include desktop-large {
+        margin: auto;
+        width: 10%;
+      }
+    }
+
+    .btnAction {
+      padding: $padding;
+
+      button {
+        width: 50%;
+        border: 1px solid #C40018;
+        padding: $padding * 2 $padding * 3;
+        border-radius: 5px;
+        background-color: #fff;
+        color: #C40018;
+        cursor: pointer;
+        font-size: 1em;
+
+        @include tab {
+          margin: auto;
+          width: 30%;
+        }
+
+        @include desktop-small {
+          margin: auto;
+          width: 20%;
+        }
+
+        @include desktop-large {
+          margin: auto;
+          width: 15%;
+        }
+      }
+    }
+  }
+}
