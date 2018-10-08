@@ -6,14 +6,16 @@ import ArticlePage from './containers/ArticlePage';
 import Homepage from './containers/Home/Home';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import ProtectedRoute from './containers/ProtectedRoute';
 
 const AppRoutes = () => (
   <Router>
     <Fragment>
       <Header />
       <Route exact path='/' component={Homepage} />
-      <Route path='/profile/user' component={ ProfilePage }/>
-      <Route exact path='/article' component={ ArticlePage }/>
+      {/* protected routes can be rendered using the ProtectedRoutes component */}
+      <ProtectedRoute path='/article' component={ ArticlePage }/>
+      <ProtectedRoute path='/profile/user' component={ ProfilePage }/>
       <Footer />
     </Fragment>
   </Router>
