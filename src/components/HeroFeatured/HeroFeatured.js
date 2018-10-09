@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+// styles
 import styles from './heroFeatured.module.scss';
+// images
 import thorAh from '../../authors_haven.png';
 
 class HeroFeatured extends Component {

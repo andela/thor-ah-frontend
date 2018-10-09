@@ -1,6 +1,13 @@
+.not_found_message {
+  text-align: center;
+  margin: auto;
+  width: 100%;
+}
+
 .articles {
   padding: 30px 15px;
   display: block;
+  width: 100%;
 
   @media only screen and (max-width: 800px) {
     padding-left: 20px;

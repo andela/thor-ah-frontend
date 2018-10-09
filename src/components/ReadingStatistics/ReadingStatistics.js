@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-
 // styles
 import styles from '../UserProfileTabs/UserProfileTabs.module.scss';
 

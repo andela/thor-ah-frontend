@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
+// components
 import Article from '../Article/Article';
+// styles
 import styles from './articles.module.scss'
+// images
 import thumbnailImage from '../../demo.png';
 
 class Articles extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      articles: []
-    }
-  }
-
-  componentWillMount() {
-    this.setState({
       articles: [
         {
           id: 1,
@@ -41,28 +38,21 @@ class Articles extends Component {
           slug: 'this-is-slug',
           body: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
           thumbnail: thumbnailImage,
-        },
-        {
-          id: 5,
-          title: 'This Article talks about some Tall Buildings And City Night Life',
-          slug: 'this-is-slug',
-          body: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
-          thumbnail: thumbnailImage,
-        },
-        {
-          id: 6,
-          title: 'This Article talks about some Tall Buildings And City Night Life',
-          slug: 'this-is-slug',
-          body: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
-          thumbnail: thumbnailImage,
-        },
+        }
       ]
-    })
+    }
   }
 
   render() {
     const { articles } = this.state;
     const { content } = this.props;
+    if (articles.length < 1) {
+      return (
+        <div className={ styles.not_found_message }>
+          <h1>No Articles Found!</h1>
+        </div>
+      )
+    }
     return (
       <div className={ styles.articles }>
         <div data-content="featured" className={ content === 'featured' ? styles.active : '' }>

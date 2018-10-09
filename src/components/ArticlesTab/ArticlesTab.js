@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+// styles
 import styles from './articlesTab.module.scss';
-
 
 class ArticlesTab extends Component {
   constructor(props) {

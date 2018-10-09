@@ -1,14 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+// icons
 import { FaBell } from 'react-icons/fa';
+// styles
 import styles from './header.module.scss';
 
-const  photoStyle = {
-  height: '40px',
-  width: '40px',
-  border: '1px solid #000',
-  borderRadius: '50%'
-}
 const Menu = (props) => {
   const { user } = props;
   const { username } = user;
@@ -21,7 +17,7 @@ const Menu = (props) => {
         </li>
         <li>
           <Link to="/#">
-            <img src="https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_1280.png" style={ photoStyle } alt={ username } className="avatar" />
+            <img src="https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_1280.png" alt={ username } className="avatar" />
           </Link>
         </li>
       </ul>

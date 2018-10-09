@@ -1,5 +1,7 @@
 import React from 'react';
+// icons
 import { FiChevronLeft, FiChevronRight} from 'react-icons/fi'
+// styles
 import styles from './articlesPagination.module.scss'
 
 const ArticlesPagination = () => (

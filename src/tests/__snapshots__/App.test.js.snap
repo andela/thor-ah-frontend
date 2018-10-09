@@ -17,7 +17,7 @@ exports[`create a snapshot 1`] = `
         <img
           alt="logo"
           className="logo"
-          src="logo.png"
+          src={Object {}}
         />
       </a>
     </div>
@@ -251,7 +251,7 @@ exports[`create a snapshot 1`] = `
         <img
           alt="title"
           className=""
-          src="authors_haven.png"
+          src={Object {}}
         />
         <div
           className="main_featured__details"
@@ -327,7 +327,7 @@ exports[`create a snapshot 1`] = `
             >
               <img
                 alt="This Article talks about some Tall Buildings And City Night Life"
-                src="demo.png"
+                src={Object {}}
               />
             </div>
             <div
@@ -371,7 +371,7 @@ exports[`create a snapshot 1`] = `
             >
               <img
                 alt="This Article talks about some Tall Buildings And City Night Life"
-                src="demo.png"
+                src={Object {}}
               />
             </div>
             <div
@@ -415,7 +415,7 @@ exports[`create a snapshot 1`] = `
             >
               <img
                 alt="This Article talks about some Tall Buildings And City Night Life"
-                src="demo.png"
+                src={Object {}}
               />
             </div>
             <div
@@ -459,7 +459,7 @@ exports[`create a snapshot 1`] = `
             >
               <img
                 alt="This Article talks about some Tall Buildings And City Night Life"
-                src="demo.png"
+                src={Object {}}
               />
             </div>
             <div
@@ -503,7 +503,7 @@ exports[`create a snapshot 1`] = `
             >
               <img
                 alt="This Article talks about some Tall Buildings And City Night Life"
-                src="demo.png"
+                src={Object {}}
               />
             </div>
             <div
@@ -547,7 +547,7 @@ exports[`create a snapshot 1`] = `
             >
               <img
                 alt="This Article talks about some Tall Buildings And City Night Life"
-                src="demo.png"
+                src={Object {}}
               />
             </div>
             <div

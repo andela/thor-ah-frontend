@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+// icons
 import { GoKebabVertical, GoX } from 'react-icons/go';
+// styles
 import styles from './header.module.scss';
 
 class AuthMenu extends Component {

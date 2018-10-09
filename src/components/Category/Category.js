@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import windowSize from 'react-window-size';
+// styles
 import styles from './category.module.scss';
-
 
 class Category extends Component {
   constructor(props) {
@@ -20,12 +21,13 @@ class Category extends Component {
 
   render() {
     const { categories } = this.state;
-    const { mobileCategory } = this.props
+    const { mobileCategory, windowWidth } = this.props
+    console.log(windowWidth);
     const categoryStyle = {
       display: mobileCategory === 'visible' ? 'block' : 'none',
     }
     return (
-      <div className={ styles.category } style={ categoryStyle }>
+      <div className={ `${styles.category}`  } style={ categoryStyle }>
         <ul>
           { categories.map(category => {
             const { id, name } = category;
@@ -40,4 +42,4 @@ class Category extends Component {
 }
 
 
-export default Category;
+export default windowSize(Category);
