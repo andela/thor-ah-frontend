@@ -16,21 +16,23 @@ const AppRoutes = () => (
   <Router>
     <Fragment>
       <Header />
-
       <ProtectedRoute path='/profile/user' component={ProfilePage} />
       <Switch>
         <Route exact path='/' component={Homepage} />
         {/* protected routes can be rendered using the ProtectedRoutes component */}
-        <Route path='/categories' component={AllCategories} />
         <Route path='/category/:name' component={ArticleCategory} />
-        <ProtectedRoute path='/articles/:slug' component={ArticlePage} />
-        <ProtectedRoute path='/profile/user' component={ProfilePage} />
         <Route exact path='/signin' component={Signin} />
-
+        <Route path='/categories' component={ AllCategories }/>
+        <Route path='/category/:name' component={ ArticleCategory } />
+        {/* protected routes can be rendered using the ProtectedRoutes component */}
+        <ProtectedRoute path='/profile/user' component={ProfilePage} />
+        <ProtectedRoute path='/articles/:slug' component={ ArticlePage }/>
+        <ProtectedRoute path='/profile/user' component={ ProfilePage }/>
+        <ProtectedRoute path='/article' component={ArticlePage} />
         {/* will always render when no other path is matched */}
         <Route component={NotFound} />
+        <Footer />
       </Switch>
-      <Footer />
     </Fragment>
   </Router>
 );
