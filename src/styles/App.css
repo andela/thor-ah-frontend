@@ -45,3 +45,27 @@
     transform: rotate(360deg);
   }
 }
+
+
+/* USERS PROFILE PAGE */
+.user-profile {
+  margin: 50px auto;
+  min-height: 100%;
+  padding: 20px;
+  width: 80%;
+}
+
+.faTwitter {
+  color: #1DA1F2;
+  font-size: 1.4em;
+}
+
+.faFacebook {
+  color: #3B5998;
+  font-size: 1.4em;
+}
+
+.faLinkedin {
+  color: #0077B5;
+  font-size: 1.4em;
+}

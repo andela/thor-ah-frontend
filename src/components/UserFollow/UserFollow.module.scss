@@ -1,0 +1,38 @@
+// Variables
+$padding: 5px;
+$tab: 600px;
+$desktop-large: 1100px;
+
+// MIXINS.
+@mixin tab {
+  @media (min-width: #{$tab}) {
+    @content;
+  }
+}
+
+@mixin desktop-large {
+  @media (min-width: #{$desktop-large}) {
+    @content;
+  }
+}
+
+.followDiv {
+  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: $padding * 2 $padding;
+
+  @include tab {
+    margin: auto;
+    width: 50%;
+  }
+
+  @include desktop-large {
+    margin: auto;
+    width: 22%;
+  }
+
+  div {
+    color: #959595;
+  }
+}
