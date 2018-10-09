@@ -20,11 +20,13 @@ const signIn = (user) => {
     axios
       .post(`${API}/api/users/login`, user)
       .then(response => {
-        localStorage.setItem("token", response.user.token);
-        localStorage.setItem("user", JSON.stringify(response.user));
+        console.log(response);
+        localStorage.setItem("token", response.data.user.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
         return dispatch(signInSuccess(response));
       })
-      .catch(error => {       
+      .catch(error => {
+        console.log(error);
         dispatch(signInFailure(error.response.data));
       });
   };

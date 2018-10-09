@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import signIn from '../../actions/SignIn';
 import styles from './SignIn.module.css';
 
-class SignIn extends React.Component {
+export class SignIn extends React.Component {
   constructor(props) {
     super(props);
 
@@ -34,7 +34,7 @@ class SignIn extends React.Component {
         {error ? <p
           id="invalid-credential"
           style={{ color: 'red', textAlign: 'center', marginBottom: '12px' }}>
-          {error.message}</p> : null}
+          {error}</p> : null}
         <div className={styles.regContainer}>
           <p className={styles.center} >{this.signInTitle}</p>
 

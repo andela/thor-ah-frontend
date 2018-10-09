@@ -32,7 +32,7 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         signingIn: false,
-        error: action.payload.error,
+        error: action.payload.error.message,
       };
     default:
       return state;

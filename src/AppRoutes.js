@@ -13,6 +13,8 @@ const Login = () => (
 );
 import LandingPage from './containers/LandingPage';
 import NavBar from './components/NavBar';
+import Footer from './components/Footer';
+import ProfilePage from './containers/ProfilePage';
 import SignIn from './containers/SignIn/SignIn';
 
 const Sample = () => (
@@ -36,6 +38,7 @@ const AppRoutes = () => (
       <Route exact path='/sample' component={ Sample }/>
       <Route path='/profile/user' component={ ProfilePage }/>
       <Route exact path='/signin' component={ SignIn }/>=
+      <Route exact path='/signin' component={ SignIn }/>
       <Footer />
     </Fragment>
   </Router>
