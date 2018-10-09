@@ -12,7 +12,10 @@
     "jsx-a11y/label-has-for": 0,
     "no-console": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "eol-last": ["error", "always"]
+    "eol-last": ["error", "always"],
+    "import/extensions": 0,
+    "require-jsdoc": 2,
+    "valid-jsdoc": 1
   },
   "plugins": ["react", "import", "jsx-a11y"],
   "parser": "babel-eslint",
