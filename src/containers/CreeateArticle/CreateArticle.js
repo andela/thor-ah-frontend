@@ -13,6 +13,8 @@ import createFocusPlugin from "draft-js-focus-plugin";
 import createResizeablePlugin from "draft-js-resizeable-plugin";
 import createBlockDndPlugin from "draft-js-drag-n-drop-plugin";
 import createDragNDropUploadPlugin from "@mikeljames/draft-js-drag-n-drop-upload-plugin";
+import { ItalicButton, BoldButton, UnderlineButton } from 'draft-js-buttons';
+import createInlineToolbarPlugin from 'draft-js-inline-toolbar-plugin';
 import "./CreateArticle.scss";
 
 const highlightPlugin = createHighlightPlugin({
@@ -26,6 +28,15 @@ const focusPlugin = createFocusPlugin();
 const resizeablePlugin = createResizeablePlugin();
 const blockDndPlugin = createBlockDndPlugin();
 const alignmentPlugin = createAlignmentPlugin();
+const inlineToolbarPlugin = createInlineToolbarPlugin({
+  structure: [
+    BoldButton,
+    ItalicButton,
+    UnderlineButton,
+    linkPlugin.LinkButton
+  ]
+});
+const { InlineToolbar } = inlineToolbarPlugin;
 
 const decorator = composeDecorators(
   resizeablePlugin.decorator,
@@ -52,7 +63,8 @@ class CreateArticle extends Component {
     imagePlugin,
     focusPlugin,
     resizeablePlugin,
-    dragNDropFileUploadPlugin
+    dragNDropFileUploadPlugin,
+    inlineToolbarPlugin
   ];
 
   onChange = editorState => {
@@ -103,70 +115,26 @@ class CreateArticle extends Component {
   render() {
     const { editorState } = this.state;
     return (
-      /* <div className="createArtilce container">
-        <div className="row justify-content-md-center">
-          <div className="col-md-8 col-xs-12">
-            <input placeholder="Title" className="articleTitle" />
-          </div>
-          <div className="buttonGroup">
-            <button onClick={this.onBoldClick} type="button">
-              <strong>B</strong>
-            </button>
-            <button onClick={this.onItalicClick} type="button">
-              <em>I</em>
-            </button>
-            <button onClick={this.onHighlight} type="button">
-              H
-            </button>
-            <button onClick={this.onStrikeThroughClick} type="button">
-              abc
-            </button>
-            <button onClick={this.onUnderlineClick} type="button">
-              U
-            </button>
-          </div>
-          <div className="textEditor">
-            <Editor
-              editorState={editorState}
-              handleKeyCommand={this.handleKeyCommand}
-              onChange={this.onChange}
-              plugins={this.plugins}
-              ref={element => {
-                this.editor = element;
-              }}
-            />
-          </div>
-          <button type="button" className="publishButton">Publish</button>
+      <div className="createArticle">
+        <input placeholder="Title" className="articleTitle" />
+        <div className="buttonGroup">
+          <button onClick={this.onBoldClick} type="button">
+            <strong>B</strong>
+          </button>
+          <button onClick={this.onItalicClick} type="button">
+            <em>I</em>
+          </button>
+          <button onClick={this.onHighlight} type="button">
+            H
+          </button>
+          <button onClick={this.onStrikeThroughClick} type="button">
+            abc
+          </button>
+          <button onClick={this.onUnderlineClick} type="button">
+            U
+          </button>
         </div>
-      </div> */
-
-      <div className="container">
-        <div className="row justify-content-md-center">
-          <div className="col-md-8 col-12 mt-4">
-            <input placeholder="Title" className="articleTitle" />
-          </div>
-        </div>
-        <div className="row justify-content-md-center">
-          <div className="buttonGroup col-md-8 col-12">
-            <button onClick={this.onBoldClick} type="button">
-              <strong>B</strong>
-            </button>
-            <button onClick={this.onItalicClick} type="button">
-              <em>I</em>
-            </button>
-            <button onClick={this.onHighlight} type="button">
-              H
-            </button>
-            <button onClick={this.onStrikeThroughClick} type="button">
-              abc
-            </button>
-            <button onClick={this.onUnderlineClick} type="button">
-              U
-            </button>
-          </div>
-       </div>
-       <div className="row justify-content-md-center">
-        <div className="col-md-8 col-12 textEditor">
+        <div className="textEditor">
           <Editor
             editorState={editorState}
             handleKeyCommand={this.handleKeyCommand}
@@ -176,12 +144,10 @@ class CreateArticle extends Component {
               this.editor = element;
             }}
           />
+          <InlineToolbar />
         </div>
-       </div>
-       <div className="row">
-        <button type="button" className="publishButton col-12 col-md-2">Publish</button>
-       </div>
-      </div>
+        <button type="button" className="publishButton">Publish</button>
+      </div> 
     );
   }
 }
