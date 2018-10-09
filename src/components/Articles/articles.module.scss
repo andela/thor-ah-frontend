@@ -1,0 +1,81 @@
+.not_found_message {
+  text-align: center;
+  margin: auto;
+  width: 100%;
+}
+
+.articles {
+  padding: 30px 15px;
+  display: block;
+  width: 100%;
+
+  @media only screen and (max-width: 800px) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  @media only screen and (max-width: 550px) {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  @media only screen and (max-width: 500px) {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  @media only screen and (max-width: 400px) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  @media only screen and (max-width: 4300px) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  & > div {
+    display: none !important;
+    transition: .5s ease-in-out;
+
+    &::after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+
+    &.active {
+      display: grid !important;
+      grid-template-columns: auto auto auto auto;
+      grid-gap: 20px;
+
+      @media only screen and (max-width: 1100px) {
+        grid-template-columns: auto auto auto;
+        grid-gap: 15px;
+      }
+
+      @media only screen and (max-width: 800px) {
+        grid-template-columns: auto auto;
+        grid-gap: 20px;
+      }
+
+      @media only screen and (max-width: 600px) {
+        grid-gap: 10px;
+      }
+
+      @media only screen and (max-width: 480px) {
+        grid-template-columns: auto;
+      }
+
+      @media only screen and (max-width: 400px) {
+        grid-template-columns: auto;
+        grid-gap: 20px;
+      }
+    }
+  }
+}

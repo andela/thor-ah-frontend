@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react';
-
 // styles
 import styles from '../UserProfileTabs/UserProfileTabs.module.scss';
-
 // images
 import appleImage from '../../assets/images/apple.jpg';
 import andelaImage from '../../assets/images/andela.png';

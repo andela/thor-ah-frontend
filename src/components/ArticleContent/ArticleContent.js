@@ -4,6 +4,7 @@ import ArticleComment from "../ArticleComment/ArticleComment";
 import ArticleTag from "../ArticleTag/ArticleTag";
 // styles
 import styles from "./ArticleContent.module.scss";
+import "bootstrap/dist/css/bootstrap.min.css"; 
 // images
 import profileImage from "../../assets/profile.png";
 import pointIcon from "../../assets/circle.png";

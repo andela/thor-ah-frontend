@@ -1,0 +1,164 @@
+$red: #C40018;
+
+header {
+  display: flex;
+  flex-direction: row;
+  height: 60px;
+  padding: 0 80px;
+  box-sizing: border-box;
+  width: 100%;
+
+  @media only screen and (max-width: 1100px) {
+    padding: 0 25px;
+  }
+
+  @media only screen and (max-width: 1000px) {
+    padding: 0 30px;
+  }
+
+  @media only screen and (max-width: 900px) {
+    padding: 0 40px;
+  }
+
+  @media only screen and (max-width: 800px) {
+   padding-left: 30px;
+   padding-right: 30px;
+  }
+
+  @media only screen and (max-width: 400px) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  &.clear::after {
+    content: ' ';
+    clear: both;
+    display: block;
+  }
+
+  a {
+    color: #777;
+  }
+
+  .header_logo {
+    float: left;
+    height: 100%;
+    padding: 10px 0;
+
+    .logo {
+      width: 100px;
+    }
+  }
+
+  .header_half {
+    float: right;
+    height: 100%;
+
+    .menu {
+      padding: 0 !important;
+      margin: 0 !important;
+      height: 100%;
+      list-style: none;
+      float: right;
+
+      li {
+        display: inline-block;
+        padding: 0 10px;
+
+        &.notification {
+          font-size: 1.4em;
+        }
+
+        a {
+          padding: 0;
+          margin: 0;
+          text-decoration: none !important;
+
+          .avatar {
+            width: 40px !important;
+            height: 40px !important;
+            border: 1px solid #eee !important;
+            border-radius: 50% !important;
+          }
+        }
+      }
+    }
+
+    .links {
+      float: left;
+      height: 100%;
+      padding: 10px 0;
+
+      button.mobileMenuCtrl {
+        float: left !important;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+        border: none !important;
+        color: $red;
+        font-size: 1.8em;
+        display: none;
+        margin: 3px 0 0 2px;
+        background: none !important;
+
+        @media only screen and (max-width: 900px) {
+          display: block;
+          float: left;       
+        }
+      }
+
+      ul {
+        list-style: none;
+        float: left;
+        padding: 0;
+        margin: 0;
+
+        a {
+          text-decoration: none;
+        }
+
+        li:not(.logged ul li) {
+          margin: 0 5px;
+          padding: 6px 15px;
+          display: inline-block;
+          border-radius: 4px;
+          cursor: pointer;
+
+          @media only screen and (max-width: 900px) {
+            margin: 0;
+            padding: 5px 10px;
+          }
+
+          @media only screen and (max-width: 400px) {
+            margin: 0;
+
+            &:first-child {
+              padding-left: 5px;
+            }
+          }
+
+          &:first-child {
+            a {
+              color: $red;
+              font-weight: bold;
+            }
+          }
+
+          &:last-child {
+            background: $red;
+            border: 1px solid $red;
+            color: #fff;
+
+            a {
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .header_category {
+    margin: auto;
+  }
+}

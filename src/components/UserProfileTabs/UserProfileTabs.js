@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-
 // components
 import FavoriteArticles from '../FavoriteArticles/FavoriteArticles';
 import PublishedArticles from '../PublishedArticles/PublishedArticles';
 import ReadingStatistics from '../ReadingStatistics/ReadingStatistics';
-
 // styles
 import styles from './UserProfileTabs.module.scss';
-
 
 class UserProfileTabs extends Component {
   constructor(props) {

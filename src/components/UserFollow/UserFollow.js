@@ -1,8 +1,6 @@
 import React from 'react';
-
 // styles
 import styles from './UserFollow.module.scss';
-
 
 const UserFollow = () => (
   <div className={styles.followDiv}>
