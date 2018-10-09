@@ -31,6 +31,8 @@
     "jest": "23.6.0",
     "jest-pnp-resolver": "1.0.1",
     "jest-resolve": "23.6.0",
+    "jwt-decode": "^2.2.0",
+    "lodash": "^4.17.11",
     "mini-css-extract-plugin": "0.4.3",
     "node-sass": "^4.9.3",
     "optimize-css-assets-webpack-plugin": "5.0.1",
@@ -64,7 +66,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --verbose --coverage -u",
+    "test": "jest --verbose --coverage",
+    "test:watch": "npm test -- --watch",
     "lint": "eslint ./src/**/*.{js,jsx} --fix",
     "format": "prettier src/**/*.{js,jsx,css,html,json}",
     "format:check": "prettier --list-different  src/**/*{js,jsx,css,json}"
@@ -121,13 +124,19 @@
   },
   "devDependencies": {
     "chalk": "^2.4.1",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.6.0",
+    "enzyme-to-json": "^3.3.4",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^3.1.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.11.1",
+    "fetch-mock": "^7.0.7",
+    "jsonwebtoken": "^8.3.0",
     "prettier": "^1.14.3",
-    "react-test-renderer": "^16.5.2"
+    "react-test-renderer": "^16.5.2",
+    "redux-mock-store": "^1.5.3"
   }
 }
