@@ -13,6 +13,7 @@ const NavBar = () => (
       <Link to='/' className="App-link"> Home </Link>
       <Link to='/sample' className="App-link"> sample </Link>
       <Link to='/profile/user' className="App-link"> profile </Link>
+      <Link to='/article' className="App-link"> Article Page </Link>
     </header>
   </Fragment>
 )
