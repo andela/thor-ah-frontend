@@ -31,18 +31,3 @@ const signIn = (user) => {
 }
 
 export default signIn;
-
-// export const loginAction = (userDetails) => (dispatch) =>
-//   axios.post('/api/v1/users/signin', userDetails)
-//     .then((res) => {
-//       const token = res.data.data.token;
-//       localStorage.setItem('token', res.data.data.token);
-//       setAuthorizationToken(token);
-//       dispatch({
-//         type: SET_CURRENT_USER,
-//         user: jsonwebtoken.decode(token)
-//       });
-//       return res.data.message;
-//     })
-//     .catch(error => Promise.reject(error.response.data.message));
-
