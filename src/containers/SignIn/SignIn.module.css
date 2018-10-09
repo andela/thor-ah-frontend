@@ -1,0 +1,98 @@
+ #regModal {
+   vertical-align: top;
+   width: 100%;
+   height: 100vh;
+   background-color: #eee;
+ }
+
+ .regContainer {
+   background-color: #FFFFFF;
+   width: 100%;
+   border-radius: 10px;
+   margin-left: auto;
+   margin-right: auto;
+   padding-top: 30px;
+ }
+
+ .regContainer p:first-child {
+   font-size: 18px;
+   color: #333;
+   /*margin-top: 30px;*/
+ }
+
+ .regContainer p:last-child {
+   color: #333;
+ }
+
+ .center {
+   text-align: center;
+   margin-bottom: 0px;
+   color: #55A;
+ }
+
+ .regContainer .regForm {
+   margin-left: auto;
+   margin-right: auto;
+   width: 100%;
+ }
+
+ .regContainer .regForm input {
+   padding-left: 10px;
+   font-size: 15px;
+ }
+
+ .regContainer .regForm input,
+ .regContainer .regForm button {
+   width: 100%;
+   height: 40px;
+   margin-bottom: 15px;
+   border-radius: 4px;
+   border: 1px solid lightgray;
+   outline: 0;
+ }
+
+ .regContainer .regForm button {
+   color: white;
+   background-color: #C40018;
+   cursor: pointer;
+   font-size: 15px;
+   height: 50px;
+ }
+
+ .helpBlock {
+   color: red;
+   font-size: 12px;
+   text-align: left;
+   margin-bottom: 20px;
+ }
+
+ @media only screen and (min-width: 768px) {
+   .regContainer {
+     background-color: #FFFFFF;
+     width: 506px;
+     border-radius: 10px;
+     margin-left: auto;
+     margin-right: auto;
+     height: 640px;
+   }
+
+   .regContainer .regForm {
+     width: 373px;
+   }
+
+   .formItemGroup {
+     width: 100%;
+   }
+
+   .regContainer .regForm input[type="email"] {
+     width: 96%;
+   }
+
+   #password {
+     width: 96%;
+   }
+
+   #email {
+     display: block;
+   }
+ }
