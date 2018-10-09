@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import HomeArticles from '../../components/HomeArticles/HomeArticles';
+// styles
 import styles from './home.module.scss';
+// components
 import HeroFeatured from '../../components/HeroFeatured/HeroFeatured';
+import HomeArticles from '../../components/HomeArticles/HomeArticles';
 
 class Home extends Component  {
   constructor(props) {
