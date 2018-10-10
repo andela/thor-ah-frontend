@@ -1,0 +1,20 @@
+form {
+  border: 1px solid rgba(0, 0, 0, .125);
+  border-radius: 5px;
+}
+
+
+.field {
+  padding: 10px 15px 20px;
+  display: flex;
+  flex-direction: column;
+
+    textarea {
+      background: #FCFCFC;
+    }
+}
+
+.submit {
+  margin-top: 10px;
+  align-self: flex-end;
+}

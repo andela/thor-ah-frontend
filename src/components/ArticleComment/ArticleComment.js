@@ -5,16 +5,13 @@ import dislikeIcon from "../../assets/down.png";
 import profileImage from "../../assets/Ellipse.png";
 // styles
 import styles from './ArticleComment.module.scss';
-import "bootstrap/dist/css/bootstrap.min.css"; 
+import "bootstrap/dist/css/bootstrap.min.css";
+// components
+import CommentBox from '../Comment/CommentBox';
 
 const ArticleComment = () => (
   <div className={styles.comment}>
-    <textarea
-      className="form-control p-3"
-      id="comment"
-      placeholder="Join the conversation..."
-      rows={4}
-    />
+    <CommentBox />
     <p className="text-secondary text-left py-3">
       Thoughts on {"The Most Amazing Article You Have Ever Read"}
     </p>
