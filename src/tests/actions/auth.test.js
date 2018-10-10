@@ -4,7 +4,7 @@ import {
   logOutUser,
   setLoggedInUser
 } from '../../actions/auth';
-import * as types from '../../actions/action.types';
+import * as types from '../../actions/types/auth';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -25,13 +25,13 @@ describe('auth actions', () => {
 
   describe('setLoggedInUser', () => {
     it('calls SET_CURRENT_USER', () => {
-      const user = { id: 1, name: 'some user'}
+      const user = { id: 1, name: 'some user' }
       const store = mockStore({ user: {} });
       store.dispatch(setLoggedInUser(user));
 
       expect(store.getActions()).toEqual([{
         type: types.SET_CURRENT_USER,
-        payload: {id: 1, name: 'some user'}
+        payload: { id: 1, name: 'some user' }
       }])
     });
   });

@@ -1,4 +1,5 @@
 const initialState = {
+<<<<<<< HEAD
   auth: {
     user: {},
     signin: {
@@ -7,6 +8,16 @@ const initialState = {
     },
     isAuthenticated: false
   }
+=======
+    auth: {
+        user: {},
+        signup: {
+            loading: false,
+            error: ''
+        },
+        isAuthenticated: false
+    }
+>>>>>>> t nitPicks: fix ft-user-signup-159987624
 };
 
 export default initialState;

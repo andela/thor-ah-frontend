@@ -1,15 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import signUp from '../../actions/user.signup';
-import styles from './SignUp.module.css';
+import signup from '../../actions/signup';
+import styles from './Signup.module.css';
 import SocialSignup from '../../components/SocialSignup'
 
 const clearError = (event) => {
     document.getElementById(`${event.target.id}Err`).innerHTML = "";
 }
 
-export class SignUp extends React.Component {
+export class Signup extends React.Component {
     constructor(props) {
         super(props);
 
@@ -21,7 +21,7 @@ export class SignUp extends React.Component {
             password: ""
         }
         this.showErrors = true
-        this.signUpTitle = "Welcome to Authors Haven";
+        this.signupTitle = "Welcome to Authors Haven";
     }
 
     handleChange = (event) => {
@@ -32,18 +32,18 @@ export class SignUp extends React.Component {
         event.preventDefault();
         this.showErrors = true;
         const { dispatch } = this.props;
-        dispatch(signUp(this.state))
+        dispatch(signup(this.state))
     }
 
     render() {
-        const { user, error, toggleModal, loading } = this.props;
+        const { error, toggleModal, loading, isAuthenticated } = this.props;
         if (this.showErrors && error && error.error) {
             Object.keys(error.error).map(key => {
                 document.getElementsByName(`${key}Err`)[0].innerHTML = error.error[key]
                 return 0
             })
             this.showErrors = false;
-        } else if (user && user.user && user.user.token) {
+        } else if (isAuthenticated) {
             toggleModal(); // dissable modal
         }
 
@@ -56,7 +56,7 @@ export class SignUp extends React.Component {
             < div id={styles.regModal} >
 
                 <div className={styles.regContainer}>
-                    <p className={styles.center} >{this.signUpTitle}</p>
+                    <p className={styles.center} >{this.signupTitle}</p>
 
                     <SocialSignup />
                     <form onSubmit={this.handleSubmit}>
@@ -114,14 +114,12 @@ export class SignUp extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    const { users } = state;
+    const { auth } = state;
     return {
-        token: users.token,
-        user: users.user,
-        loading: users.loading,
-        error: users.error,
+        isAuthenticated: auth.isAuthenticated,
+        loading: auth.loading,
+        error: auth.error,
     }
 }
 
-export default connect(mapStateToProps)(SignUp)
-// export default SignUp;
+export default connect(mapStateToProps)(Signup)

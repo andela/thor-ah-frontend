@@ -1,7 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+<<<<<<< HEAD
 import styles from '../containers/SignIn/SignIn.module.css';
 import styles from '../containers/Signup/SignUp.module.css';
+=======
+import styles from '../containers/Signup/Signup.module.css';
+>>>>>>> t nitPicks: fix ft-user-signup-159987624
 
 export default function SocialSignup() {
     return (

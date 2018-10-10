@@ -4,9 +4,14 @@ import { Link } from 'react-router-dom';
 import { GoKebabVertical, GoX } from 'react-icons/go';
 // styles
 import styles from './header.module.scss';
+<<<<<<< HEAD
 import Signin from '../../containers/SignIn/SignIn'
 import signupStyle from '../../containers/Signup/SignUp.module.css'
 import Signup from '../../containers/Signup/SignUp'
+=======
+import signupStyle from '../../containers/Signup/Signup.module.css'
+import SignUp from '../../containers/Signup/Signup'
+>>>>>>> t nitPicks: fix ft-user-signup-159987624
 
 class AuthMenu extends Component {
   constructor(props) {
@@ -35,7 +40,7 @@ class AuthMenu extends Component {
           <GoX />
         </span>
       </button>
-      <Signup toggleModal={this.toggleModal} />
+      <SignUp toggleModal={this.toggleModal} />
     </div>)
   }
 
