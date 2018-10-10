@@ -6,8 +6,6 @@ import signIn, { clearErrors } from '../../actions/SignIn';
 import styles from './SignIn.module.css';
 import SocialSignup from '../../components/SocialSignup';
 
-// const modalRoot = document.getElementById('modal');
-
 export class SignIn extends React.Component {
   constructor(props) {
     super(props);
@@ -84,7 +82,6 @@ export class SignIn extends React.Component {
 
 const mapStateToProps = (state) => {
   const { signInUser } = state;
-  console.log('lknlskjsljfslkf', signIn)
   return {
     token: signInUser.token,
     user: signInUser.user,

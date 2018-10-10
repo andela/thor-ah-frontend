@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 import { GoKebabVertical, GoX } from 'react-icons/go';
 // styles
 import styles from './header.module.scss';
-// import signinStyle from '../../containers/SignIn/SignIn.module.css'
-import SignIn from '../../containers/SignIn/SignIn'
+import SignIn from '../../containers/SignIn/SignIn' // eslint-disable-line
 
 class AuthMenu extends Component {
   constructor(props) {
@@ -40,7 +39,9 @@ class AuthMenu extends Component {
     return (
       <div className={styles.links}>
         <ul>
-          <li><Link to="/" onClick={this.toggleModal}>Login</Link></li>
+          <li> 
+            <button className={styles.transparentBtn} type="button" onClick={this.toggleModal}> Login</button>
+          </li>
           <li><Link to="/register">Register</Link></li>
         </ul>
         <button className={styles.mobileMenuCtrl} onClick={ this.triggerMobileCategory } type="button">
