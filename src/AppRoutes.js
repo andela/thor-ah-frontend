@@ -10,29 +10,29 @@ import ProtectedRoute from './containers/ProtectedRoute';
 import Signin from './containers/SignIn/SignIn';
 import AllCategories from './containers/Categories/Categories';
 import ArticleCategory from './containers/Categories/SingleCategory';
+import CreateArticlePage from './containers/CreateArticle/CreateArticlePage';
 import NotFound from './containers/NotFound/NotFound';
 
 const AppRoutes = () => (
   <Router>
     <Fragment>
       <Header />
+
       <ProtectedRoute path='/profile/user' component={ProfilePage} />
       <Switch>
         <Route exact path='/' component={Homepage} />
         {/* protected routes can be rendered using the ProtectedRoutes component */}
+        <Route path='/categories' component={AllCategories} />
         <Route path='/category/:name' component={ArticleCategory} />
-        <Route exact path='/signin' component={Signin} />
-        <Route path='/categories' component={ AllCategories }/>
-        <Route path='/category/:name' component={ ArticleCategory } />
-        {/* protected routes can be rendered using the ProtectedRoutes component */}
+        <ProtectedRoute path='/articles/:slug' component={ArticlePage} />
         <ProtectedRoute path='/profile/user' component={ProfilePage} />
-        <ProtectedRoute path='/articles/:slug' component={ ArticlePage }/>
-        <ProtectedRoute path='/profile/user' component={ ProfilePage }/>
-        <ProtectedRoute path='/article' component={ArticlePage} />
+        <Route exact path='/signin' component={Signin} />
+        <Route exact path='/create-article' component={ CreateArticlePage }/>
+
         {/* will always render when no other path is matched */}
         <Route component={NotFound} />
-        <Footer />
       </Switch>
+      <Footer />
     </Fragment>
   </Router>
 );
