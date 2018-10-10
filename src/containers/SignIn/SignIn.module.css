@@ -1,44 +1,91 @@
  #regModal {
    vertical-align: top;
-   width: 100%;
+   width: 100vw;
    height: 100vh;
    background-color: #eee;
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100vw;
+   height: 100vh;
+   background: rgba(0, 0, 0, 0.6) !important;
+   z-index: 3;
+ }
+
+ #regModal a {
+   text-decoration: none !important;
+ }
+
+ #regModal .modalClose {
+   position: absolute;
+   top: 10px;
+   right: 10px;
+   width: 30px;
+   height: 30px;
+   border: 1px solid #eee;
+   background: #eee;
+   border-radius: 50%;
+   cursor: pointer;
+   z-index: 4 !important;
+ }
+
+ .xIcon {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   font-size: 1.2em;
+   color: #ccc !important;
+   display: flex;
  }
 
  .regContainer {
    background-color: #FFFFFF;
-   width: 100%;
+   width: 90%;
+   max-height: 90vh !important;
    border-radius: 10px;
-   margin-left: auto;
-   margin-right: auto;
-   padding-top: 30px;
+   margin: 10px auto !important;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   padding: 30px 20px;
+   overflow-y: scroll !important;
+ }
+
+ .regContainer * {
+   box-sizing: border-box !important;
  }
 
  .regContainer p:first-child {
    font-size: 18px;
    color: #333;
-   /*margin-top: 30px;*/
+   margin: 15px auto;
  }
 
- .regContainer p:last-child {
-   color: #333;
+ .regContainer p:nth-child(3) a {
+   color: #AAA !important;
+ }
+
+ .regContainer p:last-child, .regContainer p:last-child a {
+   color: #464646;
  }
 
  .center {
-   text-align: center;
+   text-align: center;  
    margin-bottom: 0px;
    color: #55A;
  }
 
  .regContainer .regForm {
-   margin-left: auto;
-   margin-right: auto;
+   margin: 15px auto;
    width: 100%;
  }
 
  .regContainer .regForm input {
-   padding-left: 10px;
+   padding: 14px 18px !important;
    font-size: 15px;
+   width: 100% !important;
  }
 
  .regContainer .regForm input,
@@ -56,8 +103,16 @@
    background-color: #C40018;
    cursor: pointer;
    font-size: 15px;
-   height: 50px;
+   border-radius: 4px;
+   border: 1px solid #C40018;
+   padding: 10px 15px;
  }
+
+.disabled_btn {
+  cursor: not-allowed !important;
+  background: #ccc !important;
+  border: 1px solid #ccc !important;
+}
 
  .helpBlock {
    color: red;
@@ -66,6 +121,74 @@
    margin-bottom: 20px;
  }
 
+ .socialLogin{
+  width: 100%;
+  height:auto;
+  padding: 10px 0 15px 0;
+}
+
+.socialLogin a, #regDivider{
+margin-left: auto;
+margin-right: auto;
+text-align:center;
+width:260px;
+}
+
+.socialLogin a{
+  display: block;
+  text-decoration: none;
+  color: #fff;
+  border: 1px solid rgba(0,0,0,0.05);
+  padding: 12px;
+  border-radius: 4px;
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+.socialLogin a i{
+  position: relative;
+  float: left;
+  width: 20px;
+  top: 2px;
+}
+.socialLogin a:first-child{
+  background-color: #00ACEE;
+  margin-top: 30px;
+}
+.socialLogin a:nth-of-type(2){
+  background-color: #49639F;
+}
+.socialLogin a:nth-of-type(3){
+  color: #010204;
+  border: 1px outset #eef;
+}
+
+#regDivider{
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: lightgray;
+}
+#regDivider div:first-child,
+#regDivider div:last-child  {
+  width:30%;
+  background-color: lightgray;
+  height: 1px;
+  margin-top: 7px;
+  margin-right: 2%;
+  margin-left: 12%;
+}
+
+#regDivider div:last-child {
+  margin-left: 2%;
+  margin-right: 12%
+}
+
+#regDivider div:first-child,
+#regDivider div:nth-of-type(2),
+#regDivider div:last-child {
+  float: left;
+}
+
  @media only screen and (min-width: 768px) {
    .regContainer {
      background-color: #FFFFFF;
@@ -73,7 +196,6 @@
      border-radius: 10px;
      margin-left: auto;
      margin-right: auto;
-     height: 640px;
    }
 
    .regContainer .regForm {

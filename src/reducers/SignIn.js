@@ -2,6 +2,8 @@ import {
   SIGNING_USER_IN,
   USER_SIGN_IN_FULFILLED,
   USER_SIGN_IN_FAILED,
+  CLEAR_ERROR,
+  SIGNING_IN_REQUEST
 } from '../actions/action.types';
 
 const initialState = {
@@ -13,6 +15,11 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+    case SIGNING_IN_REQUEST:
+      return {
+        ...state,
+        signingIn: true,
+      };
     case SIGNING_USER_IN:
       return {
         ...state,
@@ -34,6 +41,11 @@ export default function reducer(state = initialState, action) {
         signingIn: false,
         error: action.payload.error.message,
       };
+    case CLEAR_ERROR:
+      return {
+        ...state,
+        error: ''
+      }
     default:
       return state;
   }

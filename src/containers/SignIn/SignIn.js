@@ -1,8 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import signIn from '../../actions/SignIn';
+import { GoX } from 'react-icons/go';
+import signIn, { clearErrors } from '../../actions/SignIn';
 import styles from './SignIn.module.css';
+import SocialSignup from '../../components/SocialSignup';
+
+// const modalRoot = document.getElementById('modal');
 
 export class SignIn extends React.Component {
   constructor(props) {
@@ -15,6 +19,7 @@ export class SignIn extends React.Component {
     this.signInTitle = "Welcome to Authors Haven";
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
   handleSubmit(event) {
@@ -26,20 +31,32 @@ export class SignIn extends React.Component {
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value.trim() });
   }
-
+  
+  toggleModal() {
+    const { props } = this
+    props.dispatch(clearErrors());
+    const { toggleModal } = this.props;
+    toggleModal();
+  }
+  
   render() {
-    const { error } = this.props;
+    const { error, signingIn } = this.props;
     return (
-      < div id={styles.regModal} >
-        {error ? <p
-          id="invalid-credential"
-          style={{ color: 'red', textAlign: 'center', marginBottom: '12px' }}>
-          {error}</p> : null}
+      <div id={styles.regModal}>
+      <button className={styles.modalClose} type="button" onClick={this.toggleModal}>
+        <span className={styles.xIcon}>
+          <GoX />
+        </span>
+      </button>
         <div className={styles.regContainer}>
           <p className={styles.center} >{this.signInTitle}</p>
 
-          {/* <SocialSignup /> */}
+          <SocialSignup />
 
+          {error ? <p
+          id="invalid-credential"
+          style={{ color: 'red', textAlign: 'center', marginBottom: '12px' }}>
+          {error}</p> : null}
           <form onSubmit={this.handleSubmit}>
             <div className={styles.regForm}>
               <div className={styles.formItemGroup}>
@@ -52,8 +69,7 @@ export class SignIn extends React.Component {
                   placeholder="password" onChange={this.handleChange} required />
                 <div id={`${styles.password}Err`} />
               </div>
-
-              <button type="submit" id="submit-btn">Login </button>
+              <button type="submit" id="submit-btn" className={ signingIn ? `${styles.disabled_btn}` : '' }>Login </button>
             </div>
           </form>
           <p className={styles.center}> <Link to="/password/reset">Forgot Password? </Link> </p>
@@ -61,19 +77,18 @@ export class SignIn extends React.Component {
 
         </div>
 
-      </div >
+      </div>
     )
   }
-
-
 }
 
 const mapStateToProps = (state) => {
   const { signInUser } = state;
+  console.log('lknlskjsljfslkf', signIn)
   return {
     token: signInUser.token,
     user: signInUser.user,
-    signingIn: signInUser.singingIn,
+    signingIn: signInUser.signingIn,
     error: signInUser.error,
   }
 }

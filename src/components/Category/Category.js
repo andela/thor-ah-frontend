@@ -21,8 +21,7 @@ class Category extends Component {
 
   render() {
     const { categories } = this.state;
-    const { mobileCategory, windowWidth } = this.props
-    console.log(windowWidth);
+    const { mobileCategory } = this.props
     const categoryStyle = {
       display: mobileCategory === 'visible' ? 'block' : 'none',
     }
