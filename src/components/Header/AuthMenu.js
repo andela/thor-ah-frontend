@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { GoKebabVertical, GoX } from 'react-icons/go';
 // styles
 import styles from './header.module.scss';
-import SignIn from '../../containers/SignIn/SignIn' // eslint-disable-line
+import Signin from '../../containers/SignIn/SignIn'
 
 class AuthMenu extends Component {
   constructor(props) {
@@ -30,7 +30,7 @@ class AuthMenu extends Component {
     const { showModal } = this.state;
     let modal;
     if (showModal) {
-      modal = <SignIn toggleModal={this.toggleModal} />;
+      modal = <Signin toggleModal={this.toggleModal} />;
     } else {
       modal = null;
     }

@@ -32,7 +32,7 @@ const signIn = (user) =>  (dispatch) => {
       return dispatch(signInSuccess(response));
     })
     .catch(error => {
-      if (error.response && error.response.status === 'error') {
+      if (error.response) {
         return dispatch(signInFailure(error.response.data));
       }
       return dispatch(signInFailure({error: {message: 'Server unreachable at the moment'}}))

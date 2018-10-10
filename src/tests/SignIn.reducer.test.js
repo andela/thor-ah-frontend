@@ -10,15 +10,14 @@ describe("signin reducer", () => {
       error: ''
     });
   });
-  it("should handle SIGNING_USER_IN", () => {
+  it("should handle SIGNING_IN_REQUEST", () => {
     const action = {
-      type: types.SIGNING_USER_IN,
+      type: types.SIGNING_IN_REQUEST,
       payload: { email: "su@mail.com", password: "password" }
     };
     expect(signIn({}, action)).toEqual({
       signingIn: true,
-      error: '',
-      message: undefined
+      error: ''
     });
   });
 

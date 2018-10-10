@@ -1,5 +1,4 @@
 import {
-  SIGNING_USER_IN,
   USER_SIGN_IN_FULFILLED,
   USER_SIGN_IN_FAILED,
   CLEAR_ERROR,
@@ -19,13 +18,7 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         signingIn: true,
-      };
-    case SIGNING_USER_IN:
-      return {
-        ...state,
-        signingIn: true,
-        message: action.payload.message,
-        error: ''
+        error: '',
       };
     case USER_SIGN_IN_FULFILLED:
       return {

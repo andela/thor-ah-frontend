@@ -7,7 +7,7 @@ import Homepage from './containers/Home/Home';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import ProtectedRoute from './containers/ProtectedRoute';
-import SignIn from './containers/SignIn/SignIn'; // eslint-disable-line
+import Signin from './containers/SignIn/SignIn'; 
 
 const AppRoutes = () => (
   <Router>
@@ -17,7 +17,7 @@ const AppRoutes = () => (
       {/* protected routes can be rendered using the ProtectedRoutes component */}
       <ProtectedRoute path='/article' component={ ArticlePage }/>
       <ProtectedRoute path='/profile/user' component={ ProfilePage }/>
-      <Route exact path='/signin' component={ SignIn }/>
+      <Route exact path='/signin' component={ Signin }/>
       <Footer />
     </Fragment>
   </Router>
