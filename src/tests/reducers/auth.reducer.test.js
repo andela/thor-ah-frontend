@@ -1,11 +1,12 @@
-import auth from '../../reducers/auth.reducer';
+import auth from '../../reducers/auth';
 import * as types from '../../actions/action.types';
 
 describe('user reducer', () => {
   it('should return initial state', () => {
     expect(auth(undefined, {})).toEqual({
       isAuthenticated: false,
-      user: {},
+      signin: {error: '', loading: false},
+      user: {}
     });
   });
 

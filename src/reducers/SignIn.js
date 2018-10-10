@@ -1,37 +1,20 @@
 import {
-  USER_SIGN_IN_FULFILLED,
-  USER_SIGN_IN_FAILED,
+  SIGN_IN_FAILURE,
   CLEAR_ERROR,
-  SIGNING_IN_REQUEST
+  SIGN_IN_LOADING
 } from '../actions/action.types';
+import initialState from '../store/initialState';
 
-const initialState = {
-  token: '',
-  user: {},
-  signingIn: false,
-  error: '',
-};
-
-export default function reducer(state = initialState, action) {
+export default function reducer(state = initialState.auth.signin, action) {
   switch (action.type) {
-    case SIGNING_IN_REQUEST:
+    case SIGN_IN_LOADING:
       return {
         ...state,
-        signingIn: true,
-        error: '',
+        loading: action.payload,
       };
-    case USER_SIGN_IN_FULFILLED:
+    case SIGN_IN_FAILURE:
       return {
         ...state,
-        signingIn: false,
-        user: action.payload.user,
-        token: action.payload.token,
-        error: ''
-      };
-    case USER_SIGN_IN_FAILED:
-      return {
-        ...state,
-        signingIn: false,
         error: action.payload.error.message,
       };
     case CLEAR_ERROR:

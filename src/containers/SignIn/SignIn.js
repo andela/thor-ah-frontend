@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { GoX } from 'react-icons/go';
-import signIn, { clearErrors } from '../../actions/SignIn';
+import signIn, { clearErrors } from '../../actions/signIn';
 import styles from './SignIn.module.css';
 import SocialSignup from '../../components/SocialSignup';
 
@@ -28,6 +28,8 @@ export class SignIn extends React.Component {
 
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value.trim() });
+    const { props } = this
+    props.dispatch(clearErrors());
   }
   
   toggleModal() {
@@ -51,9 +53,7 @@ export class SignIn extends React.Component {
 
           <SocialSignup />
 
-          {error ? <p
-          id="invalid-credential"
-          style={{ color: 'red', textAlign: 'center', marginBottom: '12px' }}>
+          {error ? <p className={styles.invalidCredential}>
           {error}</p> : null}
           <form onSubmit={this.handleSubmit}>
             <div className={styles.regForm}>
@@ -81,12 +81,11 @@ export class SignIn extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { signInUser } = state;
+  const { auth } = state;
   return {
-    token: signInUser.token,
-    user: signInUser.user,
-    signingIn: signInUser.signingIn,
-    error: signInUser.error,
+    user: auth.user,
+    signingIn: auth.signin.loading,
+    error: auth.signin.error,
   }
 }
 

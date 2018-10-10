@@ -28,11 +28,9 @@ class AuthMenu extends Component {
 
   render() {
     const { showModal } = this.state;
-    let modal;
+    let modal = null;
     if (showModal) {
       modal = <Signin toggleModal={this.toggleModal} />;
-    } else {
-      modal = null;
     }
 
     const { mobileCategory } = this.props;
