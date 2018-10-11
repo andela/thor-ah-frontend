@@ -8,6 +8,11 @@ header {
   box-sizing: border-box;
   width: 100%;
 
+.transparentBtn{
+  border: none;
+  background: transparent;
+  }
+
   @media only screen and (max-width: 1100px) {
     padding: 0 25px;
   }

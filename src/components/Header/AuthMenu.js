@@ -4,11 +4,21 @@ import { Link } from 'react-router-dom';
 import { GoKebabVertical, GoX } from 'react-icons/go';
 // styles
 import styles from './header.module.scss';
+import Signin from '../../containers/SignIn/SignIn'
 
 class AuthMenu extends Component {
   constructor(props) {
     super(props);
     this.triggerMobileCategory = this.triggerMobileCategory.bind(this);
+
+    this.state = {
+      showModal: false
+    }
+  }
+
+  toggleModal = () => {
+    const { showModal } = this.state;
+    this.setState({ showModal: !showModal })
   }
 
   triggerMobileCategory() {
@@ -17,16 +27,25 @@ class AuthMenu extends Component {
   }
 
   render() {
+    const { showModal } = this.state;
+    let modal = null;
+    if (showModal) {
+      modal = <Signin toggleModal={this.toggleModal} />;
+    }
+
     const { mobileCategory } = this.props;
     return (
       <div className={styles.links}>
         <ul>
-          <li><Link to="/login">Login</Link></li>
+          <li> 
+            <button className={styles.transparentBtn} type="button" onClick={this.toggleModal}> Login</button>
+          </li>
           <li><Link to="/register">Register</Link></li>
         </ul>
         <button className={styles.mobileMenuCtrl} onClick={ this.triggerMobileCategory } type="button">
           { mobileCategory === 'visible' ? <GoX /> : <GoKebabVertical /> }
         </button>
+        {modal}
       </div>
     );
   }

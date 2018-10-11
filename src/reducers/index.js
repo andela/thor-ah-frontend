@@ -1,12 +1,10 @@
 import { combineReducers } from 'redux';
-import auth from './auth.reducer';
-
-// initial dummy state setup
-const app = (state = {intro: 'welcome to ah'}) => state
+import auth from './auth';
+import signinuser from './signin';
 
 const rootReducer = combineReducers({
-  app,
   auth,
+  signinuser,
 });
 
 export default rootReducer;
