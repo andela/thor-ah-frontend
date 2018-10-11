@@ -42,6 +42,11 @@ const initialState = {
     },
     loading: false,
     error: ""
+  },
+  createArticle: {
+    article: {},
+    loading: false,
+    error: {}
   }
 };
 export default initialState;
