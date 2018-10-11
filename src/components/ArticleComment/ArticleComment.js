@@ -10,7 +10,7 @@ import Comments from '../Comment/Comments';
 // actions
 import { getArticleComments } from '../../actions/comments';
 
-class ArticleComment extends Component {
+export class ArticleComment extends Component {
   constructor(props) {
     super(props)
     this.state = {}
@@ -24,7 +24,6 @@ class ArticleComment extends Component {
 
   render() {
     const { comments, fetchingArticleComments } = this.props;
-    console.log(comments);
     return (
       <div className={styles.comment}>
         <CommentBox />

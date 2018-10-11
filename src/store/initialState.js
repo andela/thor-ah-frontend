@@ -13,6 +13,7 @@ const initialState = {
   },
   comments: {
     fetchingArticleComments: false,
+    fetchingCommentsError: '',
     currentArticleComments: [],
     postingNewComment: false,
     newCommentError: ''
