@@ -60,7 +60,7 @@ export class Signup extends React.Component {
         }
 
         return (
-            <div id={styles.container} style={{ 'overflowY': 'auto' }}>
+            <div id={styles.container}>
                 <button className={styles.modalClose} type="button" onClick={toggleModal}>
                     <span className={styles.xIcon}>
                         <GoX />

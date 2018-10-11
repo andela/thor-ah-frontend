@@ -1,24 +1,15 @@
 import auth from '../../reducers/auth';
-<<<<<<< HEAD:src/tests/reducers/auth.reducer.test.js
-import * as types from '../../actions/action.types';
-=======
-import * as types from '../../actions/types/auth';
->>>>>>> t nitPicks: fix ft-user-signup-159987624:src/tests/reducers/auth.test.js
+import * as types from '../../actionTypes/auth';
 
 describe('user reducer', () => {
   it('should return initial state', () => {
     expect(auth(undefined, {})).toEqual({
       isAuthenticated: false,
-<<<<<<< HEAD:src/tests/reducers/auth.reducer.test.js
-      signin: {error: '', loading: false},
-      user: {}
-    });
-=======
+      signin: { error: '', loading: false },
       signup: { error: '', loading: false },
-      "user": {}
+      user: {}
     }
     );
->>>>>>> t nitPicks: fix ft-user-signup-159987624:src/tests/reducers/auth.test.js
   });
 
   it('should handle SET_CURRENT_USER', () => {

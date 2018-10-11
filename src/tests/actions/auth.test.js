@@ -4,7 +4,7 @@ import {
   logOutUser,
   setLoggedInUser
 } from '../../actions/auth';
-import * as types from '../../actions/types/auth';
+import * as types from '../../actionTypes/auth';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);

@@ -1,7 +1,7 @@
 
 import signup from '../../reducers/signup';
 import auth from '../../reducers/auth';
-import * as types from '../../actions/types/signup';
+import * as types from '../../actionTypes/signup';
 
 describe('user reducer', () => {
     it('should return initial state', () => {
@@ -14,7 +14,7 @@ describe('user reducer', () => {
     });
 
     it('should handle LOADING', () => {
-        const action = { type: types.LOADING, payload: true };
+        const action = { type: types.SIGNUP_LOADING, payload: true };
         expect(signup({}, action)).toEqual({
             loading: true,
             error: '',

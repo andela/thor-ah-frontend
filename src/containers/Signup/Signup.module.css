@@ -11,6 +11,7 @@
   z-index: 3;
   cursor: pointer;
   z-index: 4;
+  overflow-y: auto;
  }
 
  .modalClose {
@@ -188,13 +189,12 @@
       padding: 12px;
       border-radius: 4px;
       font-size: 15px;
-      
+      margin-bottom: 10px;
   }
   .regContainer p:last-child{
     padding-bottom: 20px;
   }
-  .regContainer .regForm input{
-    margin-bottom: 10px;
+  .regContainer .regForm input,  .errMsg{
     margin-left: auto;
     margin-right: auto;
     text-align:center;
