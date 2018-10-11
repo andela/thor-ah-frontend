@@ -10,6 +10,11 @@ const initialState = {
       error: ''
     },
     isAuthenticated: false
+  },
+  article: {
+    article: {},
+    isLoading: true,
+    error: ''
   }
 };
 
