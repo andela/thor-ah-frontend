@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import { LOG_OUT_USER, SET_CURRENT_USER } from "./action.types";
+import { LOG_OUT_USER, SET_CURRENT_USER } from "../actionTypes/auth";
 
 export const logOut = () => ({
   type: LOG_OUT_USER,

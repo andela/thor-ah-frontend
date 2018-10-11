@@ -20,6 +20,12 @@ export class SignIn extends React.Component {
     this.toggleModal = this.toggleModal.bind(this);
   }
 
+  goToSignup = () => {
+    const { toggleSignupModal } = this.props;
+    this.toggleModal(); // remove login modal
+    toggleSignupModal(); // show signup modal
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     const { props } = this
@@ -31,30 +37,30 @@ export class SignIn extends React.Component {
     const { props } = this
     props.dispatch(clearErrors());
   }
-  
+
   toggleModal() {
     const { props } = this
     props.dispatch(clearErrors());
     const { toggleModal } = this.props;
     toggleModal();
   }
-  
+
   render() {
     const { error, signingIn } = this.props;
     return (
       <div id={styles.regModal}>
-      <button className={styles.modalClose} type="button" onClick={this.toggleModal}>
-        <span className={styles.xIcon}>
-          <GoX />
-        </span>
-      </button>
+        <button className={styles.modalClose} type="button" onClick={this.toggleModal}>
+          <span className={styles.xIcon}>
+            <GoX />
+          </span>
+        </button>
         <div className={styles.regContainer}>
           <p className={styles.center} >{this.signInTitle}</p>
 
           <SocialSignup />
 
           {error ? <p className={styles.invalidCredential}>
-          {error}</p> : null}
+            {error}</p> : null}
           <form onSubmit={this.handleSubmit}>
             <div className={styles.regForm}>
               <div className={styles.formItemGroup}>
@@ -67,11 +73,11 @@ export class SignIn extends React.Component {
                   placeholder="password" onChange={this.handleChange} required />
                 <div id={`${styles.password}Err`} />
               </div>
-              <button type="submit" id="submit-btn" className={ signingIn ? `${styles.disabled_btn}` : '' }>Login </button>
+              <button type="submit" id="submit-btn" className={signingIn ? `${styles.disabled_btn}` : ''}>Login </button>
             </div>
           </form>
           <p className={styles.center}> <Link to="/password/reset">Forgot Password? </Link> </p>
-          <p className={styles.center}>Not yet registered? <Link to="/signInUser">Create an Account </Link> </p>
+          <p className={styles.center}>Not yet registered? <button type='button' className={styles.transparentBtn} onClick={this.goToSignup}><Link to="/">Create an Account </Link> </button></p>
 
         </div>
 

@@ -1,13 +1,16 @@
 import isEmpty from 'lodash/isEmpty';
 
 // types
-import { SIGN_IN_SUCCESS, SET_CURRENT_USER, LOG_OUT_USER } from "../actions/action.types";
+import { SET_CURRENT_USER, LOG_OUT_USER } from '../actionTypes/auth';
+import { SIGNUP_SUCCESS } from '../actionTypes/signup'
+import { SIGN_IN_SUCCESS } from '../actionTypes/signin';
 
 // initial state
-import  initialState from '../store/initialState';
+import initialState from '../store/initialState';
 
 // reducers
 import signinReducer from './signin';
+import signupReducer from './signup';
 
 const auth = (state = initialState.auth, action) => {
   switch (action.type) {
@@ -23,7 +26,9 @@ const auth = (state = initialState.auth, action) => {
         isAuthenticated: false,
         user: {}
       }
+
     case SIGN_IN_SUCCESS:
+    case SIGNUP_SUCCESS:
       return {
         ...state,
         user: action.payload.user,
@@ -32,7 +37,8 @@ const auth = (state = initialState.auth, action) => {
     default:
       return {
         ...state,
-        signin: signinReducer(state.signin, action)
+        signin: signinReducer(state.signin, action),
+        signup: signupReducer(state.signup, action)
       }
   }
 };

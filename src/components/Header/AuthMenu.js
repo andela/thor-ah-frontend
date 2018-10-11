@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 // icons
 import { GoKebabVertical, GoX } from 'react-icons/go';
 // styles
 import styles from './header.module.scss';
 import Signin from '../../containers/SignIn/SignIn'
+import signupStyle from '../../containers/Signup/Signup.module.css'
+import SignUp from '../../containers/Signup/Signup'
 
 class AuthMenu extends Component {
   constructor(props) {
@@ -12,7 +13,8 @@ class AuthMenu extends Component {
     this.triggerMobileCategory = this.triggerMobileCategory.bind(this);
 
     this.state = {
-      showModal: false
+      showModal: false,
+      showSignupModal: false
     }
   }
 
@@ -21,31 +23,40 @@ class AuthMenu extends Component {
     this.setState({ showModal: !showModal })
   }
 
+  toggleSignupModal = () => {
+    const { showSignupModal } = this.state;
+    this.setState({ showSignupModal: !showSignupModal })
+  }
+
   triggerMobileCategory() {
     const { triggerCategory, mobileCategory } = this.props;
     triggerCategory(mobileCategory === 'visible' ? 'hidden' : 'visible');
   }
 
   render() {
-    const { showModal } = this.state;
+    const { showModal, showSignupModal } = this.state;
     let modal = null;
+    let signupModal = null;
     if (showModal) {
-      modal = <Signin toggleModal={this.toggleModal} />;
+      modal = <Signin toggleModal={this.toggleModal} toggleSignupModal={this.toggleSignupModal} />;
+    } else if (showSignupModal) {
+      signupModal = <SignUp toggleModal={this.toggleSignupModal} toggleSigninModal={this.toggleModal} />;
     }
 
     const { mobileCategory } = this.props;
     return (
       <div className={styles.links}>
         <ul>
-          <li> 
+          <li>
             <button className={styles.transparentBtn} type="button" onClick={this.toggleModal}> Login</button>
           </li>
-          <li><Link to="/register">Register</Link></li>
+          <li><button type='button' className={signupStyle.transparentBtn} onClick={this.toggleSignupModal}>Register</button></li>
         </ul>
-        <button className={styles.mobileMenuCtrl} onClick={ this.triggerMobileCategory } type="button">
-          { mobileCategory === 'visible' ? <GoX /> : <GoKebabVertical /> }
+        <button className={styles.mobileMenuCtrl} onClick={this.triggerMobileCategory} type="button">
+          {mobileCategory === 'visible' ? <GoX /> : <GoKebabVertical />}
         </button>
         {modal}
+        {signupModal}
       </div>
     );
   }

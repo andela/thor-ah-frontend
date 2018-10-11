@@ -26,12 +26,12 @@ class Category extends Component {
       display: mobileCategory === 'visible' ? 'block' : 'none',
     }
     return (
-      <div className={ `${styles.category}`  } style={ categoryStyle }>
+      <div className={`${styles.category}`} style={categoryStyle}>
         <ul>
-          { categories.map(category => {
+          {categories.map(category => {
             const { id, name } = category;
             return (
-              <li key={id}><Link to={ `/articles/categories/${name.toLowerCase()}` }>{ name }</Link></li>
+              <li key={id}><Link to={`/articles/categories/${name.toLowerCase()}`}>{name}</Link></li>
             );
           })}
         </ul>

@@ -5,6 +5,10 @@ const initialState = {
       loading: false,
       error: ''
     },
+    signup: {
+      loading: false,
+      error: ''
+    },
     isAuthenticated: false
   }
 };

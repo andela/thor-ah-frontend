@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { SIGN_IN_SUCCESS, SIGN_IN_FAILURE, CLEAR_ERROR, SIGN_IN_LOADING } from "./action.types";
+import { SIGN_IN_SUCCESS, SIGN_IN_FAILURE, CLEAR_ERROR, SIGN_IN_LOADING } from "../actionTypes/signin";
 
 const API = "https://thor-ah-staging.herokuapp.com";
 
@@ -25,7 +25,7 @@ export const clearErrors = () => ({
 });
 
 
-const signIn = (user) =>  (dispatch) => {
+const signIn = (user) => (dispatch) => {
   dispatch(siginLoading(true));
   axios
     .post(`${API}/api/users/login`, user)
@@ -40,7 +40,8 @@ const signIn = (user) =>  (dispatch) => {
       if (error.response) {
         return dispatch(signInFailure(error.response.data));
       }
-      return dispatch(signInFailure({error: {message: 'Server unreachable at the moment'}}))
-    })};
+      return dispatch(signInFailure({ error: { message: 'Server unreachable at the moment' } }))
+    })
+};
 
 export default signIn;
