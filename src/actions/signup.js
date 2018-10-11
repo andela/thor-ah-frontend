@@ -6,7 +6,7 @@ import {
     SIGNUP_LOADING
 } from '../actionTypes/signup';
 
-const API = "https://thor-ah-staging.herokuapp.com";
+const API = process.env.REACT_APP_API;
 
 const signupSuccess = body => ({
     type: SIGNUP_SUCCESS,

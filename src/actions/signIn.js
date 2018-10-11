@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { SIGN_IN_SUCCESS, SIGN_IN_FAILURE, CLEAR_ERROR, SIGN_IN_LOADING } from "../actionTypes/signin";
 
-const API = "https://thor-ah-staging.herokuapp.com";
+const API = process.env.REACT_APP_API;
 
 const signInSuccess = body => ({
   type: SIGN_IN_SUCCESS,
