@@ -1,12 +1,12 @@
 import {
-    LOADING,
+    SIGNUP_LOADING,
     SIGNUP_ERROR
-} from '../actions/types/signup';
+} from '../actionTypes/signup';
 import initialState from '../store/initialState';
 
 export default function signup(state = initialState.auth.signup, action) {
     switch (action.type) {
-        case LOADING:
+        case SIGNUP_LOADING:
             return {
                 ...state,
                 loading: action.payload,

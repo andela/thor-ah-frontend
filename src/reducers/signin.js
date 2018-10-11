@@ -2,7 +2,7 @@ import {
   SIGN_IN_FAILURE,
   CLEAR_ERROR,
   SIGN_IN_LOADING
-} from '../actions/action.types';
+} from '../actionTypes/signin';
 import initialState from '../store/initialState';
 
 export default function reducer(state = initialState.auth.signin, action) {

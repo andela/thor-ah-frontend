@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { GoX } from 'react-icons/go'
 import signup from '../../actions/signup';
 import styles from './Signup.module.css';
 import SocialSignup from '../../components/SocialSignup'
@@ -35,6 +36,12 @@ export class Signup extends React.Component {
         dispatch(signup(this.state))
     }
 
+    goToSignin = () => {
+        const { toggleSigninModal, toggleModal } = this.props
+        toggleModal() // stop showing signup modal
+        toggleSigninModal() // show login modal
+    }
+
     render() {
         const { error, toggleModal, loading, isAuthenticated } = this.props;
         if (this.showErrors && error && error.error) {
@@ -53,61 +60,68 @@ export class Signup extends React.Component {
         }
 
         return (
-            < div id={styles.regModal} >
+            <div id={styles.container} style={{ 'overflowY': 'auto' }}>
+                <button className={styles.modalClose} type="button" onClick={toggleModal}>
+                    <span className={styles.xIcon}>
+                        <GoX />
+                    </span>
+                </button>
+                < div id={styles.regModal} >
 
-                <div className={styles.regContainer}>
-                    <p className={styles.center} >{this.signupTitle}</p>
+                    <div className={styles.regContainer}>
+                        <p className={styles.center} >{this.signupTitle}</p>
 
-                    <SocialSignup />
-                    <form onSubmit={this.handleSubmit}>
-                        <div className={styles.regForm}>
+                        <SocialSignup />
+                        <form onSubmit={this.handleSubmit}>
+                            <div className={styles.regForm}>
 
-                            <div className={styles.formItemGroup}>
-                                <div>
-                                    <div className={styles.errMsg} name="firstNameErr" id={`${styles.firstName}Err`} />
-                                    <input type="text" name="firstName" className={styles.formInput} id={styles.firstName}
-                                        placeholder="firstname" onChange={this.handleChange}
+                                <div className={styles.formItemGroup}>
+                                    <div>
+                                        <div className={styles.errMsg} name="firstNameErr" id={`${styles.firstName}Err`} />
+                                        <input type="text" name="firstName" className={styles.formInput} id={styles.firstName}
+                                            placeholder="firstname" onChange={this.handleChange}
+                                            onFocus={clearError} required />
+                                    </div>
+                                    <div>
+                                        <div className={styles.errMsg} name="lastNameErr" id={`${styles.lastName}Err`} />
+                                        <input type="text" name="lastName" className={styles.formInput} id={styles.lastName}
+                                            placeholder="lastname" onChange={this.handleChange}
+                                            onFocus={clearError} required />
+                                    </div>
+                                </div>
+
+                                <div className={styles.formItemGroup}>
+                                    <div>
+                                        <div className={styles.errMsg} name="usernameErr" id={`${styles.username}Err`} />
+                                        <input type="text" name="username" className={styles.formInput} id={styles.username}
+                                            placeholder="username" onChange={this.handleChange}
+                                            onFocus={clearError} required />
+                                    </div>
+                                    <div>
+                                        <div className={styles.errMsg} name="emailErr" id={`${styles.email}Err`} />
+                                        <input type="email" name="email" className={styles.formInput} id={styles.email}
+                                            placeholder="email" onChange={this.handleChange}
+                                            onFocus={clearError} required />
+                                    </div>
+                                </div>
+
+                                <div className={styles.formItemGroup}>
+                                    <div className={styles.errMsg} name="passwordErr" id={`${styles.password}Err`} />
+                                    <input type="password" name="password" className={styles.formInput} id={styles.password}
+                                        placeholder="password" onChange={this.handleChange}
                                         onFocus={clearError} required />
                                 </div>
-                                <div>
-                                    <div className={styles.errMsg} name="lastNameErr" id={`${styles.lastName}Err`} />
-                                    <input type="text" name="lastName" className={styles.formInput} id={styles.lastName}
-                                        placeholder="lastname" onChange={this.handleChange}
-                                        onFocus={clearError} required />
+                                <div className={styles.formItemGroup}>
+                                    {submitBtn}
                                 </div>
                             </div>
+                        </form>
+                        <p className={styles.center}>Already Have an Account? <button type='button' className={styles.transparentBtn} onClick={this.goToSignin}><Link to="/auth/login"> Login </Link> </button></p>
 
-                            <div className={styles.formItemGroup}>
-                                <div>
-                                    <div className={styles.errMsg} name="usernameErr" id={`${styles.username}Err`} />
-                                    <input type="text" name="username" className={styles.formInput} id={styles.username}
-                                        placeholder="username" onChange={this.handleChange}
-                                        onFocus={clearError} required />
-                                </div>
-                                <div>
-                                    <div className={styles.errMsg} name="emailErr" id={`${styles.email}Err`} />
-                                    <input type="email" name="email" className={styles.formInput} id={styles.email}
-                                        placeholder="email" onChange={this.handleChange}
-                                        onFocus={clearError} required />
-                                </div>
-                            </div>
+                    </div>
 
-                            <div className={styles.formItemGroup}>
-                                <div className={styles.errMsg} name="passwordErr" id={`${styles.password}Err`} />
-                                <input type="password" name="password" className={styles.formInput} id={styles.password}
-                                    placeholder="password" onChange={this.handleChange}
-                                    onFocus={clearError} required />
-                            </div>
-                            <div className={styles.formItemGroup}>
-                                {submitBtn}
-                            </div>
-                        </div>
-                    </form>
-                    <p className={styles.center}>Already Have an Account? <Link to="/auth/login"> Login </Link> </p>
-
-                </div>
-
-            </div >
+                </div >
+            </div>
         )
     }
 
@@ -117,8 +131,8 @@ const mapStateToProps = (state) => {
     const { auth } = state;
     return {
         isAuthenticated: auth.isAuthenticated,
-        loading: auth.loading,
-        error: auth.error,
+        loading: auth.signup.loading,
+        error: auth.signup.error,
     }
 }
 

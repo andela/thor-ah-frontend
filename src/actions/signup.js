@@ -3,8 +3,8 @@ import axios from 'axios';
 import {
     SIGNUP_SUCCESS,
     SIGNUP_ERROR,
-    LOADING
-} from './types/signup';
+    SIGNUP_LOADING
+} from '../actionTypes/signup';
 
 const API = "https://thor-ah-staging.herokuapp.com";
 
@@ -18,7 +18,7 @@ const signupError = error => ({
     payload: error
 });
 
-const signupLoading = (payload) => ({ type: LOADING, payload })
+const signupLoading = (payload) => ({ type: SIGNUP_LOADING, payload })
 
 function signUp(user) {
     return (dispatch) => {

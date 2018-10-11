@@ -16,6 +16,13 @@
    text-decoration: none !important;
  }
 
+
+ .transparentBtn{
+  border: none;
+  background: transparent;
+  color: #FFF;
+}
+
  #regModal .modalClose {
    position: absolute;
    top: 10px;
