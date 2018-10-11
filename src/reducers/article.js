@@ -1,5 +1,8 @@
-import { FETCH_ARTICLE_SUCCESS, FETCH_ARTICLE_ERROR, FETCH_ARTICLE_LOADING } from "../actionTypes/article";
-// initial state
+import {
+  CREATE_ARTICLE_SUCCESS,
+  CREATE_ARTICLE_FAILURE,
+  CREATE_ARTICLE_LOADING
+} from "../actionTypes/article";
 import initialState from "../store/initialState";
 
 export default function reducer(state = initialState.article, action) {

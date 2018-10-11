@@ -1,52 +1,62 @@
 import axios from "axios";
+import dotenv from "dotenv";
+
 import {
-  FETCH_ARTICLE_SUCCESS,
-  FETCH_ARTICLE_ERROR,
-  FETCH_ARTICLE_LOADING
-} from "../actionTypes/article";
+  CREATE_ARTICLE_SUCCESS,
+  CREATE_ARTICLE_FAILURE,
+  CREATE_ARTICLE_LOADING
+} from "../actionTypes/auth";
 
-const API = process.env.REACT_APP_API;
+dotenv.config();
 
-const fetchArticleSuccess = payload => ({
-  type: FETCH_ARTICLE_SUCCESS,
-  payload
+const setArticleSuccess = article => ({
+  type: CREATE_ARTICLE_SUCCESS,
+  payload: article
 });
 
-const fetchArticleLoading = payload => ({
-  type: FETCH_ARTICLE_LOADING,
-  payload
+const setArticleLoading = isLoading => ({
+  type: CREATE_ARTICLE_LOADING,
+  payload: isLoading
 });
 
-const fetchArticleError = payload => ({
-  type: FETCH_ARTICLE_ERROR,
-  payload
+const setArticleFailure = error => ({
+  type: CREATE_ARTICLE_FAILURE,
+  payload: error
 });
 
-const getArticle = (articleSlug) => (dispatch) => {
-  dispatch(fetchArticleLoading(true));
+export const createArticle = articleData => dispatch => {
+  // const someUser = {
+  //   name: "Some name",
+  //   token:
+  //     "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE1MzkxNjg5ODgsImV4cCI6MTU3MTQ4MjU4OCwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0.DyNHulvnxYECg1DFrq8PC0eGvQDUOCyYGE3b_FodoGE"
+  // };
+
   const { token } = localStorage;
+  // localStorage.setItem("user", JSON.stringify(someUser));
+  // const user = JSON.parse(localStorage.getItem("user"));
+  // const { token } = user;
+
+  dispatch(setArticleLoading(true));
   return axios
-    .get(`${API}/api/articles/${articleSlug}`, {
+    .post(process.env.REACT_APP_API, articleData, {
       headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json"
+        Authorization: `Bearer ${token}`
       }
     })
     .then(response => {
-      dispatch(fetchArticleLoading(false));
-      dispatch(fetchArticleSuccess(response.data.article));
-    })
-    .catch(error => {
-      dispatch(fetchArticleLoading(false));
-      if (error.response) {
-        return dispatch(fetchArticleError(error.response.data));
+      if (response.data.status === "success") {
+        // const { slug } = response.data;
+        // history.push(`/articles/${slug}`);
+        console.log(response);
+        dispatch(setArticleLoading(false));
+        return dispatch(
+          setArticleSuccess(response.data.newArticleAlert.createdArticle)
+        );
       }
-      return dispatch(
-        fetchArticleError({
-          error: { message: "Server unreachable at the moment" }
-        })
-      );
-    });
+      console.log(response);
+      return dispatch(setArticleFailure(response.data.error));
+    })
+    .catch(error => console.log(error));
 };
 
-export default getArticle;
+export default createArticle;

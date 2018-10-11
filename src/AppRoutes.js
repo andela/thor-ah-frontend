@@ -11,7 +11,7 @@ import Signin from './containers/SignIn/SignIn';
 import AllCategories from './containers/Categories/Categories';
 import ArticleCategory from './containers/Categories/SingleCategory';
 import NotFound from './containers/NotFound/NotFound';
-import CreateArticlePage from "./containers/CreateArticle/CreateArticlePage";
+import CreateArticlePage from './containers/CreateArticle/CreateArticlePage';
 
 const AppRoutes = () => (
   <Router>
