@@ -13,22 +13,6 @@ import ArticleCategory from './containers/Categories/SingleCategory';
 import NavBar from './components/NavBar';
 import CreateArticlePage from './containers/CreateArticle/CreateArticlePage';
 
-const Login = () => (
-  <div><h1>Login page</h1></div>
-);
-// import ProfilePage from "./containers/ProfilePage";
-// import ArticlePage from "./containers/ArticlePage";
-// import Homepage from "./containers/Home/Home";
-// import Header from "./components/Header/Header";
-// import Footer from "./components/Footer/Footer";
-// import ProtectedRoute from "./containers/ProtectedRoute";
-// import NavBar from './components/NavBar';
-
-const Sample = () => (
-  <div className="landing-page">
-    <h1>This is just a sample page for routes</h1>
-  </div>
-);
 
 const AppRoutes = () => (
   <Router>
@@ -51,7 +35,15 @@ const AppRoutes = () => (
       <Route exact path='/sample' component={ Sample }/>
       <Route exact path='/create-article' component={ CreateArticlePage }/>
       <Route exact path="/" component={Homepage} />
-      <Route path="/login" component={Login} />
+      <Route exact path="/signin" component={Signin} />
+      {/* protected routes can be rendered using the ProtectedRoutes component */}
+      <ProtectedRoute path="/article" component={ArticlePage} />
+      <ProtectedRoute path="/profile/user" component={ProfilePage} />
+      <ProtectedRoute
+        exact
+        path="/create-article"
+        component={CreateArticlePage}
+      />
       <Footer />
     </Fragment>
   </Router>

@@ -7,9 +7,6 @@ import articleCategoryReducer from './categories';
 import createArticle from './createArticle';
 import article from "./article";
 
-// initial dummy state setup
-const app = (state = { intro: "welcome to ah" }) => state;
-
 const rootReducer = combineReducers({
   auth,
   article,
