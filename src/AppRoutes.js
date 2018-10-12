@@ -12,7 +12,7 @@ import AllCategories from './containers/Categories/Categories';
 import ArticleCategory from './containers/Categories/SingleCategory';
 import NavBar from './components/NavBar';
 import CreateArticlePage from './containers/CreateArticle/CreateArticlePage';
-
+import ErrorPage from "./containers/Error";
 
 const AppRoutes = () => (
   <Router>
@@ -22,7 +22,13 @@ const AppRoutes = () => (
       <Route path='/categories' component={ AllCategories }/>
       <Route path='/category/:name' component={ ArticleCategory } />
       <Route exact path='/signin' component={ Signin }/>
+      <Route exact path='/' component={ Homepage }/>
+      <Route exact path='/create-article' component={ CreateArticlePage }/>
+      <Route exact path="/" component={Homepage} />
+      <Route exact path="/signin" component={Signin} />
+      <Route exact path="/error" component={ErrorPage} />
       {/* protected routes can be rendered using the ProtectedRoutes component */}
+      <NavBar />
       <ProtectedRoute path='/articles/:slug' component={ ArticlePage }/>
       <ProtectedRoute path='/profile/user' component={ ProfilePage }/>
       <ProtectedRoute path='/article' component={ArticlePage} />
@@ -30,20 +36,9 @@ const AppRoutes = () => (
       <Route exact path='/signin' component={Signin} />
       <ProtectedRoute path='/article' component={ ArticlePage }/>
       <ProtectedRoute path='/profile/user' component={ ProfilePage }/>
-      <NavBar />
-      <Route exact path='/' component={ Homepage }/>
-      <Route exact path='/sample' component={ Sample }/>
-      <Route exact path='/create-article' component={ CreateArticlePage }/>
-      <Route exact path="/" component={Homepage} />
-      <Route exact path="/signin" component={Signin} />
-      {/* protected routes can be rendered using the ProtectedRoutes component */}
       <ProtectedRoute path="/article" component={ArticlePage} />
       <ProtectedRoute path="/profile/user" component={ProfilePage} />
-      <ProtectedRoute
-        exact
-        path="/create-article"
-        component={CreateArticlePage}
-      />
+      <ProtectedRoute exact path="/create-article" component={CreateArticlePage} />
       <Footer />
     </Fragment>
   </Router>
