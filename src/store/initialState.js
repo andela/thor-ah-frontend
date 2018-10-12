@@ -22,6 +22,18 @@ const initialState = {
       error: '',
       loading: false,
     }
+  },
+  articleCategory: {
+    category: {
+      isLoading: false,
+      isError: false,
+      data: {}
+    },
+    categories: {
+      isLoading: false,
+      isError: false,
+      data: []
+    },
   }
 };
 
