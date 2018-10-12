@@ -20,9 +20,8 @@ const createCommentError = (error) => ({
 
 const createComment = (commentData, articleSlug) => (dispatch) => {
   dispatch(createCommentRequest(true));
-  // make ajax request to create comment here
   const { token } = localStorage;
-  axios.post(
+  return axios.post(
     `${API}/api/articles/${articleSlug}/comments`,
     {
       comment: commentData
@@ -35,9 +34,13 @@ const createComment = (commentData, articleSlug) => (dispatch) => {
     }
   )
     .then((response) => {
-      console.log(response);
+      dispatch(createCommentRequest(false));
+      dispatch(createCommentSuccess(response.data.comment));
     })
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      dispatch(createCommentRequest(false));
+      dispatch(createCommentError(error));
+    });
 };
 
 const getArticleCommentsLoading = (isFetching) => ({
@@ -69,7 +72,11 @@ export const getArticleComments = (articleSlug) => (dispatch) => {
   )
     .then((response) => {
       dispatch(getArticleCommentsLoading(false));
-      dispatch(getArticleCommentsSuccess(response.data.comments))
+      const comments = [...response.data.comments]
+      comments.sort((firstComment, nextComment) => (
+        nextComment.id - firstComment.id
+      ));
+      dispatch(getArticleCommentsSuccess(comments));
     })
     .catch((error) => {
       dispatch(getArticleCommentsLoading(false));

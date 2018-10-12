@@ -12,11 +12,20 @@ exports[`Comment Component renders the Comment Component 1`] = `
       className="commenterImg"
       src="http://i.pravatar.cc/150?u=John"
     />
-    <span
-      className="font-weight-bold text-secondary p-2"
-    >
-      John
-    </span>
+    <div>
+      <span
+        className="font-weight-bold text-secondary p-2"
+      >
+        John
+      </span>
+      <br />
+      <span
+        className="timestamp"
+      >
+        almost NaN years
+         ago
+      </span>
+    </div>
   </div>
   <p
     className="text-secondary text-left my-4"
@@ -31,7 +40,9 @@ exports[`Comment Component renders the Comment Component 1`] = `
         alt="icon"
         src={Object {}}
       />
-      <span />
+      <span>
+        0
+      </span>
     </div>
     <div
       className="px-2"
@@ -40,7 +51,9 @@ exports[`Comment Component renders the Comment Component 1`] = `
         alt="icon"
         src={Object {}}
       />
-      <span />
+      <span>
+        0
+      </span>
     </div>
   </div>
 </div>

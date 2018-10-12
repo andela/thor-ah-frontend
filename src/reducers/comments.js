@@ -11,7 +11,7 @@ const comments = (state = initialState.comments, action) => {
     case types.CREATE_COMMENT_SUCCESS:
       return {
         ...state,
-        currentArticleComments: [...state.currentArticleComments, action.payload],
+        currentArticleComments: [action.payload, ...state.currentArticleComments],
       }
     case types.CREATE_COMMENT_FAILED:
       return {

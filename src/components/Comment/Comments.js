@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types'; // eslint-disable-line import/no-extraneous-dependencies
 import Comment from './Comment';
 
 const Comments = ({ comments, currentArticleTitle }) => (
-  <React.Fragment>
+  <Fragment>
     <p className="text-secondary text-left py-3">
       {currentArticleTitle ? `Thoughts on "${currentArticleTitle}"` : ''}
     </p>
     <section>
       {comments && comments.map(comment => <Comment key={comment.id} comment={comment} />)}
     </section>
-  </React.Fragment>
+  </Fragment>
 );
 
 Comments.propTypes = {

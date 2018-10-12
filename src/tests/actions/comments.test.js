@@ -2,7 +2,7 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { getArticleComments } from '../../actions/comments';
+import createComment, { getArticleComments } from '../../actions/comments';
 import * as types from '../../actionTypes/comments';
 
 const API = process.env.REACT_APP_API;
@@ -14,7 +14,6 @@ const moxios = new MockAdapter(axios);
 describe('comment actions', () => {
   afterEach(() => {
     moxios.reset();
-    moxios.restore();
   });
 
   describe('getArticleComments', () => {
@@ -60,6 +59,55 @@ describe('comment actions', () => {
           const receivedActions = store.getActions();
           const failureAction = receivedActions.find(
             action => action.type === types.FETCH_ARTICLE_COMMENTS_FAILURE
+          );
+          expect(failureAction).toBeTruthy();
+        });
+    });
+  });
+
+  describe('createComment', () => {
+    it('dispatches FETCH_ARTICLE_COMMENTS_SUCCESS after fetching comments', () => {
+      moxios.onPost(`${API}/api/articles/some-slug/comments`)
+        .reply(201, {
+          comment: {
+            id: 1,
+            body: 'The body'
+          }
+        });
+
+      const expectedActions = [
+        {
+          type: types.CREATE_COMMENT_REQUEST,
+          payload: true
+        },
+        {
+          type: types.CREATE_COMMENT_REQUEST,
+          payload: false
+        },
+        {
+          type: types.CREATE_COMMENT_SUCCESS,
+          payload: {id: 1, body: 'The body'}
+        }
+      ]
+
+      const store = mockStore({comments: {}});
+      return store.dispatch(createComment('the comment', 'some-slug'))
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+        });
+    });
+
+
+    it('dispatches FETCH_ARTICLE_COMMENTS_ERROR', () => {
+      moxios.onPost(`${API}/api/articles/some-slug/comments`)
+        .networkError('Server error');
+
+      const store = mockStore({comments: {}});
+      return store.dispatch(createComment('some comment', 'some-slug'))
+        .then(() => {
+          const receivedActions = store.getActions();
+          const failureAction = receivedActions.find(
+            action => action.type === types.CREATE_COMMENT_FAILED
           );
           expect(failureAction).toBeTruthy();
         });

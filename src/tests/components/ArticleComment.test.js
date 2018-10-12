@@ -24,7 +24,6 @@ describe("ArticleComment Component", () => {
   });
 
   test("renders the a loading spinner Component", () => {
-    console.log(store.getState());
     const wrapper = mount(
       <Provider store={store}>
         <ArticleComment fetchingArticleComments fetchArticleComments={mockFunction} />

@@ -53,4 +53,4 @@ const mapDispatchToProps = (dispatch) => ({
   }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps, null, { pure: false })(ArticleComment);
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleComment);

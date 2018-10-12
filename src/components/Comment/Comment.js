@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
 import styles from './comment.module.scss';
 // images
 import likeIcon from "../../assets/up.png";
@@ -10,9 +11,15 @@ const Comment = ({ comment }) => (
   <div className={`card p-3 ${styles.comment}`}>
     <div className="d-flex ">
       <img className={styles.commenterImg} src={`http://i.pravatar.cc/150?u=${comment.commenter.firstName}`} alt="profile" />
-      <span className="font-weight-bold text-secondary p-2">
-        {comment.commenter.firstName}
-      </span>
+      <div>
+        <span className="font-weight-bold text-secondary p-2">
+          {comment.commenter.firstName}
+        </span>
+        <br />
+        <span className={styles.timestamp}>
+          {distanceInWordsToNow(comment.createdAt)} ago
+        </span>
+      </div>
     </div>
     <p className="text-secondary text-left my-4">
       {comment.body}
@@ -20,11 +27,11 @@ const Comment = ({ comment }) => (
     <div className="d-flex">
       <div className="px-2">
         <img src={likeIcon} alt="icon" />
-        <span>{comment.likesCount}</span>
+        <span>{comment.likesCount || 0}</span>
       </div>
       <div className="px-2">
         <img src={dislikeIcon} alt="icon" />
-        <span>{comment.dislikesCount}</span>
+        <span>{comment.dislikesCount || 0}</span>
       </div>
     </div>
   </div>
