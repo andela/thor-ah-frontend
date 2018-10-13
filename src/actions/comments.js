@@ -36,10 +36,12 @@ const createComment = (commentData, articleSlug) => (dispatch) => {
     .then((response) => {
       dispatch(createCommentRequest(false));
       dispatch(createCommentSuccess(response.data.comment));
+      return response;
     })
     .catch((error) => {
       dispatch(createCommentRequest(false));
       dispatch(createCommentError(error));
+      return error;
     });
 };
 
@@ -77,10 +79,12 @@ export const getArticleComments = (articleSlug) => (dispatch) => {
         nextComment.id - firstComment.id
       ));
       dispatch(getArticleCommentsSuccess(comments));
+      return response;
     })
     .catch((error) => {
       dispatch(getArticleCommentsLoading(false));
       dispatch(getArticleCommentsError(error));
+      return error;
     });
 };
 

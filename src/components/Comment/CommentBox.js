@@ -9,6 +9,7 @@ class CommentBox extends Component {
     super(props)
     this.state = {
       comment: '',
+      showError: false,
     };
 
     this.submitComment = this.submitComment.bind(this);
@@ -17,7 +18,8 @@ class CommentBox extends Component {
 
   handleTextAreaChange(event) {
     this.setState({
-      comment: event.target.value
+      comment: event.target.value,
+      showError: false,
     });
   }
 
@@ -27,15 +29,28 @@ class CommentBox extends Component {
     if (comment.length < 1) return;
 
     const articleSlug = window.location.pathname.split('/article/')[1];
-    const { handleCommentSubmit } = this.props;
-    handleCommentSubmit(comment, articleSlug);
+    // hide any errors
     this.setState({
-      comment: ''
+      showError: false,
     });
+
+    const { handleCommentSubmit } = this.props;
+    handleCommentSubmit(comment, articleSlug)
+      .then((result) => {
+        if (result.data && result.data.status === 'success') {
+          return this.setState({
+            comment: ''
+          });
+        }
+        return this.setState({
+          showError: true,
+        })
+      });
   }
 
   render() {
-    const { comment } = this.state;
+    const { comment, showError } = this.state;
+    const { loading, error } = this.props;
     return (
       <form onSubmit = {this.submitComment} >
         <div className={styles.field}>
@@ -49,8 +64,9 @@ class CommentBox extends Component {
               onChange={this.handleTextAreaChange}
             />
           </div>
+          {showError && error ? <span style={{color: 'red'}}>Unable to post comment at this time. Try again</span> : ''}
           {/* display submit button only as soon as user starts typing */}
-          {comment ? <button className={`btn btn-success ${styles.submit}`} type="submit">submit</button> : ''}
+          {comment ? <button className={`btn btn-success ${styles.submit}`} type="submit" disabled={loading}>submit</button> : ''}
         </div>
       </form>
     );
@@ -59,12 +75,18 @@ class CommentBox extends Component {
 
 CommentBox.propTypes = {
   handleCommentSubmit: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  loading: state.newComment.loading,
+  error: state.newComment.error,
+})
 
 const mapDispatchToProps = (dispatch) => ({
   handleCommentSubmit(comment, slug) {
-    dispatch(createComment(comment, slug));
+    return dispatch(createComment(comment, slug));
   }
 });
 
-export default connect(null, mapDispatchToProps)(CommentBox);
+export default connect(mapStateToProps, mapDispatchToProps)(CommentBox);

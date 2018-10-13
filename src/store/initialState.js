@@ -12,11 +12,16 @@ const initialState = {
     isAuthenticated: false
   },
   comments: {
-    fetchingArticleComments: false,
-    fetchingCommentsError: '',
-    currentArticleComments: [],
-    postingNewComment: false,
-    newCommentError: ''
+    articleComments: {
+      data: [],
+      error: '',
+      loading: false
+    },
+    newComment: {
+      data: {},
+      error: '',
+      loading: false,
+    }
   }
 };
 

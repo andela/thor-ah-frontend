@@ -23,13 +23,19 @@ export class ArticleComment extends Component {
   }
 
   render() {
-    const { comments, fetchingArticleComments } = this.props;
+    const { comments, fetchingArticleComments, error } = this.props;
     return (
       <div className={styles.comment}>
         <CommentBox />
-        {fetchingArticleComments
-          ? <i className={`fa fa-spinner fa-3x fa-spin ${styles.loading}`} />
-          : <Comments comments={comments} />
+        {fetchingArticleComments ?
+          <i className={`fa fa-spinner fa-3x fa-spin ${styles.loading}`} /> :
+          <Comments comments={comments} />
+        }
+        {error ?
+          <span style={{color: 'red'}}>
+            Unable to fetch comments at this time. Try reloading this page
+          </span> :
+          ''
         }
       </div>
     );
@@ -40,16 +46,18 @@ ArticleComment.propTypes = {
   fetchArticleComments: PropTypes.func.isRequired,
   comments: PropTypes.array.isRequired,
   fetchingArticleComments: PropTypes.bool.isRequired,
+  error: PropTypes.any.isRequired,
 }
 
 const mapStateToProps = (state) => ({
-  comments: state.comments.currentArticleComments,
-  fetchingArticleComments: state.comments.fetchingArticleComments,
+  comments: state.articleComments.data,
+  fetchingArticleComments: state.articleComments.loading,
+  error: state.articleComments.error,
 })
 
 const mapDispatchToProps = (dispatch) => ({
   fetchArticleComments(articleSlug) {
-    dispatch(getArticleComments(articleSlug));
+    return dispatch(getArticleComments(articleSlug));
   }
 })
 

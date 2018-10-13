@@ -1,44 +1,12 @@
-import comments from '../../reducers/comments';
+import { articleComments, newComment } from '../../reducers/comments';
 import * as types from '../../actionTypes/comments';
 
-describe('comments reducer', () => {
+describe('articleComments reducer', () => {
   it('should return initial state', () => {
-    expect(comments(undefined, {})).toEqual({
-      fetchingArticleComments: false,
-      fetchingCommentsError: '',
-      currentArticleComments: [],
-      postingNewComment: false,
-      newCommentError: ''
-    });
-  });
-
-  it('should handle CREATE_COMMENT_REQUEST', () => {
-    const action = {
-      type: types.CREATE_COMMENT_REQUEST,
-      payload: true
-    };
-    expect(comments({}, action)).toEqual({
-      postingNewComment: action.payload,
-    });
-  });
-
-  it('should handle CREATE_COMMENT_SUCCESS', () => {
-    const action = {
-      type: types.CREATE_COMMENT_SUCCESS,
-      payload: {id: 1, body: 'commentOne'}
-    };
-    expect(comments({currentArticleComments: []}, action)).toEqual({
-      currentArticleComments: [action.payload],
-    });
-  });
-
-  it('should handle CREATE_COMMENT_FAILED', () => {
-    const action = {
-      type: types.CREATE_COMMENT_FAILED,
-      payload: 'some errors'
-    };
-    expect(comments({}, action)).toEqual({
-      commentError: action.payload,
+    expect(articleComments(undefined, {})).toEqual({
+      data: [],
+      error: '',
+      loading: false,
     });
   });
 
@@ -47,8 +15,8 @@ describe('comments reducer', () => {
       type: types.FETCH_ARTICLE_COMMENTS_LOADING,
       payload: true
     };
-    expect(comments({}, action)).toEqual({
-      fetchingArticleComments: action.payload,
+    expect(articleComments({}, action)).toEqual({
+      loading: action.payload,
     });
   });
 
@@ -57,8 +25,8 @@ describe('comments reducer', () => {
       type: types.FETCH_ARTICLE_COMMENTS_SUCCESS,
       payload: [{id: 1, comment: 'the comment'}]
     };
-    expect(comments({}, action)).toEqual({
-      currentArticleComments: action.payload,
+    expect(articleComments({}, action)).toEqual({
+      data: action.payload,
     });
   });
 
@@ -67,9 +35,52 @@ describe('comments reducer', () => {
       type: types.FETCH_ARTICLE_COMMENTS_FAILURE,
       payload: 'some error'
     };
-    expect(comments({}, action)).toEqual({
-      fetchingCommentsError: action.payload,
+    expect(articleComments({}, action)).toEqual({
+      error: action.payload,
     });
   });
 
+});
+
+describe('newComment reducer', () => {
+  it('should return initial state', () => {
+    expect(newComment(undefined, {})).toEqual({
+      data: {},
+      error: '',
+      loading: false,
+    });
+  });
+
+ it('should handle CREATE_COMMENT_REQUEST', () => {
+    const action = {
+      type: types.CREATE_COMMENT_REQUEST,
+      payload: true
+    };
+    expect(newComment({}, action)).toEqual({
+      loading: action.payload,
+    });
+  });
+
+  it('should handle CREATE_COMMENT_SUCCESS', () => {
+    const action = {
+      type: types.CREATE_COMMENT_SUCCESS,
+      payload: {id: 1, body: 'commentOne'}
+    };
+    expect(newComment({}, action)).toEqual({
+      data: action.payload,
+    });
+    expect(articleComments({data: ['one']}, action)).toEqual({
+      data: [action.payload, 'one']
+    })
+  });
+
+  it('should handle CREATE_COMMENT_FAILED', () => {
+    const action = {
+      type: types.CREATE_COMMENT_FAILED,
+      payload: 'some errors'
+    };
+    expect(newComment({}, action)).toEqual({
+      error: action.payload,
+    });
+  });
 });

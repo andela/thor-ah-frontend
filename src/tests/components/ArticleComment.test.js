@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
+import { shallow } from "enzyme";
 import { Provider } from "react-redux";
 import configureMockStore from "redux-mock-store";
 import ConnectedArticleComment, { ArticleComment } from "../../components/ArticleComment/ArticleComment";
@@ -24,10 +24,8 @@ describe("ArticleComment Component", () => {
   });
 
   test("renders the a loading spinner Component", () => {
-    const wrapper = mount(
-      <Provider store={store}>
-        <ArticleComment fetchingArticleComments fetchArticleComments={mockFunction} />
-      </Provider>
+    const wrapper = shallow(
+      <ArticleComment fetchingArticleComments fetchArticleComments={mockFunction} />
     );
     expect(wrapper.find('i').exists()).toBe(true);
   });

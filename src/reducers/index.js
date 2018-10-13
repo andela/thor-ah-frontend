@@ -2,13 +2,14 @@ import { combineReducers } from 'redux';
 import auth from './auth';
 import signinuser from './signin';
 import signup from './signup';
-import comments from './comments';
+import { articleComments, newComment } from './comments';
 
 const rootReducer = combineReducers({
   auth,
   signinuser,
   signup,
-  comments,
+  articleComments,
+  newComment
 });
 
 export default rootReducer;
