@@ -51,3 +51,16 @@ export const newComment = (state = comments.newComment, action) => {
       return state;
   }
 };
+
+const commentsReducer = (state = comments, action) => {
+  switch (action.type) {
+    default:
+      return {
+        ...state,
+        articleComments: articleComments(state.articleComments, action),
+        newComment: newComment(state.newComment, action),
+      }
+  }
+}
+
+export default commentsReducer;

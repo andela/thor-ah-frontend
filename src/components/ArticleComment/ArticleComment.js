@@ -50,9 +50,9 @@ ArticleComment.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  comments: state.articleComments.data,
-  fetchingArticleComments: state.articleComments.loading,
-  error: state.articleComments.error,
+  comments: state.comments.articleComments.data,
+  fetchingArticleComments: state.comments.articleComments.loading,
+  error: state.comments.articleComments.error,
 })
 
 const mapDispatchToProps = (dispatch) => ({

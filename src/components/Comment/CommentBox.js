@@ -79,8 +79,8 @@ CommentBox.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  loading: state.newComment.loading,
-  error: state.newComment.error,
+  loading: state.comments.newComment.loading,
+  error: state.comments.newComment.error,
 })
 
 const mapDispatchToProps = (dispatch) => ({
