@@ -1,8 +1,8 @@
 import React from "react";
-import { Editor } from "@tinymce/tinymce-react";
 import PropTypes from "prop-types";
+import { Editor } from "@tinymce/tinymce-react";
 
-const apiKey = "0naso5vy7fw5eu2eqblor00o1c326x0hupermg4cli0rqoqn";
+const { EDITOR_API_KEY } = process.env;
 
 const ArticleTitle = ({
   value,
@@ -11,7 +11,7 @@ const ArticleTitle = ({
   titlePlaceholderFocusOutHandler
 }) => (
   <Editor
-    apiKey={apiKey}
+    apiKey={EDITOR_API_KEY}
     value={value}
     onEditorChange={titleChangeHandler}
     onFocusIn={titlePlaceholderFocusInHandler}

@@ -4,11 +4,13 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 import PropTypes from "prop-types";
+
 import createArticle from "../../actions/article";
 import ArticleTitle from "./ArticleTitle";
 import TextEditor from "./TextEditor";
 import stripHtml from "../../utils/stripHtml";
 import styles from "./CreateArticle.module.scss";
+import { SIGPWR } from "constants";
 
 class CreateArticle extends Component {
   constructor(props) {
@@ -21,8 +23,7 @@ class CreateArticle extends Component {
       error: {
         title: "",
         body: ""
-      },
-      message: ""
+      }
     };
   }
 
@@ -49,40 +50,49 @@ class CreateArticle extends Component {
     });
   };
 
-  titlePlaceholderFocusInHandler = () => {
+  titlePlaceHolderFocusHandler = event => {
+    const eventType = event.type;
     const { title } = this.state;
-    if (title.trim() === "Title") {
-      this.setState({ title: "" });
+    switch (eventType) {
+      case 'focusin':
+        if (title.trim() === "Title") {
+          this.setState({ title: "" });
+        }
+      case 'focusout':
+      if (title.trim() === "") {
+        this.setState({
+          title: "Title"
+        });
+      }
+      default:
+        return null;
     }
   };
 
-  titlePlaceholderFocusOutHandler = () => {
-    const { title } = this.state;
-    if (title.trim() === "") {
-      this.setState({
-        title: "Title"
-      });
-    }
-  };
-
-  bodyPlaceholderFocusInHandler = () => {
+  bodyPlaceholderFocusHandler = event => {
+    const eventType = event.type;
     const { body } = this.state;
-    if (
-      body.trim() === "Share your thoughts..." ||
-      body.trim() === "<p>Share your thoughts...</p>"
-    ) {
-      this.setState({
-        body: ""
-      });
-    }
-  };
-
-  bodyPlaceholderFocusOutHandler = () => {
-    const { body } = this.state;
-    if (body.trim() === "") {
-      this.setState({
-        body: "Share your thoughts..."
-      });
+    switch (eventType) {
+      case 'focusin':
+        if (
+          body.trim() === "Share your thoughts..." ||
+          body.trim() === "<p>Share your thoughts...</p>"
+        ) {
+          this.setState({
+            body: ""
+          });
+        }
+      case 'focusout':
+        if (
+          body.trim() === "Share your thoughts..." ||
+          body.trim() === "<p>Share your thoughts...</p>"
+        ) {
+          this.setState({
+            body: ""
+          });
+        }
+      default:
+        return null;
     }
   };
 
@@ -154,7 +164,6 @@ class CreateArticle extends Component {
     };
 
     if (this.validateArticle() === false) {
-      console.log(error);
       return;
     }
 
@@ -168,19 +177,23 @@ class CreateArticle extends Component {
     if (response) {
       switch (response.status) {
         case 201:
-          <Redirect to={{
-            pathname: '/'
-          }} />
+          <Redirect
+            to={{
+              pathname: "/"
+            }}
+          />;
         default:
-        <Redirect to={{
-          pathname: '/error'
-        }} />;
+          <Redirect
+            to={{
+              pathname: "/error"
+            }}
+          />;
       }
     }
   };
 
   render() {
-    const { title, body, error, message } = this.state;
+    const { title, body, error } = this.state;
     const errorArray = Object.keys(error).filter(err => err[1] === "");
     return (
       <Fragment>
@@ -200,10 +213,10 @@ class CreateArticle extends Component {
                 value={title}
                 titleChangeHandler={this.titleChangeHandler}
                 titlePlaceholderFocusInHandler={
-                  this.titlePlaceholderFocusInHandler
+                  this.titlePlaceHolderFocusHandler
                 }
                 titlePlaceholderFocusOutHandler={
-                  this.titlePlaceholderFocusOutHandler
+                  this.titlePlaceHolderFocusHandler
                 }
               />
             </div>
@@ -213,10 +226,10 @@ class CreateArticle extends Component {
                 value={body}
                 editorChangeHandler={this.editorChangeHandler}
                 bodyPlaceholderFocusInHandler={
-                  this.bodyPlaceholderFocusInHandler
+                  this.bodyPlaceholderFocusHandler
                 }
                 bodyPlaceholderFocusOutHandler={
-                  this.bodyPlaceholderFocusOutHandler
+                  this.bodyPlaceholderFocusHandler
                 }
                 imageUploadHandler={this.imageUploadHandler}
               />
