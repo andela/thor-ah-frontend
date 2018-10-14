@@ -9,6 +9,7 @@ import userIsLoggedIn from './utils/userIsLoggedIn';
 import { logOutUser, setLoggedInUser } from './actions/auth';
 
 const store = configureStore();
+console.log('apiUrl', process.env.REACT_APP_API);
 
 if (userIsLoggedIn()) {
   // set current user in store

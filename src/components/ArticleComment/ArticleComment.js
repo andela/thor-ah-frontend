@@ -1,45 +1,64 @@
-import React from 'react';
-// images
-import likeIcon from "../../assets/up.png";
-import dislikeIcon from "../../assets/down.png";
-import profileImage from "../../assets/Ellipse.png";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 // styles
 import styles from './ArticleComment.module.scss';
-import "bootstrap/dist/css/bootstrap.min.css"; 
+import "bootstrap/dist/css/bootstrap.min.css";
+// components
+import CommentBox from '../Comment/CommentBox';
+import Comments from '../Comment/Comments';
+// actions
+import { getArticleComments } from '../../actions/comments';
 
-const ArticleComment = () => (
-  <div className={styles.comment}>
-    <textarea
-      className="form-control p-3"
-      id="comment"
-      placeholder="Join the conversation..."
-      rows={4}
-    />
-    <p className="text-secondary text-left py-3">
-      Thoughts on {"The Most Amazing Article You Have Ever Read"}
-    </p>
-    <div className="card p-3">
-      <div className="d-flex ">
-        <img src={profileImage} alt="profile" />
-        <span className="font-weight-bold text-secondary p-2">
-          John Doe
-            </span>
-      </div>
-      <p className="text-secondary text-left my-4">
-        Amazing Write up. Thanks for this Jane
-          </p>
-      <div className="d-flex">
-        <div className="px-2">
-          <img src={likeIcon} alt="icon" />
-          <span>3</span>
-        </div>
-        <div className="px-2">
-          <img src={dislikeIcon} alt="icon" />
-          <span>0</span>
-        </div>
-      </div>
-    </div>
-  </div>
-);
+export class ArticleComment extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
 
-export default ArticleComment;
+  componentDidMount() {
+    const { fetchArticleComments } = this.props;
+    const articleSlug = window.location.pathname.split('/article/')[1];
+    fetchArticleComments(articleSlug);
+  }
+
+  render() {
+    const { comments, fetchingArticleComments, error } = this.props;
+    return (
+      <div className={styles.comment}>
+        <CommentBox />
+        {fetchingArticleComments ?
+          <i className={`fa fa-spinner fa-3x fa-spin ${styles.loading}`} /> :
+          <Comments comments={comments} />
+        }
+        {error ?
+          <span style={{color: 'red'}}>
+            Unable to fetch comments at this time. Try reloading this page
+          </span> :
+          ''
+        }
+      </div>
+    );
+  }
+}
+
+ArticleComment.propTypes = {
+  fetchArticleComments: PropTypes.func.isRequired,
+  comments: PropTypes.array.isRequired,
+  fetchingArticleComments: PropTypes.bool.isRequired,
+  error: PropTypes.any.isRequired,
+}
+
+const mapStateToProps = (state) => ({
+  comments: state.comments.articleComments.data,
+  fetchingArticleComments: state.comments.articleComments.loading,
+  error: state.comments.articleComments.error,
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchArticleComments(articleSlug) {
+    return dispatch(getArticleComments(articleSlug));
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleComment);

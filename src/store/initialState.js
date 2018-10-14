@@ -10,6 +10,18 @@ const initialState = {
       error: ''
     },
     isAuthenticated: false
+  },
+  comments: {
+    articleComments: {
+      data: [],
+      error: '',
+      loading: false
+    },
+    newComment: {
+      data: {},
+      error: '',
+      loading: false,
+    }
   }
 };
 
