@@ -7,7 +7,6 @@ import PropTypes from "prop-types";
 import createArticle from "../../actions/article";
 import ArticleTitle from "./ArticleTitle";
 import TextEditor from "./TextEditor";
-import ErrorPage from "../Error";
 import stripHtml from "../../utils/stripHtml";
 import styles from "./CreateArticle.module.scss";
 
@@ -88,15 +87,14 @@ class CreateArticle extends Component {
   };
 
   imageUploadHandler = (blobInfo, success, failure) => {
+    const { CLOUDINARY_API_KEY, UPLOAD_PRESET, UPLOAD_URL } = process.env;
     try {
       const formData = new FormData();
       formData.append("file", blobInfo.blob());
-      formData.append("upload_preset", "asgjqcgx");
-      formData.append("api_key", "329369412183662");
-      const uploadUrl =
-        "https://api.cloudinary.com/v1_1/dn6fnuhxr/image/upload";
+      formData.append("upload_preset", UPLOAD_PRESET);
+      formData.append("api_key", CLOUDINARY_API_KEY);
       return axios
-        .post(uploadUrl, formData, {
+        .post(UPLOAD_URL, formData, {
           headers: {
             "Content-Type": "Application/x-www-form-urlencoded",
             "X-Requested-With": "XMLHttpRequest"
