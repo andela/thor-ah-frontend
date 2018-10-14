@@ -1,47 +1,45 @@
 import axios from "axios";
-import dotenv from "dotenv";
 
 import {
   CREATE_ARTICLE_SUCCESS,
-  CREATE_ARTICLE_FAILURE,
+  CREATE_ARTICLE_ERROR,
   CREATE_ARTICLE_LOADING
 } from "../actionTypes/article";
 
-dotenv.config();
-
-const setArticleSuccess = article => ({
+const createArticleSuccess = article => ({
   type: CREATE_ARTICLE_SUCCESS,
   payload: article
 });
 
-const setArticleLoading = isLoading => ({
+const createArticleLoading = isLoading => ({
   type: CREATE_ARTICLE_LOADING,
   payload: isLoading
 });
 
-const setArticleFailure = error => ({
-  type: CREATE_ARTICLE_FAILURE,
+const createArticleFailure = error => ({
+  type: CREATE_ARTICLE_ERROR,
   payload: error
 });
 
 export const createArticle = articleData => dispatch => {
   const { token } = localStorage;
 
-  dispatch(setArticleLoading(true));
+  dispatch(createArticleLoading(true));
+  const { REACT_APP_API } = process.env;
   return axios
-    .post("https://thor-ah-staging.herokuapp.com/api/articles", articleData, {
+    .post(`${REACT_APP_API}/api/articles`, articleData, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     })
     .then(response => {
       if (response.data.status === "success") {
-        dispatch(setArticleLoading(false));
+        dispatch(createArticleLoading(false));
         return dispatch(
-          setArticleSuccess(response.data.newArticleAlert.createdArticle)
+          createArticleSuccess(response.data.newArticleAlert.createdArticle)
         );
       }
-      return dispatch(setArticleFailure(response.data.error));
+      return dispatch(createArticleFailure(response.data.error));
     })
     .catch(error => console.log(error, "error from creating article"));
 };
