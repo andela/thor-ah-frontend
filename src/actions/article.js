@@ -5,7 +5,7 @@ import {
   CREATE_ARTICLE_SUCCESS,
   CREATE_ARTICLE_FAILURE,
   CREATE_ARTICLE_LOADING
-} from "../actionTypes/auth";
+} from "../actionTypes/article";
 
 dotenv.config();
 
@@ -36,8 +36,6 @@ export const createArticle = articleData => dispatch => {
     })
     .then(response => {
       if (response.data.status === "success") {
-        // const { slug } = response.data;
-        // history.push(`/articles/${slug}`);
         dispatch(setArticleLoading(false));
         return dispatch(
           setArticleSuccess(response.data.newArticleAlert.createdArticle)
