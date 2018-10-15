@@ -5,7 +5,7 @@ import {
 } from "../actionTypes/createArticle";
 import initialState from "../store/initialState";
 
-export default function reducer(state = initialState.article, action) {
+const createArticle = (state = initialState.createArticle, action) => {
   switch (action.type) {
     case CREATE_ARTICLE_LOADING:
       return {
@@ -26,3 +26,5 @@ export default function reducer(state = initialState.article, action) {
       return state;
   }
 }
+
+export default createArticle;
