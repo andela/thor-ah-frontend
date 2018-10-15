@@ -4,7 +4,7 @@ import {
   CREATE_ARTICLE_SUCCESS,
   CREATE_ARTICLE_ERROR,
   CREATE_ARTICLE_LOADING
-} from "../actionTypes/article";
+} from "../actionTypes/createArticle";
 
 const createArticleSuccess = article => ({
   type: CREATE_ARTICLE_SUCCESS,
