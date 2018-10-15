@@ -8,6 +8,7 @@ import * as types from "../../actionTypes/article";
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 const mockAdapter = new MockAdapter(axios);
+const { REACT_APP_API } = process.env;
 
 describe("create article actions", () => {
   afterEach(() => {
@@ -46,10 +47,7 @@ describe("create article actions", () => {
         status: "success"
       };
       mockAdapter
-        .onPost(
-          `https://thor-ah-staging.herokuapp.com/api/articles`,
-          newArticle
-        )
+        .onPost(`${REACT_APP_API}/api/articles`, newArticle)
         .reply(201, mockData);
 
       const expectedActions = [
