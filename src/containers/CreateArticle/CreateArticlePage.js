@@ -150,8 +150,7 @@ class CreateArticle extends Component {
   };
 
   handleSubmit = () => {
-    const { title, body, error } = this.state;
-    const { createArticle } = this.props;
+    const { title, body } = this.state;
     const description = stripHtml(body).slice(0, 200);
     const articleData = {
       title,
@@ -190,7 +189,7 @@ class CreateArticle extends Component {
 
   render() {
     const { title, body, error } = this.state;
-    const errorArray = Object.keys(error).filter(err => err[1] === "");
+    const { createArticle } = this.props;
     return (
       <Fragment>
         {Object.keys(error).length === 0 ? null : (

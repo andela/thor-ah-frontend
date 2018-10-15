@@ -17,8 +17,6 @@ const AppRoutes = () => (
   <Router>
     <Fragment>
       <Header />
-
-      <ProtectedRoute path='/profile/user' component={ProfilePage} />
       <Switch>
         <Route exact path='/' component={Homepage} />
         {/* protected routes can be rendered using the ProtectedRoutes component */}
