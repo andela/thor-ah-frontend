@@ -5,6 +5,7 @@ import cinemaImage from '../../assets/cinema.png';
 import profileImage from "../../assets/Ellipse.png";
 // styles
 import styles from './RelatedArticle.module.scss';
+import "bootstrap/dist/css/bootstrap.min.css"; 
 
 const RelatedArticle = () => (
   <React.Fragment>

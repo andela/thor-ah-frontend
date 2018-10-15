@@ -22,7 +22,7 @@ const fetchArticleError = payload => ({
   payload
 });
 
-const getArticle = articleSlug => dispatch => {
+const getArticle = (articleSlug) => (dispatch) => {
   dispatch(fetchArticleLoading(true));
   const { token } = localStorage;
   return axios

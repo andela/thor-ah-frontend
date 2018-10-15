@@ -3,10 +3,6 @@
   box-sizing: border-box;
   outline: none;
 }
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 5vmin;
-}
 
 body {
   min-height: 100vh;
