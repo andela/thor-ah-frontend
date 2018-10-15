@@ -5,12 +5,11 @@ import { Redirect } from "react-router-dom";
 import axios from "axios";
 import PropTypes from "prop-types";
 
-import createArticle from "../../actions/article";
+import createArticle from "../../actions/createArticle";
 import ArticleTitle from "./ArticleTitle";
 import TextEditor from "./TextEditor";
 import stripHtml from "../../utils/stripHtml";
 import styles from "./CreateArticle.module.scss";
-import { SIGPWR } from "constants";
 
 class CreateArticle extends Component {
   constructor(props) {

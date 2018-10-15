@@ -1,5 +1,5 @@
-import article from "../../reducers/article";
-import * as types from "../../actionTypes/article";
+import article from "../../reducers/createArticle";
+import * as types from "../../actionTypes/createArticle";
 
 describe("article reducer", () => {
   it("should return initial state", () => {
