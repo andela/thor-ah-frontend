@@ -2,13 +2,17 @@
   "name": "thor-ah-frontend",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "npm": "6.4.1",
+    "node": "10.8.0"
+  },
   "dependencies": {
     "@babel/core": "7.1.0",
     "@fortawesome/fontawesome-free-brands": "^5.0.13",
     "@svgr/webpack": "2.4.1",
-    "axios-mock-adapter": "^1.15.0",
     "@tinymce/tinymce-react": "^2.3.0",
     "axios": "^0.18.0",
+    "axios-mock-adapter": "^1.15.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "9.0.0",
     "babel-plugin-named-asset-import": "^0.2.2",
@@ -62,6 +66,7 @@
     "redux-thunk": "^2.3.0",
     "resolve": "1.8.1",
     "sass-loader": "7.1.0",
+    "serve": "^10.0.2",
     "style-loader": "0.23.0",
     "terser-webpack-plugin": "1.1.0",
     "url-loader": "1.1.1",
@@ -71,13 +76,15 @@
     "workbox-webpack-plugin": "3.6.2"
   },
   "scripts": {
-    "start": "node scripts/start.js",
+    "dev": "node scripts/start.js",
+    "start": "serve -s build",
     "build": "node scripts/build.js",
     "test": "jest --verbose --coverage",
     "test:watch": "npm test -- --watch",
     "lint": "eslint ./src/**/*.{js,jsx} --fix",
     "format": "prettier src/**/*.{js,jsx,css,html,json}",
-    "format:check": "prettier --list-different  src/**/*{js,jsx,css,json}"
+    "format:check": "prettier --list-different  src/**/*{js,jsx,css,json}",
+    "heroku-postbuild": "npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"
