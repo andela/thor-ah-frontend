@@ -52,7 +52,7 @@ export class Categories extends Component {
             const { id, name } = category;
             return (
               <div key={id} className='col-sm-6 col-md-4 col-sm-offset-6'>
-                <div className='card text-center'>
+                <div className='card card-style text-center'>
                   <div className='card-body'>
                     <Link to={ `/category/${name}` }
                       className='category-card'
