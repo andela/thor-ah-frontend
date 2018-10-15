@@ -11,15 +11,32 @@
     "react/prop-types": 0,
     "jsx-a11y/label-has-for": 0,
     "no-console": 0,
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "eol-last": ["error", "always"],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
+    "eol-last": [
+      "error",
+      "always"
+    ],
     "jsx-a11y/label-has-associated-control": 0,
     "react/forbid-prop-types": 0,
     "import/no-named-as-default": 0,
     "prefer-destructuring": 0,
     "import/extensions": 0
+    "jsx-a11y/click-events-have-key-events": 0,
+    "jsx-a11y/no-noninteractive-element-interactions": 0
   },
-  "plugins": ["react", "import", "jsx-a11y"],
+  "plugins": [
+    "react",
+    "import",
+    "jsx-a11y"
+  ],
   "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 2018,
