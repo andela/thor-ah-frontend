@@ -33,6 +33,7 @@
 
 .transparentBtn {
   border: none;
+  cursor: pointer;
   background: transparent;
   color: #FFF;
 }

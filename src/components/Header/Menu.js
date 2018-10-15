@@ -30,7 +30,7 @@ class Menu extends React.Component {
 
     const { user, mobileCategory } = this.props;
     const { profileMenuVisibility } = this.state;
-    const { username } = user;
+    const { username, role } = user;
     const profileToggleStyle = {
       display: profileMenuVisibility ? 'block' : 'none',
     }
@@ -38,11 +38,11 @@ class Menu extends React.Component {
     return (
       <div className={styles.menu}>
         <ul>
-          <li ><Link to="/articles/new">{<FaPencilAlt />}</Link></li>
+          {role === 'author' ? <li><Link to='/articles/new'> {<FaPencilAlt />}</Link></li> : null}
           <li >
             <Link to="/notifications">{<FaBell />}</Link>
           </li>
-          <li lassName={styles.small}>
+          <li className={styles.small}>
             <button type="button" className={styles.transparentBtn} onClick={this.toggleProfile}>
               <img src="https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_1280.png" alt={username} className="avatar" />
             </button>
@@ -54,10 +54,10 @@ class Menu extends React.Component {
           </li>
         </ul>
         <div className={styles.profile} style={profileToggleStyle}>
-          <ul>
-            <li><Link to='/profile'> {<FaUser />} Profile </Link></li>
+          <ul onClick={this.toggleProfile}>
+            <li><Link to='/profile/user'> {<FaUser />} Profile </Link></li>
             <li><Link to='/notifications'> {<FaBell />} Notifications</Link></li>
-            <li><Link to='/articles'> {<FaPencilAlt />} Publish</Link></li>
+            {role === 'author' ? <li><Link to='/articles/new'> {<FaPencilAlt />} Publish</Link></li> : null}
             <li><Link to='/favorite'> {<FaStar />} Favorites</Link></li>
             <li><Link to='/logout'> {<FaSignOutAlt />} Logout</Link></li>
             <li> user: {username}</li>

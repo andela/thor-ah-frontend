@@ -27,7 +27,7 @@ const AppRoutes = () => (
         <ProtectedRoute path='/profile/user' component={ProfilePage} />
         <Route exact path='/signin' component={Signin} />
 
-        {/* will alsways render when no other path is matched */}
+        {/* will always render when no other path is matched */}
         <Route component={NotFound} />
       </Switch>
       <Footer />
