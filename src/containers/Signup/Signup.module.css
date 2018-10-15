@@ -39,7 +39,7 @@
 }
 
 #regModal {
-  border: 3px solid red;
+  /* border: 3px solid red; */
 }
 
  .regContainer{
@@ -101,7 +101,7 @@
  }
 
  .regContainer .regForm button:disabled{
-  cursor: not-allowed; 
+  cursor: not-allowed;
   background: #ccc;
   border: 1px solid #ccc;
 }
