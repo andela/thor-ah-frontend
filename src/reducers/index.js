@@ -4,7 +4,8 @@ import signinuser from './signin';
 import signup from './signup';
 import comments from './comments';
 import articleCategoryReducer from './categories';
-import article from './article';
+import createArticle from './createArticle';
+import article from "./article";
 
 const rootReducer = combineReducers({
   auth,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   signinuser,
   signup,
   comments,
-  category: articleCategoryReducer
+  category: articleCategoryReducer,
+  createArticle
 });
 
 export default rootReducer;
