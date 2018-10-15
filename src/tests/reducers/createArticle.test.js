@@ -4,45 +4,41 @@ import * as types from "../../actionTypes/createArticle";
 describe("article reducer", () => {
   it("should return initial state", () => {
     expect(article(undefined, {})).toEqual({
-      article: {
-        author: {},
-        tags: [{}]
-      },
+      article: {},
       loading: false,
-      error: ""
+      error: {}
     });
   });
-  it("should handle FETCH_ARTICLE_SUCCESS", () => {
+
+  it("should handle CREATE_ARTILCE_LOADING", () => {
+    const action = { type: types.CREATE_ARTICLE_LOADING, payload: true };
+    expect(article({}, action)).toEqual({
+      loading: true
+    });
+  });
+
+  it("should handle CREATE_ARTILCE_FAILURE", () => {
+    const action = { type: types.CREATE_ARTICLE_ERROR, payload: "error" };
+    expect(article({}, action)).toEqual({
+      error: "error"
+    });
+  });
+
+  it("should handle CREATE_ARTILCE_SUCCESS", () => {
     const action = {
-      type: types.FETCH_ARTICLE_SUCCESS,
+      type: types.CREATE_ARTICLE_SUCCESS,
       payload: {
-        article: {
-          id: 2,
-          title: "staying fit",
-          description: "fitness",
-          body:
-            "To stay fit, eat well, exercise daily and visit your doctor monthly"
-        }
+        title: "sample title",
+        body: "sample body",
+        description: "sample description"
       }
     };
-    expect(article({}, action)).toEqual({ article: action.payload });
-  });
-  it("should handle FETCH_ARTICLE_LOADING", () => {
-    const action = {
-      type: types.FETCH_ARTICLE_LOADING,
-      payload: { loading: true }
-    };
     expect(article({}, action)).toEqual({
-      loading: action.payload
-    });
-  });
-  it("should handle FETCH_ARTICLE_ERROR", () => {
-    const action = {
-      type: types.FETCH_ARTICLE_ERROR,
-      payload: "error"
-    };
-    expect(article({}, action)).toEqual({
-      error: action.payload
+      article: {
+        body: "sample body",
+        description: "sample description",
+        title: "sample title"
+      }
     });
   });
 });
