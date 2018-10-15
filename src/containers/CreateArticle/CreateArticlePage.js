@@ -53,16 +53,16 @@ class CreateArticle extends Component {
     const eventType = event.type;
     const { title } = this.state;
     switch (eventType) {
-      case 'focusin':
+      case "focusin":
         if (title.trim() === "Title") {
           this.setState({ title: "" });
         }
-      case 'focusout':
-      if (title.trim() === "") {
-        this.setState({
-          title: "Title"
-        });
-      }
+      case "focusout":
+        if (title.trim() === "") {
+          this.setState({
+            title: "Title"
+          });
+        }
       default:
         return null;
     }
@@ -72,7 +72,7 @@ class CreateArticle extends Component {
     const eventType = event.type;
     const { body } = this.state;
     switch (eventType) {
-      case 'focusin':
+      case "focusin":
         if (
           body.trim() === "Share your thoughts..." ||
           body.trim() === "<p>Share your thoughts...</p>"
@@ -81,13 +81,10 @@ class CreateArticle extends Component {
             body: ""
           });
         }
-      case 'focusout':
-        if (
-          body.trim() === "Share your thoughts..." ||
-          body.trim() === "<p>Share your thoughts...</p>"
-        ) {
+      case "focusout":
+        if (body.trim() === "") {
           this.setState({
-            body: ""
+            body: "Share your thoughts..."
           });
         }
       default:
@@ -224,9 +221,7 @@ class CreateArticle extends Component {
                 ref={node => (this.rootNode = node)}
                 value={body}
                 editorChangeHandler={this.editorChangeHandler}
-                bodyPlaceholderFocusInHandler={
-                  this.bodyPlaceholderFocusHandler
-                }
+                bodyPlaceholderFocusInHandler={this.bodyPlaceholderFocusHandler}
                 bodyPlaceholderFocusOutHandler={
                   this.bodyPlaceholderFocusHandler
                 }

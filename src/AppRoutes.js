@@ -10,8 +10,8 @@ import ProtectedRoute from './containers/ProtectedRoute';
 import Signin from './containers/SignIn/SignIn';
 import AllCategories from './containers/Categories/Categories';
 import ArticleCategory from './containers/Categories/SingleCategory';
+import CreateArticle from './containers/CreateArticle/CreateArticlePage'
 import NotFound from './containers/NotFound/NotFound';
-import CreateArticlePage from './containers/CreateArticle/CreateArticlePage';
 
 const AppRoutes = () => (
   <Router>
@@ -26,8 +26,8 @@ const AppRoutes = () => (
         <Route path='/category/:name' component={ArticleCategory} />
         <ProtectedRoute path='/articles/:slug' component={ArticlePage} />
         <ProtectedRoute path='/profile/user' component={ProfilePage} />
+        <ProtectedRoute path='create-article' component= {CreateArticle} />
         <Route exact path='/signin' component={Signin} />
-        <Route exact path='/create-article' component={ CreateArticlePage }/>
 
         {/* will always render when no other path is matched */}
         <Route component={NotFound} />
