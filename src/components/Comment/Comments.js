@@ -1,11 +1,12 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types'; // eslint-disable-line import/no-extraneous-dependencies
 import Comment from './Comment';
+import styles from './comment.module.scss';
 
 const Comments = ({ comments, currentArticleTitle }) => (
   <Fragment>
-    <p className="text-secondary text-left py-3">
-      {currentArticleTitle ? `Thoughts on "${currentArticleTitle}"` : ''}
+    <p className={`text-secondary text-left py-3 ${styles.title}`}>
+      {comments.length && currentArticleTitle ? `Thoughts on "${currentArticleTitle}"` : ''}
     </p>
     <section>
       {comments && comments.map(comment => <Comment key={comment.id} comment={comment} />)}
