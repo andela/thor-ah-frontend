@@ -2,10 +2,6 @@
   "name": "thor-ah-frontend",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "npm": "6.4.1",
-    "node": "10.8.0"
-  },
   "dependencies": {
     "@babel/core": "7.1.0",
     "@fortawesome/fontawesome-free-brands": "^5.0.13",
