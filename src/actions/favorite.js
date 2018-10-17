@@ -17,7 +17,7 @@ const success = (payload) => ({
     payload
 })
 
-const fialure = (payload) => ({
+const failure = (payload) => ({
     type: FAVORITE_ERROR,
     payload
 })
@@ -38,9 +38,9 @@ const addFavorite = (articleId) => dispatch => {
     }).catch(error => {
         dispatch(loading(false))
         if (error.response) {
-            return dispatch(fialure(error.response.data.error.message))
+            return dispatch(failure(error.response.data.error.message))
         }
-        return dispatch(fialure("Server unreachable at the moment"))
+        return dispatch(failure("Server unreachable at the moment"))
     })
 
 }
@@ -63,9 +63,9 @@ const deleteFavorite = (articleId) => dispatch => {
         }).catch(error => {
             dispatch(loading(false))
             if (error.response) {
-                return dispatch(fialure(error.response.data.error.message))
+                return dispatch(failure(error.response.data.error.message))
             }
-            return dispatch(fialure("Server unreachable at the moment"))
+            return dispatch(failure("Server unreachable at the moment"))
         })
 
 }
