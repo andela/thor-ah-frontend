@@ -6,6 +6,7 @@ import comments from './comments';
 import articleCategoryReducer from './categories';
 import createArticle from './createArticle';
 import article from "./article";
+import favorite from './favorite'
 
 const rootReducer = combineReducers({
   auth,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   signup,
   comments,
   category: articleCategoryReducer,
-  createArticle
+  createArticle,
+  favorite
 });
 
 export default rootReducer;
