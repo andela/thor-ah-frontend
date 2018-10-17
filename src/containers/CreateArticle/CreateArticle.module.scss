@@ -1,0 +1,79 @@
+* {
+  outline: none;
+}
+
+.createArticle {
+  min-height: 600px;
+  padding: 2em;
+  background: #f9f9f9;
+
+  .articleTitle {
+    h1 {
+      font-size: 3em;
+      font-weight: 700;
+    }
+  }
+
+  img {
+    max-width: 100%;
+  }
+  .textEditor {
+    width: 100%;
+
+    p,
+    span {
+      line-height: 1.5em;
+    }
+  }
+}
+
+.buttonDiv {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1em;
+}
+
+.publishButton {
+  color: #fff;
+  background: #c40018;
+  padding: 5px 1.5em;
+  border-radius: 4px;
+  font-size: 0.9em;
+  align-self: flex-end;
+  cursor: pointer;
+}
+
+.textEditor {
+  background-color: transparent;
+
+  p {
+    font-size: 1em;
+    text-decoration: none;
+  }
+}
+
+.error {
+  position: fixed;
+  z-index: 200;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  color: #fff;
+  background-color: rgb(250, 113, 113);
+  transition: 0.3 ease-in all;
+}
+
+.articleTitle > h1 {
+  font-size: 3em;
+  font-weight: 700;
+}
+
+.message {
+  color: #fff;
+  position: fixed;
+  z-index: 200;
+  padding: 10px 20px;
+  text-align: center;
+  background-color: #1aa71a;
+  transition: 0.3 ease-in all;
+}
