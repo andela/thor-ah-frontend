@@ -12,7 +12,7 @@ import Article from '../Article/Article';
 import styles from './articles.module.scss'
 
 // images
-import thumbnailImage from '../../demo.png';
+import thumbnailImage from "../../demo.png";
 
 class Articles extends Component {
   constructor(props) {
@@ -32,10 +32,10 @@ class Articles extends Component {
     const { content } = this.props;
     if (!articles) {
       return (
-        <div className={ styles.not_found_message }>
+        <div className={styles.not_found_message}>
           <h1>No Articles Found!</h1>
         </div>
-      )
+      );
     }
     return (
       <div className={ styles.articles }>
@@ -57,8 +57,8 @@ class Articles extends Component {
                 thumbnail={ thumbnail || thumbnailImage }
                 details={ details }
               />
-            )
-          }) }
+            );
+          })}
         </div>
         <div data-content="recommended" className={ content === 'recommended' ? styles.active : '' }>
         { sortedArticles.map(article => {
@@ -82,7 +82,7 @@ class Articles extends Component {
           }) }
         </div>
       </div>
-    )
+    );
   }
 }
 

@@ -38,7 +38,7 @@ class Menu extends React.Component {
     return (
       <div className={styles.menu}>
         <ul>
-          {role === 'author' ? <li><Link to='/articles/new'> {<FaPencilAlt />}</Link></li> : null}
+          {role === 'author' ? <li><Link to='/article/create'> {<FaPencilAlt />}</Link></li> : null}
           <li >
             <Link to="/notifications">{<FaBell />}</Link>
           </li>
@@ -57,7 +57,7 @@ class Menu extends React.Component {
           <ul onClick={this.toggleProfile}>
             <li><Link to='/profile/user'> {<FaUser />} Profile </Link></li>
             <li><Link to='/notifications'> {<FaBell />} Notifications</Link></li>
-            {role === 'author' ? <li><Link to='/articles/new'> {<FaPencilAlt />} Publish</Link></li> : null}
+            {role === 'author' ? <li><Link to='/article/create'> {<FaPencilAlt />} Publish</Link></li> : null}
             <li><Link to='/favorite'> {<FaStar />} Favorites</Link></li>
             <li><Link to='/logout'> {<FaSignOutAlt />} Logout</Link></li>
             <li> user: {username}</li>

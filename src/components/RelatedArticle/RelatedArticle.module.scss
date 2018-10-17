@@ -1,4 +1,32 @@
 .card_title {
   font-size: 20px;
-  color: #20232D;
+  color: #20232d;
+  text-transform: capitalize;
+}
+
+.content {
+  color: #2d3436;
+  font-size: 17px;
+}
+
+.link {
+  text-decoration: none !important;
+}
+
+.img {
+  width: 100%;
+  height: 20%;
+}
+.author {
+  font-weight: bold;
+  font-style: italic;
+  color: #ababab;
+  font-size: 14px;
+  text-transform: capitalize;
+}
+
+.detail {
+  font-style: italic;
+  font-size: 16px;
+  color: #ababab;
 }
