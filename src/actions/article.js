@@ -82,7 +82,7 @@ export const getAllArticle = () => (dispatch) => {
         dispatch(fetchAllArticleLoading(false))
         return dispatch(fetchAllArticleSuccess(response.data.articles));
       }
-      return dispatch(fetchAllArticleError());
+      return dispatch(fetchAllArticleError(response));
     })
-    .catch(() => dispatch(fetchAllArticleError()));
+    .catch((error) => dispatch(fetchAllArticleError(error)));
 };
