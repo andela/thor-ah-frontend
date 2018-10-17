@@ -8,7 +8,7 @@ import ArticleComment from "../ArticleComment/ArticleComment";
 import ArticleTag from "../ArticleTag/ArticleTag";
 import ArticleLoader from "../ArticleLoader";
 // actions
-import getArticle from "../../actions/article";
+import { getArticle } from "../../actions/article";
 // styles
 import styles from "./ArticleContent.module.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -81,7 +81,7 @@ ArticleContent.propTypes = {
  * @returns {Object}
  */
 const mapStateToProps = state => ({
-  article: state.article.article,
+  article: state.oneArticleReducer.article,
 });
 
 /**

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 // actions
-import getArticle from "../../actions/article";
+import { getArticle } from "../../actions/article";
 // styles
 import styles from "./ArticleTag.module.scss";
 
@@ -37,7 +37,7 @@ class ArticleTag extends Component {
  * @returns {Object}
  */
 const mapStateToProps = state => ({
-  article: state.article.article
+  article: state.oneArticleReducer.article,
 });
 
 /**

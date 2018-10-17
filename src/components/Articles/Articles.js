@@ -1,52 +1,37 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import moment from 'moment';
+
+// import get all articles action
+import { getAllArticle } from '../../actions/article'
+
 // components
 import Article from '../Article/Article';
+
 // styles
 import styles from './articles.module.scss'
+
 // images
 import thumbnailImage from '../../demo.png';
 
 class Articles extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      articles: [
-        {
-          id: 1,
-          title: 'This Article talks about some Tall Buildings And City Night Life',
-          slug: 'this-is-slug',
-          description: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
-          thumbnail: thumbnailImage,
-        },
-        {
-          id: 2,
-          title: 'This Article talks about some Tall Buildings And City Night Life',
-          slug: 'this-is-slug',
-          description: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
-          thumbnail: thumbnailImage,
-        },
-        {
-          id: 3,
-          title: 'This Article talks about some Tall Buildings And City Night Life',
-          slug: 'this-is-slug',
-          description: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
-          thumbnail: thumbnailImage,
-        },
-        {
-          id: 4,
-          title: 'This Article talks about some Tall Buildings And City Night Life',
-          slug: 'this-is-slug',
-          description: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
-          thumbnail: thumbnailImage,
-        }
-      ]
-    }
+    this.state = {};
+  }
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(getAllArticle());
   }
 
   render() {
-    const { articles } = this.state;
+    const { articles } = this.props;
+    const { data } = articles;
+    const data2 = data.slice(0);
+    data2.sort((a, b) => Number(moment(a.createdAt).format("x") - moment(b.createdAt).format("x")));
     const { content } = this.props;
-    if (articles.length < 1) {
+    if (!data) {
       return (
         <div className={ styles.not_found_message }>
           <h1>No Articles Found!</h1>
@@ -56,13 +41,13 @@ class Articles extends Component {
     return (
       <div className={ styles.articles }>
         <div data-content="featured" className={ content === 'featured' ? styles.active : '' }>
-          { articles.map(article => {
-            const { id, title, slug, thumbnail, description } = article;
+          { data.map(article => {
+            const { id, title, image: thumbnail, slug, description, timeToRead, author, createdAt } = article;
             const snippet = description;
             const details = {
-              author: 'John Doe',
-              timeToRead: '2 mins Read',
-              date: '4th, Oct',
+              author: `${author.username}`,
+              timeToRead: `${timeToRead} min read`,
+              date: moment(createdAt).format("Do MMM, YY"),
             }
             return (
               <Article
@@ -70,21 +55,43 @@ class Articles extends Component {
                 title={ title }
                 snippet={ snippet }
                 slug={ slug }
-                thumbnail={ thumbnail }
+                thumbnail={ thumbnail || thumbnailImage }
                 details={ details }
               />
             )
           }) }
         </div>
-        <div data-content="collections" className={ content === 'collections' ? styles.active : '' }>
-          <h1>Collections</h1>
-        </div>
         <div data-content="recommended" className={ content === 'recommended' ? styles.active : '' }>
-          <h1>Recommended</h1>
+        { data2.map(article => {
+            const { id, title, image: thumbnail, slug, description, timeToRead, author, createdAt } = article;
+            const snippet = description;
+            const details = {
+              author: `${author.username}`,
+              timeToRead: `${timeToRead} min read`,
+              date: moment(createdAt).format("Do MMM, YY"),
+            }
+            return (
+              <Article
+                key={ id }
+                title={ title }
+                snippet={ snippet }
+                slug={ slug }
+                thumbnail={ thumbnail || thumbnailImage }
+                details={ details }
+              />
+            )
+          }) }
         </div>
       </div>
     )
   }
 }
 
-export default Articles;
+const mapStateToProps = state => {
+  const { allArticleReducer } = state;
+  return {
+    articles: allArticleReducer,
+  }
+}
+
+export default connect(mapStateToProps)(Articles);

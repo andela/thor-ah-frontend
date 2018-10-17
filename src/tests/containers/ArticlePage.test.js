@@ -9,4 +9,3 @@ describe('ArticlePage Container', () => {
   });
 });
 
-
