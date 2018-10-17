@@ -60,6 +60,13 @@
     "react-router-dom": "^4.3.1",
     "react-tabs": "^2.3.0",
     "react-window-size": "^1.2.2",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-prettier": "^3.0.0",
+    "eslint-plugin-react": "^7.11.1",
+    "jsonwebtoken": "^8.3.0",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
     "redux-mock-store": "^1.5.3",
@@ -84,6 +91,9 @@
     "lint": "eslint ./src/**/*.{js,jsx} --fix",
     "format": "prettier src/**/*.{js,jsx,css,html,json}",
     "format:check": "prettier --list-different  src/**/*{js,jsx,css,json}",
+    "dev": "node scripts/start.js",
+    "start": "serve -s build",
+    "build": "node scripts/build.js",
     "heroku-postbuild": "npm run build"
   },
   "eslintConfig": {
@@ -143,13 +153,6 @@
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
     "enzyme-to-json": "^3.3.4",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-config-prettier": "^3.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-prettier": "^3.0.0",
-    "eslint-plugin-react": "^7.11.1",
-    "jsonwebtoken": "^8.3.0",
     "prettier": "^1.14.3",
     "react-test-renderer": "^16.5.2"
   }
