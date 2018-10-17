@@ -361,7 +361,8 @@ module.exports = {
         REACT_APP_API: JSON.stringify(process.env.REACT_APP_API),
         EDITOR_API_KEY: JSON.stringify(process.env.EDITOR_API_KEY),
         CLOUDINARY_API_KEY: JSON.stringify(process.env.CLOUDINARY_API_KEY),
-        UPLOAD_PRESET: JSON.stringify(process.env.UPLOAD_PRESET)
+        UPLOAD_PRESET: JSON.stringify(process.env.UPLOAD_PRESET),
+        UPLOAD_URL: JSON.stringify(process.env.UPLOAD_URL)
       }
     }),
     // This is necessary to emit hot updates (currently CSS only):

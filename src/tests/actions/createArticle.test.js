@@ -37,6 +37,7 @@ describe("create article actions", () => {
             description: "Sample Description",
             displayStatus: true,
             id: 15,
+            published: true,
             slug: "SampleTitle151426",
             tags: [],
             timeToRead: 1,
@@ -61,7 +62,7 @@ describe("create article actions", () => {
         },
         {
           type: types.CREATE_ARTICLE_SUCCESS,
-          payload: mockData.newArticleAlert.createdArticle
+          payload: mockData
         }
       ];
       const store = mockStore({ article: {} });

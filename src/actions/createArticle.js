@@ -36,7 +36,7 @@ export const createArticle = articleData => dispatch => {
       if (response.data.status === "success") {
         dispatch(createArticleLoading(false));
         return dispatch(
-          createArticleSuccess(response.data.newArticleAlert.createdArticle)
+          createArticleSuccess(response.data)
         );
       }
       return dispatch(createArticleFailure(response.data.error));

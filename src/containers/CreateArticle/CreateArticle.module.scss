@@ -7,10 +7,11 @@
   padding: 2em;
   background: #f9f9f9;
 
-  .artilcleTitle {
-    padding: 0.3em;
-    font-size: 1.4em;
-    font-weight: bolder;
+  .articleTitle {
+    h1 {
+      font-size: 3em;
+      font-weight: 700;
+    }
   }
 
   img {
@@ -42,32 +43,37 @@
   cursor: pointer;
 }
 
-.textEditor * {
-  font-size: 1em;
-  text-decoration: none;
-  background-color: none;
+.textEditor {
+  background-color: transparent;
+
+  p {
+    font-size: 1em;
+    text-decoration: none;
+  }
 }
 
 .error {
-  // background-color: rgb(253, 166, 166);
+  position: fixed;
+  z-index: 200;
   width: 100%;
-  padding: 10px 20px;
+  padding: 10px;
   text-align: center;
-  color: rgb(255, 140, 140);
+  color: #fff;
+  background-color: rgb(250, 113, 113);
   transition: 0.3 ease-in all;
 }
 
-.message {
-  background-color: rgb(4, 209, 168);
-  padding: 10px 20px;
-  text-align: center;
+.articleTitle > h1 {
+  font-size: 3em;
+  font-weight: 700;
 }
 
-.white {
-  background: #fff;
-  width: 100%;
+.message {
+  color: #fff;
+  position: fixed;
+  z-index: 200;
   padding: 10px 20px;
   text-align: center;
-  color: rgb(160, 160, 160);
+  background-color: #1aa71a;
   transition: 0.3 ease-in all;
 }

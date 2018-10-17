@@ -1,7 +1,6 @@
 /* eslint-disable */
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
 import axios from "axios";
 import PropTypes from "prop-types";
 
@@ -19,9 +18,12 @@ class CreateArticle extends Component {
       title: "Title",
       body: "Share your thoughts...",
       description: "",
+      loading: false,
+      message: "",
       error: {
         title: "",
-        body: ""
+        body: "",
+        message: ""
       }
     };
   }
@@ -149,8 +151,9 @@ class CreateArticle extends Component {
     return true;
   };
 
-  handleSubmit = () => {
-    const { title, body } = this.state;
+  handleSubmit = async () => {
+    const { title, body, error } = this.state;
+    const { createArticle } = this.props;
     const description = stripHtml(body).slice(0, 200);
     const articleData = {
       title,
@@ -163,36 +166,52 @@ class CreateArticle extends Component {
     }
 
     this.setState({
-      title: "Title",
-      body: "Share your thoughts..."
+      loading: true
     });
 
-    const response = createArticle(articleData);
+    const response = await createArticle(articleData);
 
     if (response) {
-      switch (response.status) {
-        case 201:
-          <Redirect
-            to={{
-              pathname: "/"
-            }}
-          />;
+      switch (response.payload.status) {
+        case "success":
+          this.setState({
+            title: "Title",
+            body: "Share your thoughts...",
+            loading: false,
+            message: "Article was successfully created"
+          });
+          setTimeout(() => {
+            this.setState({
+              message: ""
+            });
+          }, 2000);
         default:
-          <Redirect
-            to={{
-              pathname: "/error"
-            }}
-          />;
+          this.setState({
+            loading: false
+          });
+          return null;
       }
+    } else {
+      this.setState({
+        error: {
+          message:
+            "An error occurred while creating the artilcle. Please refresh your browser and try again"
+        }
+      });
+      setTimeout(() => {
+        this.setState({
+          error: { message: "" }
+        });
+      }, 2000);
     }
   };
 
   render() {
-    const { title, body, error } = this.state;
-    const { createArticle } = this.props;
+    const { title, body, error, loading, message } = this.state;
     return (
       <Fragment>
-        {Object.keys(error).length === 0 ? null : (
+        {message === "" ? "" : <div className={styles.message}>{message}</div>}
+        {Object.entries(error).every(err => err[1] === "") ? null : (
           <div>
             {Object.entries(error).map((err, index) => (
               <div className={styles.error} key={index}>
@@ -201,6 +220,9 @@ class CreateArticle extends Component {
             ))}
           </div>
         )}
+        <div className="text-center">
+          {loading ? <i className="fa fa-3x fa-spinner fa-spin" /> : null}
+        </div>
         <div className="col-md-8 col-sm-10 col-12 mx-auto my-5">
           <div className={styles.createArticle}>
             <div className={styles.articleTitle}>
