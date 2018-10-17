@@ -23,7 +23,7 @@ class ArticleReaction extends React.Component {
     this.setState({ optionsActive: !optionsActive })
   }
 
-  setMsg = (msg) => {
+  setMessasge = (msg) => {
     this.setState({ message: msg })
   }
 
@@ -61,7 +61,7 @@ class ArticleReaction extends React.Component {
           <button type='button' className={styles.transparentBtn} onClick={this.toggleMoreOptions}> <img src={dotIcon} alt="icon" /></button>
 
           <div className={styles.popup} id={styles.popup1} style={style}>
-            <Favorite articleId={articleId} setMsg={this.setMsg} hideOptions={this.toggleMoreOptions} />
+            <Favorite articleId={articleId} setMessasge={this.setMessasge} hideOptions={this.toggleMoreOptions} />
             <button type='button' className={styles.button}>Report abuse</button>
           </div>
 

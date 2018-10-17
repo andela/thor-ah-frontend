@@ -4,7 +4,7 @@ import { Favorite } from "../../components/Favorite/Favorite";
 
 describe("Favorite Article Component", () => {
     test("renders the Favorite Article Component", () => {
-        const wrapper = shallow(<Favorite setMsg={(msg) => (msg)} />);
+        const wrapper = shallow(<Favorite setMessasge={(msg) => (msg)} />);
         expect(wrapper.exists()).toBe(true);
     });
 });

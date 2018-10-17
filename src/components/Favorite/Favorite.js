@@ -11,8 +11,8 @@ export class Favorite extends React.Component {
     }
 
     render() {
-        const { setMsg, message } = this.props
-        setMsg(message) // show response message
+        const { setMessasge, message } = this.props
+        setMessasge(message) // show response message
 
         return <button type='button' onClick={this.favorite}> Add to favorite</button>
     }
