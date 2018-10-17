@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { mount, render } from "enzyme";
 import { Provider } from "react-redux";
 import configureMockStore from "redux-mock-store";
 import Comment from "../../components/Comment/Comment";
@@ -14,7 +14,7 @@ describe("Comment Component", () => {
         firstName: 'John'
       }
     }
-    const wrapper = shallow(
+    const wrapper = mount(
       <Provider store={store}>
         <Comment comment={comment} />
       </Provider>

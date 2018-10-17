@@ -19,11 +19,12 @@ class Comment extends Component {
 
   handleClick = (e) => {
     const { action } = e.target.dataset;
-    const { handleLike, handleDislike } = this.props;
+    const { handleLike, handleDislike, comment } = this.props;
+    const articleSlug = window.location.pathname.split('/articles/')[1];
     if (action === 'like') {
-      return handleLike(e.target.dataset.key);
+      return handleLike(e.target.dataset.key, comment.id, articleSlug);
     }
-    return handleDislike(e.target.dataset.key);
+    return handleDislike(e.target.dataset.key, comment.id, articleSlug);
   }
 
   render() {
@@ -47,11 +48,11 @@ class Comment extends Component {
         </p>
         <div className="d-flex">
           <div className="px-2">
-            <img onClick={this.handleClick} data-key={id} data-action="like" data-comment={comment.id} src={likeIcon} alt="icon" />
+            <img className={styles.reaction} onClick={this.handleClick} data-key={id} data-action="like" data-comment={comment.id} src={likeIcon} alt="icon" />
             <span>{comment.likesCount || 0}</span>
           </div>
           <div className="px-2">
-            <img onClick={this.handleClick} data-key={id} data-action="dislike" data-comment={comment.id}  src={dislikeIcon} alt="icon" />
+            <img className={styles.reaction} onClick={this.handleClick} data-key={id} data-action="dislike" data-comment={comment.id}  src={dislikeIcon} alt="icon" />
             <span>{comment.dislikesCount || 0}</span>
           </div>
         </div>
@@ -65,11 +66,11 @@ Comment.propTypes = {
 }
 
 const mapDispatchToProps = dispatch => ({
-  handleLike(id) {
-    dispatch(likeComment(id));
+  handleLike(id, commentId, slug) {
+    dispatch(likeComment(id, commentId, slug));
   },
-  handleDislike(id) {
-    dispatch(dislikeComment(id));
+  handleDislike(id, commentId, slug) {
+    dispatch(dislikeComment(id, commentId, slug));
   }
 })
 

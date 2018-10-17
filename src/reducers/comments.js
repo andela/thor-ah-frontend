@@ -10,10 +10,10 @@ const commentsData = (state = [], action) => {
         if (idx === Number(action.key)) {
           return {
             ...comment,
-            likesCount: comment.userLiked ? comment.likesCount - 1 : comment.likesCount + 1,
-            dislikesCount: comment.userDisliked ? comment.dislikesCount - 1 : comment.dislikesCount,
-            userLiked: comment.userLiked ? !comment.userLiked : true,
-            userDisliked: comment.userDisliked ? !comment.userDisliked : comment.userDisliked,
+            likesCount: comment.liked ? comment.likesCount - 1 : comment.likesCount + 1,
+            dislikesCount: comment.disliked ? comment.dislikesCount - 1 : comment.dislikesCount,
+            liked: comment.liked ? !comment.liked : true,
+            disliked: comment.disliked ? !comment.disliked : comment.disliked,
           }
         }
         return comment
@@ -23,10 +23,10 @@ const commentsData = (state = [], action) => {
         if (idx === Number(action.key)) {
           return {
             ...comment,
-            dislikesCount: comment.userDisliked ? comment.dislikesCount - 1 : comment.dislikesCount + 1,
-            likesCount: comment.userLiked ? comment.likesCount - 1 : comment.likesCount,
-            userDisliked: comment.userDisliked ? !comment.userDisliked : true,
-            userLiked: comment.userLiked ? !comment.userLiked : comment.userLiked,
+            dislikesCount: comment.disliked ? comment.dislikesCount - 1 : comment.dislikesCount + 1,
+            likesCount: comment.liked ? comment.likesCount - 1 : comment.likesCount,
+            disliked: comment.disliked ? !comment.disliked : true,
+            liked: comment.liked ? !comment.liked : comment.liked,
           }
         }
         return comment

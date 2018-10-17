@@ -33,15 +33,45 @@ const getArticleCommentsError = (error) => ({
   payload: error,
 });
 
-export const likeComment = (key) => ({
+const like = (key) => ({
   type: types.LIKE_COMMENT,
   key,
 });
 
-export const dislikeComment = (key) => ({
+const dislike = (key) => ({
   type: types.DISLIKE_COMMENT,
   key,
 });
+
+export const likeComment = (key, commentId, articleSlug) => (dispatch) => {
+  dispatch(like(key));
+  const { token } = localStorage;
+  return axios.post(
+    `${API}/api/articles/${articleSlug}/comments/${commentId}/like`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    }
+  );
+}
+
+export const dislikeComment = (key, commentId, articleSlug) => (dispatch) => {
+  dispatch(dislike(key));
+  const { token } = localStorage;
+  return axios.post(
+    `${API}/api/articles/${articleSlug}/comments/${commentId}/dislike`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    }
+  );
+}
 
 export const getArticleComments = (articleSlug) => (dispatch) => {
   dispatch(getArticleCommentsLoading(true));
