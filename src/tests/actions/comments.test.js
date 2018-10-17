@@ -71,7 +71,11 @@ describe('comment actions', () => {
         .reply(201, {
           comment: {
             id: 1,
-            body: 'The body'
+            body: 'The body',
+            article: {
+              id: 2,
+              slug: 'some-slug'
+            }
           }
         });
 

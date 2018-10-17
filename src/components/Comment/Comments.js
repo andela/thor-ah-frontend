@@ -9,7 +9,7 @@ const Comments = ({ comments, currentArticleTitle }) => (
       {comments.length && currentArticleTitle ? `Thoughts on "${currentArticleTitle}"` : ''}
     </p>
     <section>
-      {comments && comments.map(comment => <Comment key={comment.id} comment={comment} />)}
+      {comments && comments.map((comment, idx) => <Comment key={comment.id} id={idx} comment={comment} />)}
     </section>
   </Fragment>
 );

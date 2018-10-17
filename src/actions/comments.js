@@ -18,33 +18,6 @@ const createCommentError = (error) => ({
   payload: error,
 });
 
-const createComment = (commentData, articleSlug) => (dispatch) => {
-  dispatch(createCommentRequest(true));
-  const { token } = localStorage;
-  return axios.post(
-    `${API}/api/articles/${articleSlug}/comments`,
-    {
-      comment: commentData
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
-    }
-  )
-    .then((response) => {
-      dispatch(createCommentRequest(false));
-      dispatch(createCommentSuccess(response.data.comment));
-      return response;
-    })
-    .catch((error) => {
-      dispatch(createCommentRequest(false));
-      dispatch(createCommentError(error));
-      return error;
-    });
-};
-
 const getArticleCommentsLoading = (isFetching) => ({
   type: types.FETCH_ARTICLE_COMMENTS_LOADING,
   payload: isFetching,
@@ -58,6 +31,16 @@ const getArticleCommentsSuccess = (comments) => ({
 const getArticleCommentsError = (error) => ({
   type: types.FETCH_ARTICLE_COMMENTS_FAILURE,
   payload: error,
+});
+
+export const likeComment = (key) => ({
+  type: types.LIKE_COMMENT,
+  key,
+});
+
+export const dislikeComment = (key) => ({
+  type: types.DISLIKE_COMMENT,
+  key,
 });
 
 export const getArticleComments = (articleSlug) => (dispatch) => {
@@ -84,6 +67,35 @@ export const getArticleComments = (articleSlug) => (dispatch) => {
     .catch((error) => {
       dispatch(getArticleCommentsLoading(false));
       dispatch(getArticleCommentsError(error));
+      return error;
+    });
+};
+
+const createComment = (commentData, articleSlug) => (dispatch) => {
+  dispatch(createCommentRequest(true));
+  const {
+    token
+  } = localStorage;
+  return axios.post(
+      `${API}/api/articles/${articleSlug}/comments`, {
+        comment: commentData
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+    .then((response) => {
+      dispatch(createCommentRequest(false));
+      dispatch(createCommentSuccess(response.data.comment));
+      dispatch(getArticleComments(response.data.comment.article.slug));
+      dispatch(getArticleCommentsLoading(false));
+      return response;
+    })
+    .catch((error) => {
+      dispatch(createCommentRequest(false));
+      dispatch(createCommentError(error));
       return error;
     });
 };

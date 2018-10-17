@@ -3,6 +3,39 @@ import * as types from '../actionTypes/comments';
 
 const { comments } = initialState;
 
+const commentsData = (state = [], action) => {
+  switch (action.type) {
+    case types.LIKE_COMMENT:
+      return state.map((comment, idx) => {
+        if (idx === Number(action.key)) {
+          return {
+            ...comment,
+            likesCount: comment.userLiked ? comment.likesCount - 1 : comment.likesCount + 1,
+            dislikesCount: comment.userDisliked ? comment.dislikesCount - 1 : comment.dislikesCount,
+            userLiked: comment.userLiked ? !comment.userLiked : true,
+            userDisliked: comment.userDisliked ? !comment.userDisliked : comment.userDisliked,
+          }
+        }
+        return comment
+      });
+    case types.DISLIKE_COMMENT:
+      return state.map((comment, idx) => {
+        if (idx === Number(action.key)) {
+          return {
+            ...comment,
+            dislikesCount: comment.userDisliked ? comment.dislikesCount - 1 : comment.dislikesCount + 1,
+            likesCount: comment.userLiked ? comment.likesCount - 1 : comment.likesCount,
+            userDisliked: comment.userDisliked ? !comment.userDisliked : true,
+            userLiked: comment.userLiked ? !comment.userLiked : comment.userLiked,
+          }
+        }
+        return comment
+      });
+    default:
+      return state;
+  }
+}
+
 export const articleComments = (state = comments.articleComments, action) => {
   switch (action.type) {
     case types.FETCH_ARTICLE_COMMENTS_LOADING:
@@ -24,6 +57,16 @@ export const articleComments = (state = comments.articleComments, action) => {
       return {
         ...state,
         data: [action.payload, ...state.data],
+      }
+    case types.LIKE_COMMENT:
+      return {
+        ...state,
+        data: commentsData(state.data, action),
+      }
+    case types.DISLIKE_COMMENT:
+      return {
+        ...state,
+        data: commentsData(state.data, action),
       }
     default:
       return state;
