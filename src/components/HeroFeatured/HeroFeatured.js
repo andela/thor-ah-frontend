@@ -26,13 +26,12 @@ class HeroFeatured extends Component {
   }
 
   render() {
-    const data2 = [];
+    const heroArticle = [];
     const { articles } = this.props;
-    const { data } = articles;
-    const newData = data.slice(0);
+    const newData = articles.slice(0);
     while (newData.length !== 0) {
       const randomIndex = Math.floor(Math.random() * newData.length);
-      data2.push(newData[randomIndex]);
+      heroArticle.push(newData[randomIndex]);
       newData.splice(randomIndex, 1);
     }
     const defaultValue = {
@@ -44,12 +43,12 @@ class HeroFeatured extends Component {
       }
     }
 
-    const mainArticle = data.length ? data[0] : defaultValue;
+    const mainArticle = articles.length ? articles[0] : defaultValue;
 
     return (
       <div className={styles.hero_featured}>
         <div className={styles.sub_featured}>
-          {data2.map(article => {
+          {heroArticle.map(article => {
             const { id, title, slug, author } = article;
             const details = {
               author: `${author.username}`
@@ -86,7 +85,7 @@ class HeroFeatured extends Component {
 const mapStateToProps = state => {
   const { allArticleReducer } = state;
   return {
-    articles: allArticleReducer,
+    articles: allArticleReducer.data,
   }
 }
 

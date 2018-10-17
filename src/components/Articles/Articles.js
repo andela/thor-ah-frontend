@@ -27,11 +27,10 @@ class Articles extends Component {
 
   render() {
     const { articles } = this.props;
-    const { data } = articles;
-    const data2 = data.slice(0);
-    data2.sort((a, b) => Number(moment(a.createdAt).format("x") - moment(b.createdAt).format("x")));
+    const sortedArticles = articles.slice(0);
+    sortedArticles.sort((a, b) => a.id - b.id);
     const { content } = this.props;
-    if (!data) {
+    if (!articles) {
       return (
         <div className={ styles.not_found_message }>
           <h1>No Articles Found!</h1>
@@ -41,7 +40,7 @@ class Articles extends Component {
     return (
       <div className={ styles.articles }>
         <div data-content="featured" className={ content === 'featured' ? styles.active : '' }>
-          { data.map(article => {
+          { articles.map(article => {
             const { id, title, image: thumbnail, slug, description, timeToRead, author, createdAt } = article;
             const snippet = description;
             const details = {
@@ -62,7 +61,7 @@ class Articles extends Component {
           }) }
         </div>
         <div data-content="recommended" className={ content === 'recommended' ? styles.active : '' }>
-        { data2.map(article => {
+        { sortedArticles.map(article => {
             const { id, title, image: thumbnail, slug, description, timeToRead, author, createdAt } = article;
             const snippet = description;
             const details = {
@@ -90,7 +89,7 @@ class Articles extends Component {
 const mapStateToProps = state => {
   const { allArticleReducer } = state;
   return {
-    articles: allArticleReducer,
+    articles: allArticleReducer.data,
   }
 }
 

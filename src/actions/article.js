@@ -78,12 +78,11 @@ export const getAllArticle = () => (dispatch) => {
   return axios
     .get(`${API}/api/articles`)
     .then(response => {
-      console.log(response);
       if (response.data.status === 'success') {
         dispatch(fetchAllArticleLoading(false))
         return dispatch(fetchAllArticleSuccess(response.data.articles));
       }
-      return dispatch(fetchAllArticleError('some erroe here'));
+      return dispatch(fetchAllArticleError());
     })
-    .catch(() => dispatch(fetchAllArticleError('some erro')));
+    .catch(() => dispatch(fetchAllArticleError()));
 };
