@@ -29,3 +29,25 @@
   color: #fff;
   text-decoration: none;
 }
+.highlight {
+  background: #eee;
+}
+
+.commentPrompt{
+  width: 50px;
+  background: #333;
+  height: 30px;
+  color: #fff;
+  border-radius: 4px;
+  display: none;
+}
+.commentPrompt :active {
+  display: block;
+}
+
+.commentPromptIcon {
+  width: 20px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
