@@ -40,6 +40,54 @@ describe('articleComments reducer', () => {
     });
   });
 
+  it('should handle LIKE_COMMENT', () => {
+    const action = {
+      type: types.LIKE_COMMENT,
+      key: 0
+    }
+
+    const mockState = {
+      data: [{
+        liked: false,
+        disliked: false,
+        likesCount: 3,
+        dislikesCount: 5,
+      }]
+    }
+    expect(articleComments(mockState, action)).toEqual({
+      data: [{
+        liked: true,
+        disliked: false,
+        likesCount: 4,
+        dislikesCount: 5,
+      }]
+    })
+  });
+
+  it('should handle DISLIKE_COMMENT', () => {
+    const action = {
+      type: types.DISLIKE_COMMENT,
+      key: 0
+    }
+
+    const mockState = {
+      data: [{
+        liked: false,
+        disliked: false,
+        likesCount: 3,
+        dislikesCount: 5,
+      }]
+    }
+    expect(articleComments(mockState, action)).toEqual({
+      data: [{
+        liked: false,
+        disliked: true,
+        likesCount: 3,
+        dislikesCount: 6,
+      }]
+    })
+  });
+
 });
 
 describe('newComment reducer', () => {

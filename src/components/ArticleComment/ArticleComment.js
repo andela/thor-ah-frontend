@@ -23,13 +23,13 @@ export class ArticleComment extends Component {
   }
 
   render() {
-    const { comments, fetchingArticleComments, error } = this.props;
+    const { comments, fetchingArticleComments, error, currentArticle } = this.props;
     return (
       <div className={styles.comment}>
         <CommentBox />
         {fetchingArticleComments ?
           <i className={`fa fa-spinner fa-3x fa-spin ${styles.loading}`} /> :
-          <Comments comments={comments} />
+          <Comments comments={comments} currentArticleTitle={currentArticle} />
         }
         {error ?
           <span style={{color: 'red'}}>
@@ -47,12 +47,18 @@ ArticleComment.propTypes = {
   comments: PropTypes.array.isRequired,
   fetchingArticleComments: PropTypes.bool.isRequired,
   error: PropTypes.any.isRequired,
+  currentArticle: PropTypes.string,
+}
+
+ArticleComment.defaultProps = {
+  currentArticle: '',
 }
 
 const mapStateToProps = (state) => ({
   comments: state.comments.articleComments.data,
   fetchingArticleComments: state.comments.articleComments.loading,
   error: state.comments.articleComments.error,
+  currentArticle: state.article.article.title
 })
 
 const mapDispatchToProps = (dispatch) => ({
