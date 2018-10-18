@@ -85,15 +85,15 @@ describe('comment actions', () => {
 
       const expectedActions = [
         {
-          type: "CREATE_COMMENT_REQUEST",
+          type: types.CREATE_COMMENT_REQUEST,
           payload: true,
         },
         {
-          type: "CREATE_COMMENT_REQUEST",
+          type: types.CREATE_COMMENT_REQUEST,
           payload: false,
         },
         {
-          type: "CREATE_COMMENT_SUCCESS",
+          type: types.CREATE_COMMENT_SUCCESS,
           payload: {
             article: {
               id: 2,
@@ -104,11 +104,11 @@ describe('comment actions', () => {
           },
         },
         {
-          type: "FETCH_ARTICLE_COMMENTS_LOADING",
+          type: types.FETCH_ARTICLE_COMMENTS_LOADING,
           payload: true,
         },
         {
-          type: "FETCH_ARTICLE_COMMENTS_LOADING",
+          type: types.FETCH_ARTICLE_COMMENTS_LOADING,
           payload: false,
         }
       ]

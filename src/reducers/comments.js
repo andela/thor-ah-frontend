@@ -8,6 +8,8 @@ const commentsData = (state = [], action) => {
     case types.LIKE_COMMENT:
       return state.map((comment, idx) => {
         if (idx === Number(action.key)) {
+          // check if user has liked the comment and update corresponding
+          // reaction count(s)
           return {
             ...comment,
             likesCount: comment.liked ? comment.likesCount - 1 : comment.likesCount + 1,
@@ -21,6 +23,8 @@ const commentsData = (state = [], action) => {
     case types.DISLIKE_COMMENT:
       return state.map((comment, idx) => {
         if (idx === Number(action.key)) {
+          // check if user has disliked the comment and update corresponding
+          // reaction count(s)
           return {
             ...comment,
             dislikesCount: comment.disliked ? comment.dislikesCount - 1 : comment.dislikesCount + 1,
