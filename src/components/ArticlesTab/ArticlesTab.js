@@ -33,9 +33,6 @@ class ArticlesTab extends Component {
           <li className={ activeTab === 'featured' ? styles.active : ''}>
             <button data-tab="featured" type="button" onClick={ this.processAction }>Featured Articles</button>
           </li>
-          <li className={activeTab === 'collections' ? styles.active : ''}>
-            <button data-tab="collections" type="button" onClick={this.processAction}>Collections</button>
-          </li>
           <li className={activeTab === 'recommended' ? styles.active : ''}>
             <button data-tab="recommended" type="button" onClick={this.processAction}>Most Recommended</button>
           </li>

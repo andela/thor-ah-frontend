@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+// import get all articles action
+import { getAllArticle } from '../../actions/article'
+
+// import component
+import HeroArticles from './HeroArticles';
+import MainFeature from './MainFeature';
+
 // styles
 import styles from './heroFeatured.module.scss';
 // images
 import thorAh from '../../authors_haven.png';
+
 
 class HeroFeatured extends Component {
   constructor(props) {
@@ -11,34 +20,60 @@ class HeroFeatured extends Component {
     this.state = {};
   }
 
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(getAllArticle());
+  }
+
   render() {
+    const heroArticle = [];
+    const { articles } = this.props;
+    const newData = articles.slice(0);
+    while (newData.length !== 0) {
+      const randomIndex = Math.floor(Math.random() * newData.length);
+      heroArticle.push(newData[randomIndex]);
+      newData.splice(randomIndex, 1);
+    }
+    const defaultValue = {
+      id: 0,
+      title: 'Loading',
+      slug: '...loading',
+      author: {
+        username: '...loading'
+      }
+    }
+
+    const mainArticle = articles.length ? articles[0] : defaultValue;
+
     return (
-      <div className={ styles.hero_featured }>
+      <div className={styles.hero_featured}>
         <div className={styles.sub_featured}>
-          <div className={ styles.sub_featured__single }>
-            <h2><Link to="/article/slug">The Molestation scandal that costed Bill Cosby his legacy and reputation</Link></h2>
-            <p>BY MIKE TEESON</p>
-          </div>
-          <div className={styles.sub_featured__single}>
-            <h2><Link to="/article/slug">The Molestation scandal that costed Bill Cosby his legacy and reputation</Link></h2>
-            <p>BY MIKE TEESON</p>
-          </div>
-          <div className={styles.sub_featured__single}>
-            <h2><Link to="/article/slug">The Molestation scandal that costed Bill Cosby his legacy and reputation</Link></h2>
-            <p>BY MIKE TEESON</p>
-          </div>
-          <div className={styles.sub_featured__single}>
-            <h2><Link to="/article/slug">The Molestation scandal that costed Bill Cosby his legacy and reputation</Link></h2>
-            <p>BY MIKE TEESON</p>
-          </div>
+          {heroArticle.map(article => {
+            const { id, title, slug, author } = article;
+            const details = {
+              author: `${author.username}`
+            }
+            return (
+              <HeroArticles
+                key={id}
+                title={title}
+                slug={slug}
+                details={details}
+              />
+            )
+          })}
         </div>
-        <div className={ styles.main_featured }>
-          <img src={ thorAh } className="" alt="title" />
-          <div className={ styles.main_featured__details }>
-            <div>
-              <Link to="/article/slug">Top 10 tips for improving your writing skills and increasing your readership</Link>
-              <p>BY JOHN DOE</p>
-            </div>
+        <div className={styles.main_featured}>
+          <img src={thorAh} className="" alt="title" />
+          <div className={styles.main_featured__details}>
+
+            <MainFeature
+              key={mainArticle.id}
+              title={mainArticle.title}
+              slug={mainArticle.slug}
+              details={mainArticle.author.username}
+            />
+
           </div>
         </div>
       </div>
@@ -46,4 +81,12 @@ class HeroFeatured extends Component {
   }
 }
 
-export default HeroFeatured;
+
+const mapStateToProps = state => {
+  const { allArticleReducer } = state;
+  return {
+    articles: allArticleReducer.data,
+  }
+}
+
+export default connect(mapStateToProps)(HeroFeatured);

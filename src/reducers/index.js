@@ -5,12 +5,13 @@ import signup from './signup';
 import comments from './comments';
 import articleCategoryReducer from './categories';
 import createArticle from './createArticle';
-import article from "./article";
 import favorite from './favorite'
+import { oneArticleReducer, allArticleReducer } from './article';
 
 const rootReducer = combineReducers({
   auth,
-  article,
+  oneArticleReducer,
+  allArticleReducer,
   signinuser,
   signup,
   comments,

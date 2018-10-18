@@ -36,12 +36,19 @@ const initialState = {
     },
   },
   article: {
-    article: {
-      author: {},
-      tags: [{}]
+    allArticle: {
+      isLoading: false,
+      error: false,
+      data: []
     },
-    loading: false,
-    error: ""
+    oneArticle: {
+      article: {
+        author: {},
+        tags: [{}]
+      },
+      loading: false,
+      error: ""
+    }
   },
   createArticle: {
     article: {},
