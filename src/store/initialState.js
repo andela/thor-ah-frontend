@@ -82,5 +82,17 @@ const initialState = {
     loading: false,
     error: ""
   },
+  readingStats: {
+    loading: false,
+    error: '',
+    stats: {
+      mostReadCategory: 'None',
+      numberOfArticlesRead: 0,
+      articleReactions: {
+        liked: 0,
+        disliked: 0
+      },
+    }
+  }
 };
 export default initialState;

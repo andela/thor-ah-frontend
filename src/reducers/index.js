@@ -10,6 +10,8 @@ import { oneArticleReducer, allArticleReducer } from './article';
 import relatedArticle from "./relatedArticle";
 import drafts from './drafts';
 import articleUpdate from './updateArticle';
+import article from "./article";
+import readingStats from './readingStats';
 
 const rootReducer = combineReducers({
   auth,
@@ -23,7 +25,8 @@ const rootReducer = combineReducers({
   favorite,
   relatedArticle,
   drafts,
-  articleUpdate
+  articleUpdate,
+  readingStats,
 });
 
 export default rootReducer;
