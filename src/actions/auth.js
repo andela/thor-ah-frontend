@@ -12,4 +12,4 @@ export const logOutUser = () => (dispatch) => {
 export const setLoggedInUser = (user) => ({
   type: SET_CURRENT_USER,
   payload: user,
-})
+});
