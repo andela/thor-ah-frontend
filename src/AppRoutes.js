@@ -20,17 +20,13 @@ const AppRoutes = () => (
 
       <Switch>
         <Route exact path="/" component={Homepage} />
-        {/* protected routes can be rendered using the ProtectedRoutes component */}
+        <Route exact path="/signin" component={Signin} />
         <Route path="/categories" component={AllCategories} />
         <Route path="/category/:name" component={ArticleCategory} />
+        {/* protected routes can be rendered using the ProtectedRoutes component */}
         <ProtectedRoute path="/articles/:slug" component={ArticlePage} />
         <ProtectedRoute path="/profile/user" component={ProfilePage} />
-        <ProtectedRoute
-          exact
-          path="/create-article"
-          component={CreateArticle}
-        />
-        <Route exact path="/signin" component={Signin} />
+        <ProtectedRoute exact path='/article/create' component={CreateArticle} />
         {/* will always render when no other path is matched */}
         <Route component={NotFound} />
       </Switch>

@@ -46,15 +46,15 @@ class ArticleReaction extends React.Component {
       <div className="d-flex justify-content-end">
         <div className="px-2">
           <img src={likeIcon} alt="icon" />
-          <span>1.3K</span>
+          <span>0</span>
         </div>
         <div className="px-2">
           <img src={dislikeIcon} alt="icon" />
-          <span>3</span>
+          <span>0</span>
         </div>
         <div className="px-2">
           <img src={commentIcon} alt="icon" />
-          <span>145</span>
+          <span>0</span>
         </div>
 
         <div className={styles.popupContainer}>

@@ -1,57 +1,20 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-// actions
-import { getArticle } from "../../actions/article";
+import React from "react";
+import PropTypes from "prop-types";
 // styles
 import styles from "./ArticleTag.module.scss";
 
-class ArticleTag extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+const ArticleTag = ({ tags }) => (
+  <div className="text-left">
+    {tags.map(tag => (
+      <button key={tag} type="button" className={styles.btn_round}>
+        {tag.tag}
+      </button>
+    ))}
+  </div>
+);
 
-  componentDidMount() {
-    const articleSlug = window.location.pathname.split("/articles/")[1];
-    const { fetchArticle } = this.props;
-    fetchArticle(articleSlug);
-  }
+ArticleTag.propTypes = {
+  tags: PropTypes.array.isRequired
+};
 
-  render() {
-    const { article } = this.props;
-    const { tags } = article;
-    return (
-      <div className="text-left">
-        {tags.map(tag => (
-          <button key={tag} type="button" className={styles.btn_round}>
-            {tag.tag}
-          </button>
-        ))}
-      </div>
-    );
-  }
-}
-/**
- * mapStateToProps
- * @param state
- * @returns {Object}
- */
-const mapStateToProps = state => ({
-  article: state.oneArticleReducer.article,
-});
-
-/**
- * mapDispatchToProps
- * @param mapDispatchToProps
- * @returns {Object}
- */
-const mapDispatchToProps = dispatch => ({
-  fetchArticle(articleSlug) {
-    dispatch(getArticle(articleSlug));
-  }
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ArticleTag);
+export default ArticleTag;

@@ -7,6 +7,7 @@ import articleCategoryReducer from './categories';
 import createArticle from './createArticle';
 import favorite from './favorite'
 import { oneArticleReducer, allArticleReducer } from './article';
+import relatedArticle from "./relatedArticle";
 
 const rootReducer = combineReducers({
   auth,
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
   comments,
   category: articleCategoryReducer,
   createArticle,
-  favorite
+  favorite,
+  relatedArticle
 });
 
 export default rootReducer;

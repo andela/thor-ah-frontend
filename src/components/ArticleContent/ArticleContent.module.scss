@@ -1,13 +1,15 @@
 .article_text {
-  color:#6D6868;
+  color: #6d6868;
   font-size: 14px;
 }
 
 .content {
-  font-size: 18px;
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  line-height: 2.2rem;
+  font-style: normal !important;
 }
 
 .divider {
-  border: 0.9px solid #C40018;
+  border: 0.9px solid #c40018;
 }
-

@@ -33,7 +33,7 @@ const initialState = {
       isLoading: false,
       isError: false,
       data: []
-    },
+    }
   },
   article: {
     allArticle: {
@@ -59,6 +59,11 @@ const initialState = {
     loading: false,
     error: "",
     message: ""
+  },
+  relatedArticles: {
+    articles: [],
+    loading: true,
+    error: ""
   }
 };
 export default initialState;
