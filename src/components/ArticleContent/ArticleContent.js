@@ -32,42 +32,42 @@ class ArticleContent extends Component {
   render() {
     const { article, loading } = this.props;
     return <div className="card col-md-7 p-0">
-        {loading ? <div>
-            <ArticleLoader />
-          </div> : <div>
-            <img className="card-img-top" src={bannerImage} alt="banner" width="100%" />
-            <div className="content p-5 ">
-              <h3 className="h1 text-left">{article.title}</h3>
-              <div className="d-flex justify-content-start">
-                <div>
-                  <img src={profileImage} className="rounded-circle" alt="profile" />
-                </div>
-                <div className={`${styles.article_text} d-flex px-2 flex-column `}>
-                  <span className="text-center">
-                    {" "}
-                    {article.author.username}{" "}
-                  </span>
-                  <span className="font-italic">
-                    {format(new Date(article.createdAt), ["MMM DD"])}
-                  </span>
-                </div>
-                <div className="my-3 text-secondary">
-                  <img src={pointIcon} alt="icon" height="7px" />
-                  <span className="pl-1">
-                    {`${(article.timeToRead)} min read`}
-                  </span>
-                </div>
+      {loading ? <div>
+        <ArticleLoader />
+      </div> : <div>
+          <img className="card-img-top" src={bannerImage} alt="banner" width="100%" />
+          <div className="content p-5 ">
+            <h3 className="h1 text-left">{article.title}</h3>
+            <div className="d-flex justify-content-start">
+              <div>
+                <img src={profileImage} className="rounded-circle" alt="profile" />
               </div>
-              <div className={`${styles.content} text-left mt-2`}>
-                <p>{article.body}</p>
+              <div className={`${styles.article_text} d-flex px-2 flex-column `}>
+                <span className="text-center">
+                  {" "}
+                  {article.author.username}{" "}
+                </span>
+                <span className="font-italic">
+                  {format(new Date(article.createdAt), ["MMM DD"])}
+                </span>
               </div>
-              <ArticleTag />
-              <ArticleReaction />
-              <hr className={styles.divider} />
-              <ArticleComment />
+              <div className="my-3 text-secondary">
+                <img src={pointIcon} alt="icon" height="7px" />
+                <span className="pl-1">
+                  {`${(article.timeToRead)} min read`}
+                </span>
+              </div>
             </div>
-          </div>}
-      </div>;
+            <div className={`${styles.content} text-left mt-2`}>
+              <p>{article.body}</p>
+            </div>
+            <ArticleTag />
+            <ArticleReaction articleId={article.id} />
+            <hr className={styles.divider} />
+            <ArticleComment />
+          </div>
+        </div>}
+    </div>;
   }
 }
 

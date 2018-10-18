@@ -66,7 +66,6 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.11.1",
-    "jsonwebtoken": "^8.3.0",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
     "redux-mock-store": "^1.5.3",
@@ -91,9 +90,6 @@
     "lint": "eslint ./src/**/*.{js,jsx} --fix",
     "format": "prettier src/**/*.{js,jsx,css,html,json}",
     "format:check": "prettier --list-different  src/**/*{js,jsx,css,json}",
-    "dev": "node scripts/start.js",
-    "start": "serve -s build",
-    "build": "node scripts/build.js",
     "heroku-postbuild": "npm run build"
   },
   "eslintConfig": {

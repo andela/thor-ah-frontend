@@ -47,6 +47,11 @@ const initialState = {
     article: {},
     loading: false,
     error: {}
+  },
+  favoriteArticle: {
+    loading: false,
+    error: "",
+    message: ""
   }
 };
 export default initialState;
