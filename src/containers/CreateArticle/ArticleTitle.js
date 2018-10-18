@@ -29,8 +29,6 @@ const ArticleTitle = ({
 ArticleTitle.propTypes = {
   value: PropTypes.string.isRequired,
   titleChangeHandler: PropTypes.func.isRequired,
-  titlePlaceholderFocusInHandler: PropTypes.func.isRequired,
-  titlePlaceholderFocusOutHandler: PropTypes.func.isRequired
 };
 
 export default ArticleTitle;

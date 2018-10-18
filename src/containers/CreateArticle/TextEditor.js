@@ -54,8 +54,6 @@ class TextEditor extends Component {
 TextEditor.propTypes = {
   imageUploadHandler: PropTypes.func.isRequired,
   editorChangeHandler: PropTypes.func.isRequired,
-  bodyPlaceholderFocusInHandler: PropTypes.func.isRequired,
-  bodyPlaceholderFocusOutHandler: PropTypes.func.isRequired
 };
 
 export default TextEditor;

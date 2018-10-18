@@ -3,11 +3,13 @@ import auth from './auth';
 import signinuser from './signin';
 import signup from './signup';
 import comments from './comments';
-import articleCategoryReducer from './categories';
+import category from './categories';
 import createArticle from './createArticle';
 import favorite from './favorite'
 import { oneArticleReducer, allArticleReducer } from './article';
 import relatedArticle from "./relatedArticle";
+import drafts from './drafts';
+import articleUpdate from './updateArticle';
 
 const rootReducer = combineReducers({
   auth,
@@ -16,10 +18,12 @@ const rootReducer = combineReducers({
   signinuser,
   signup,
   comments,
-  category: articleCategoryReducer,
+  category,
   createArticle,
   favorite,
-  relatedArticle
+  relatedArticle,
+  drafts,
+  articleUpdate
 });
 
 export default rootReducer;

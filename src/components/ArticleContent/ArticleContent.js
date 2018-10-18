@@ -2,6 +2,8 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import format from "date-fns/format";
+import jwtDecode from 'jwt-decode';
+import { Link } from 'react-router-dom';
 // components
 import ArticleReaction from "../ArticleReaction/ArticleReaction";
 import ArticleComment from "../ArticleComment/ArticleComment";
@@ -30,7 +32,13 @@ class ArticleContent extends Component {
   }
 
   render() {
+
+    const user = JSON.parse(localStorage.user); 
+    const decoded = jwtDecode(user.token);
+    const { id } = decoded;
+
     const { article, loading } = this.props;
+    const { authorId, slug } = article;
     return (
       <div className="card col-md-7 p-0">
         <div>
@@ -76,6 +84,12 @@ class ArticleContent extends Component {
                 <div className="text-left mt-2">
                   <p className={styles.content}>{article.body}</p>
                 </div>
+                {
+                  article && authorId === id ? 
+                  <Link to={ `/me/articles/${slug}/edit` } className={styles.updateLink}>
+                    Edit article
+                  </Link> : null
+                }
                 <ArticleTag tags={article.tags} />
                 <ArticleReaction articleId={article.id} />
                 <hr className={styles.divider} />

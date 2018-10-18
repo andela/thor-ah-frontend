@@ -11,7 +11,7 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 const mockAxios = new MockAdapter(axios);
 
-describe('comment actions', () => {
+describe('category actions', () => {
 
   describe('get all categories', () => {
     it('fetches all article categories in the application', () => {
