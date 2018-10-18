@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 // components
 import FavoriteArticles from '../FavoriteArticles/FavoriteArticles';
@@ -17,8 +18,11 @@ class UserProfileTabs extends Component {
   }
 
   componentWillMount() {
+    const { user } = this.props;
+    const { role } = user;
+
     this.setState({
-      activeTab: 'published',
+      activeTab: role === 'author' ? 'published' : 'favorites',
     })
   }
 
@@ -29,16 +33,19 @@ class UserProfileTabs extends Component {
   }
 
   render() {
-    const { activeTab } = this.state;
+    const { user } = this.props;
+    const { activeTab } = this.state; 
+    const { role } = user;
+
     return(
       <Tabs className={ styles.tabs }>
 
         <TabList className={ styles.tabButtons }>
-          <Tab data-tab="published" 
+          { role === 'author' ? <Tab data-tab="published" 
             onClick={ this.processAction }
             className={ activeTab === 'published' ? styles.active : styles.tabLink }>
             Published Articles
-          </Tab>
+          </Tab> : '' }
           <Tab data-tab="favorites"
             onClick={ this.processAction }
             className={ activeTab === 'favorites' ? styles.active : styles.tabLink }>
@@ -51,9 +58,9 @@ class UserProfileTabs extends Component {
           </Tab>
         </TabList>
 
-        <TabPanel>
+        { role === 'author' ? <TabPanel>
           <PublishedArticles />
-        </TabPanel>
+        </TabPanel> : '' }
         <TabPanel>
           <FavoriteArticles />
         </TabPanel>
@@ -66,4 +73,12 @@ class UserProfileTabs extends Component {
   }
 }
 
-export default UserProfileTabs;
+const mapStateToProps = state => {
+  const { auth } = state;
+  const { user } = auth;
+  return {
+    user,
+  }
+}
+
+export default connect(mapStateToProps)(UserProfileTabs);
