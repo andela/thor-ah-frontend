@@ -255,8 +255,9 @@ class ArticleContent extends Component {
           </div>
         </div>
       </div>
-    );
+    </div >
   }
+
 }
 
 ArticleContent.propTypes = {

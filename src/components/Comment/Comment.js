@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
 import styles from './comment.module.scss';
 // images
 import likeIcon from "../../assets/up.png";
@@ -52,7 +54,7 @@ class Comment extends Component {
             <span>{comment.likesCount || 0}</span>
           </div>
           <div className="px-2">
-            <img className={styles.reaction} onClick={this.handleClick} data-key={id} data-action="dislike" data-comment={comment.id}  src={dislikeIcon} alt="icon" />
+            <img className={styles.reaction} onClick={this.handleClick} data-key={id} data-action="dislike" data-comment={comment.id} src={dislikeIcon} alt="icon" />
             <span>{comment.dislikesCount || 0}</span>
           </div>
         </div>

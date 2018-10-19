@@ -18,6 +18,32 @@ const createCommentError = (error) => ({
   payload: error,
 });
 
+// comment object === {comment, articleBody,highlighted,cssId}   or {comment}
+const createComment = (commentObject, articleSlug) => (dispatch) => {
+  dispatch(createCommentRequest(true));
+  const { token } = localStorage;
+  return axios.post(
+    `${API}/api/articles/${articleSlug}/comments`,
+    commentObject,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    }
+  )
+    .then((response) => {
+      dispatch(createCommentRequest(false));
+      dispatch(createCommentSuccess(response.data.comment));
+      return response;
+    })
+    .catch((error) => {
+      dispatch(createCommentRequest(false));
+      dispatch(createCommentError(error));
+      return error;
+    });
+};
+
 const getArticleCommentsLoading = (isFetching) => ({
   type: types.FETCH_ARTICLE_COMMENTS_LOADING,
   payload: isFetching,
