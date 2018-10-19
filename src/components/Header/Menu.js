@@ -28,7 +28,7 @@ class Menu extends React.Component {
 
   render() {
 
-    const { user, mobileCategory } = this.props;
+    const { user, mobileCategory, logOut } = this.props;
     const { profileMenuVisibility } = this.state;
     const { username, role, image } = user;
     const profileToggleStyle = {
@@ -60,7 +60,7 @@ class Menu extends React.Component {
             {role === 'author' ? <li><Link to='/article/create'> {<FaPencilAlt />} Publish</Link></li> : null}
             {role === 'author' ? <li><Link to='/me/drafts'> {<FaEnvelope />} Drafts</Link></li> : null}
             <li><Link to='/favorite'> {<FaStar />} Favorites</Link></li>
-            <li><Link onClick={this.props.logOut} to='/logout'> {<FaSignOutAlt />} Logout</Link></li>
+            <li><Link onClick={logOut} to='/logout'> {<FaSignOutAlt />} Logout</Link></li>
             <li> user: {username}</li>
           </ul>
         </div>
