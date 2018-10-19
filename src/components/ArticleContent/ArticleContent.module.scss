@@ -33,16 +33,18 @@
   background: #eee;
 }
 
-.commentPrompt{
-  width: 50px;
-  background: #333;
-  height: 30px;
+.commentPrompt,
+.showCommentBox{
+  position: absolute;
   color: #fff;
   border-radius: 4px;
   display: none;
+  user-select: none;
 }
-.commentPrompt :active {
-  display: block;
+.commentPrompt{
+  background: #333;
+  width: 50px;
+  height: 30px;
 }
 
 .commentPromptIcon {
@@ -50,4 +52,23 @@
   margin-right: auto;
   margin-left: auto;
 }
+
+.showCommentBox{
+  background: #eee;
+  margin-left: 9%;
+  width: 70%;
+}
+
+// .commentBoxContainer{
+//   height: 100vh;
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   width: 100vw;
+//   height: 100vh;
+//   background: rgba(0, 0, 0, 0.7) !important;
+//   z-index: 3;
+//   cursor: pointer;
+//   overflow-y: auto;
+// }
 

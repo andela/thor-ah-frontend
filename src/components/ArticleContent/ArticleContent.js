@@ -21,14 +21,19 @@ import bannerImage from "../../assets/image.png";
 
 // icons
 import { FaComment } from 'react-icons/fa';
+import CommentBox from "../Comment/CommentBox";
 
 class ArticleContent extends Component {
   constructor(props) {
     super(props);
     this.state = {
       highlight: false,
-      promptStyle: { top: '0px', left: '0px', position: 'absolute' }
+      promptStyle: { top: '0px', left: '0px' },
+      commentBoxStyle: { top: '0px' }
     };
+    this.elementId = ''
+    this.hilightedText = ''
+    this.injectedArticleBody = ''
   }
 
   componentDidMount() {
@@ -38,50 +43,66 @@ class ArticleContent extends Component {
   }
 
   // returns id to be used to associate comment position to article
-  generateId = () => 'spanId'
+  generateId = () => {
+    const Id = 'artId' + Math.floor((Math.random() * 1000000) + 1).toString()
+    if (!document.getElementById(Id)) return Id;
+    return generateId()
+  }
 
   // surrounds selected with element, and returns the selected text
   surroundSelection = () => {
+    const { highlight } = this.state
+
+    if (highlight) this.clearHighlight()
+
     if (window.getSelection().toString()) { // if text selected
       const selection = window.getSelection();
       const range = selection.getRangeAt(0);
+      this.elementId = this.generateId(); // set elementId to object for reuse
+      this.hilightedText = selection.toString(); // set highlightedText fro reuse
 
-      const span = document.createElement('span')
-      span.id = this.generateId()
-      span.appendChild(range.extractContents());
-      range.insertNode(span);
+      const element = document.createElement('span')
+      element.id = this.elementId
+      element.appendChild(range.extractContents());
+      range.insertNode(element);
 
-      return span.id;
+      this.injectedArticleBody = document.getElementById('articleBody').innerHTML;
+      // set highlight stat
+      this.setState({ highlight: true })
+
+      return element.id;
     }
     return false
   }
 
   clearHighlight = () => {
-    var span = document.getElementById('spanId');
-    var parent = span.parentNode;
+    var element = document.getElementById(`${this.elementId}`);
 
-    while (span.firstChild) {
-      parent.insertBefore(span.firstChild, span);
+    if (element) {
+      var parent = element.parentNode;
+      while (element.firstChild) {
+        parent.insertBefore(element.firstChild, element);
+      }
+      parent.removeChild(element);
+
+      // set highlight stat
+      this.setState({ highlight: false })
     }
-
-    parent.removeChild(span);
-
   }
 
+
+  // Prompt Component
   CommentPrompt = () => {
-    // const position = { top: '20px', left: '10px', position: 'absolute' }
     const { promptStyle } = this.state
     return (
-      <div className={styles.commentPrompt} style={promptStyle} onBlur={this.clearHighlight} >
+      <div className={styles.commentPrompt} style={promptStyle} onClick={this.displayCommentBox} >
         <p className={styles.commentPromptIcon}><FaComment /> </p>
       </ div>
     )
   }
 
   displayComentPromt = () => {
-    console.log(window.getSelection().getRangeAt(0).getBoundingClientRect())
-
-    const { offsetLeft, offsetTop, offsetWidth } = document.getElementById('spanId')
+    const { offsetLeft, offsetTop, offsetWidth } = document.getElementById(`${this.elementId}`)
     const { promptStyle } = this.state
 
     this.setState({
@@ -104,6 +125,48 @@ class ArticleContent extends Component {
     })
   }
 
+  // Hilighted comment Component
+  HighlightCommentBox = () => {
+    const cssId = this.elementId
+    const highlighted = this.hilightedText
+    const articleBody = this.injectedArticleBody
+
+    const { commentBoxStyle } = this.state
+    return (
+      <div className={styles.showCommentBox} style={commentBoxStyle} onClick={this.styleHighlighted}>
+        <CommentBox hideHighlightBox={() => { this.hideCommentBox(); this.hideCommentPrompt() }} highlightedObject={{ articleBody, highlighted, cssId }} />
+      </div>
+    )
+  }
+  // displays comment box
+  displayCommentBox = () => {
+    const { offsetLeft, offsetTop, offsetHeight } = document.getElementById(`${this.elementId}`)
+    const { commentBoxStyle } = this.state
+    this.setState({
+      commentBoxStyle: {
+        ...commentBoxStyle,
+        top: offsetTop + offsetHeight + 10,
+        display: 'block'
+      }
+    })
+  }
+
+  // hide comment box
+  hideCommentBox = () => {
+    const { commentBoxStyle } = this.state
+    this.setState({
+      commentBoxStyle: {
+        ...commentBoxStyle,
+        display: 'none'
+      }
+    })
+  }
+
+
+  styleHighlighted = () => {
+    document.getElementById(`${this.elementId}`).style.background = '#ee3';
+  }
+
   highlightAndComment = () => {
     const selectedId = this.surroundSelection();
 
@@ -111,7 +174,7 @@ class ArticleContent extends Component {
       this.displayComentPromt()
     } else {
       this.hideCommentPrompt()
-      this.clearHighlight()
+      this.hideCommentBox()
     }
   }
 

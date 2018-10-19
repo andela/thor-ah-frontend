@@ -34,10 +34,16 @@ class CommentBox extends Component {
       showError: false,
     });
 
-    const { handleCommentSubmit } = this.props;
-    handleCommentSubmit(comment, articleSlug)
+
+    const { handleCommentSubmit, highlightedObject } = this.props;
+    const { articleBody, highlighted, cssId } = highlightedObject
+
+    const commentObject = (articleBody && highlighted && cssId) ? { ...highlightedObject, comment } : { comment }
+
+    handleCommentSubmit(commentObject, articleSlug)
       .then((result) => {
         if (result.data && result.data.status === 'success') {
+          this.props.hideHighlightBox()
           return this.setState({
             comment: ''
           });
@@ -52,7 +58,7 @@ class CommentBox extends Component {
     const { comment, showError } = this.state;
     const { loading, error } = this.props;
     return (
-      <form onSubmit = {this.submitComment} >
+      <form onSubmit={this.submitComment} >
         <div className={styles.field}>
           <div className="control">
             <textarea
@@ -64,7 +70,7 @@ class CommentBox extends Component {
               onChange={this.handleTextAreaChange}
             />
           </div>
-          {showError && error ? <span style={{color: 'red'}}>Unable to post comment at this time. Try again</span> : ''}
+          {showError && error ? <span style={{ color: 'red' }}>Unable to post comment at this time. Try again</span> : ''}
           {/* display submit button only as soon as user starts typing */}
           {comment ? <button className={`btn btn-success ${styles.submit}`} type="submit" disabled={loading}>submit</button> : ''}
         </div>
@@ -76,6 +82,8 @@ class CommentBox extends Component {
 CommentBox.propTypes = {
   handleCommentSubmit: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
+  highlightedObject: PropTypes.object,
+  hideHighlightBox: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({

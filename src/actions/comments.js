@@ -107,15 +107,15 @@ const createComment = (commentData, articleSlug) => (dispatch) => {
     token
   } = localStorage;
   return axios.post(
-      `${API}/api/articles/${articleSlug}/comments`, {
-        comment: commentData
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
+    `${API}/api/articles/${articleSlug}/comments`, {
+      commentData
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
       }
-    )
+    }
+  )
     .then((response) => {
       dispatch(createCommentRequest(false));
       dispatch(createCommentSuccess(response.data.comment));
