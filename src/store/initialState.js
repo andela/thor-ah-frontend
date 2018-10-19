@@ -58,6 +58,10 @@ const initialState = {
         author: {},
         tags: [{}]
       },
+      reactions: {
+        likes: 0,
+        dislikes: 0
+      },
       loading: false,
       error: ""
     }
