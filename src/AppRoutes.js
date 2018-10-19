@@ -33,7 +33,6 @@ const AppRoutes = () => (
         <ProtectedRoute exact path='/article/create' component={CreateArticle} />
         <ProtectedRoute path="/me/drafts" component={ GetDrafts } />
         <ProtectedRoute path="/me/articles/:slug/edit" component={ UpdateArticle } />
-        <Route exact path="/signin" component={Signin} />
         {/* will always render when no other path is matched */}
         <Route component={NotFound} />
       </Switch>

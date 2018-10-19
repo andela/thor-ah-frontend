@@ -30,7 +30,7 @@ export const clearErrors = () => ({
 
 const signIn = user => dispatch => {
   dispatch(signInLoading(true));
-  axios
+  return axios
     .post(`${API}/api/users/login`, user)
     .then(response => {
       localStorage.setItem("token", response.data.user.token);
@@ -53,7 +53,7 @@ const signIn = user => dispatch => {
 
 export const handleSocialAuth = (authUrl) => (dispatch) => {
   dispatch(signInLoading(true));
-  axios
+  return axios
     .get(`${API}${authUrl}`)
     .then((response) => {
       localStorage.setItem('token', response.data.user.token);

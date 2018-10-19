@@ -6,10 +6,6 @@ const API = process.env.REACT_APP_API;
 export default function SocialSignup() {
     return (
       <div className={styles.socialLogin}>
-        <a className={styles.twitter} href={`${API}/api/auth/twitter`} >
-          <i className="fa fa-twitter fa-lg" />
-          Continue with Twitter
-        </a>
         <a className={styles.facebook} href={`${API}/api/auth/facebook`}>
           <i className="fa fa-facebook fa-lg" />
           Continue with Facebook
