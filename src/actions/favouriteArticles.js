@@ -26,7 +26,7 @@ export const fetchFavouriteRequest = state => ({
 
 export const fetchFavouriteArticles = () => dispatch => {
   dispatch(fetchFavouriteRequest(true));
-  axios
+  return axios
     .get(`${API}/api/user/articles/favorite`, {
       headers: {
         'Authorization': `Bearer ${token}`,

@@ -26,7 +26,7 @@ export const fetchPublishedRequest = state => ({
 
 export const fetchPublishedArticles = () => dispatch => {
   dispatch(fetchPublishedRequest(true));
-  axios
+  return axios
     .get(`${API}/api/articles/published`, {
       headers: {
         'Authorization': `Bearer ${token}`,

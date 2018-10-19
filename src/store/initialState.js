@@ -67,6 +67,16 @@ const initialState = {
     loading: false,
     error: {}
   },
+  favoriteArticle: {
+    loading: false,
+    error: "",
+    message: ""
+  },
+  relatedArticles: {
+    articles: [],
+    loading: true,
+    error: ""
+  },
   favouriteArticles: {
     loading: false,
     error: '',
