@@ -9,7 +9,7 @@ import ArticleTitle from "../CreateArticle/ArticleTitle";
 import TextEditor from "../CreateArticle/TextEditor";
 import stripHtml from "../../utils/stripHtml";
 
-import getArticle from '../../actions/article';
+import { getArticle } from '../../actions/article';
 import { updateArticle, publishDraft } from '../../actions/updateArticle';
 import { getDrafts } from '../../actions/drafts';
 import isEmpty from '../../utils/isEmpty';
@@ -111,24 +111,11 @@ class UpdateArticle extends Component {
     const bodyValue = this.rootNode.props.value;
 
     if (title.trim() === "") {
-      this.setState({
-        error: {
-          title: "Update will be available when you provide a title"
-        }
-      });
-      return false;
+      this.setState({ title });
     }
 
-    if (
-      bodyValue.length < 30 ||
-      body.trim() === ""
-    ) {
-      this.setState({
-        error: {
-          body: "You need to provide more words"
-        }
-      });
-      return false;
+    if (body.trim() === "" || bodyValue.length < 30) {
+      this.setState({ body });
     }
 
     this.setState({
@@ -146,8 +133,8 @@ class UpdateArticle extends Component {
           this.props.history.push('/me/drafts');
         }
         if (article.published) {
-          this.props.getDrafts()
-          this.props.history.push('/');
+          const { articleUpdate: { data: { slug } } } = this.props;
+          this.props.history.push(`/articles/${slug}`);
         }
       }
     })
@@ -174,7 +161,7 @@ class UpdateArticle extends Component {
     }
     this.setState({ loading: true }, async () => {
       await updateArticle(updates, slug)
-      this.updateSuccess(article);
+      this.updateSuccess(article)
     })
   };
 
@@ -182,6 +169,9 @@ class UpdateArticle extends Component {
     this.setState({
       loading: false,
       message: "You have successfully published this article"
+    }, () => {
+      const { articleUpdate: { data: { slug } } } = this.props;
+      this.props.history.push(`/articles/${slug}`);
     });
   }
 
@@ -206,8 +196,6 @@ class UpdateArticle extends Component {
       const response = await publishDraft(updates, slug)
       if (response) {
         this.publishSuccess();
-        const { history } = this.props;
-        history.push('/');
       }
     })
   };
@@ -288,7 +276,7 @@ UpdateArticle.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  article: state.article.article,
+  article: state.oneArticleReducer.article,
   articleUpdate: state.articleUpdate
 });
 
