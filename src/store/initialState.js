@@ -124,6 +124,24 @@ const initialState = {
     articles: [],
     error: '',
     loading: false
+  },
+  updateUser: {
+    loading: false,
+    error: '',
+    user: {},
+  },
+  userFollow: {
+    loading: false,
+    follows: {
+      followers: 0,
+      following: 0
+    },
+    errors: ''
+  },
+  profilePhoto: {
+    loading: false,
+    error: '',
+    photo: '',
   }
 };
 

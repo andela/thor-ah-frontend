@@ -1,0 +1,161 @@
+$red: #C40018;
+
+.update_profile {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.4);
+  width: 100vw;
+  height: 100vh;
+  z-index: 3;
+  text-align: left;
+
+  .update_profile_content {
+    background: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    max-width: 90%;
+    max-height: 90%;
+    overflow-x: auto;
+
+    .tab_container {
+      .tab_contents {
+        padding: 15px 10px;
+        display: none;
+
+        &.active {
+          display: block;
+        }
+      }
+
+      .tabs_controls {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        border-bottom: 1px solid #ccc;
+
+        li {
+          display: inline-block;
+          padding: 10px 20px;
+          cursor: pointer;
+
+          &.tab_close {
+            float: right;
+            border-bottom: 1px solid $red;
+            padding-left: 5px;
+            padding-right: 5px;
+            border-left: 1px solid $red;
+            color: $red;
+          }
+          
+          &.active {
+            border-bottom: 1px solid $red;
+          }
+        }
+      }
+    }
+  }
+}
+
+form {
+  border: none !important;
+  padding: 0 5px 5px 5px;
+
+  &::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+
+  .form_message_foot {
+    &::after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+
+    .form_message_foot_error {
+      float: right;
+      color: firebrick;
+    }
+
+    .form_message_foot_success {
+      float: right;
+      color: forestgreen;
+    }
+  }
+
+  .form_input_group {
+    margin: 5px 0;
+    padding: 5px;
+    position: relative;
+
+    .upload_photo {
+      position: absolute;
+      color: #000;
+      right: 15px;
+      bottom: 17px;
+
+      .error {
+        color: firebrick !important;
+      }
+
+      .success {
+        color: forestgreen !important;
+      }
+    }
+
+    &::after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+
+    label {
+      display: block;
+    }
+
+    .rear {
+      &::after {
+        content: '';
+        display: block;
+        clear: both;
+      }
+
+      label {
+        float: left !important;
+      }
+
+      .right {
+        float: right;
+        color: firebrick;
+        font-size: small;
+      }
+    }
+
+    input, textarea {
+      display: block;
+      width: 100%;
+      border: 1px solid #ccc;
+      padding: 8px 10px;
+      resize: none;
+
+      button {
+        background: transparent !important;
+        border: none !important;
+      }
+    }
+
+    button[type=submit] {
+      background: $red;
+      color: #fff;
+      padding: 6px 20px;
+      border: 1px solid $red;
+      cursor: pointer;
+      float: right;
+    }
+  }
+}
