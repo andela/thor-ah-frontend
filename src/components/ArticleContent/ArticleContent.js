@@ -4,11 +4,15 @@ import PropTypes from "prop-types";
 import format from "date-fns/format";
 import jwtDecode from 'jwt-decode';
 import { Link } from 'react-router-dom';
+import ReactHtmlParser from 'react-html-parser';
+// icons
+import { FaComment } from 'react-icons/fa';
 // components
 import ArticleReaction from "../ArticleReaction/ArticleReaction";
 import ArticleComment from "../ArticleComment/ArticleComment";
 import ArticleTag from "../ArticleTag/ArticleTag";
 import ArticleLoader from "../ArticleLoader";
+import CommentBox from "../Comment/CommentBox";
 // actions
 import { getArticle } from "../../actions/article";
 // styles
@@ -18,10 +22,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import profileImage from "../../assets/profile.png";
 import pointIcon from "../../assets/circle.png";
 import bannerImage from "../../assets/image.png";
-
-// icons
-import { FaComment } from 'react-icons/fa';
-import CommentBox from "../Comment/CommentBox";
 
 class ArticleContent extends Component {
   constructor(props) {
@@ -44,9 +44,9 @@ class ArticleContent extends Component {
 
   // returns id to be used to associate comment position to article
   generateId = () => {
-    const Id = 'artId' + Math.floor((Math.random() * 1000000) + 1).toString()
+    const Id = `artId${Math.floor((Math.random() * 1000000) + 1)}`
     if (!document.getElementById(Id)) return Id;
-    return generateId()
+    return this.generateId()
   }
 
   // surrounds selected with element, and returns the selected text
@@ -66,8 +66,8 @@ class ArticleContent extends Component {
       element.appendChild(range.extractContents());
       range.insertNode(element);
 
-      this.injectedArticleBody = document.getElementById('articleBody').innerHTML;
-      // set highlight stat
+      this.injectedArticleBody = document.getElementById(`${styles.articleBody}`).innerHTML;
+      // set highlight state
       this.setState({ highlight: true })
 
       return element.id;
@@ -76,16 +76,16 @@ class ArticleContent extends Component {
   }
 
   clearHighlight = () => {
-    var element = document.getElementById(`${this.elementId}`);
+    const element = document.getElementById(`${this.elementId}`);
 
     if (element) {
-      var parent = element.parentNode;
+      const parent = element.parentNode;
       while (element.firstChild) {
         parent.insertBefore(element.firstChild, element);
       }
       parent.removeChild(element);
 
-      // set highlight stat
+      // set highlight state
       this.setState({ highlight: false })
     }
   }
@@ -95,7 +95,7 @@ class ArticleContent extends Component {
   CommentPrompt = () => {
     const { promptStyle } = this.state
     return (
-      <div className={styles.commentPrompt} style={promptStyle} onClick={this.displayCommentBox} >
+      <div className={styles.commentPrompt} style={promptStyle} onClick={this.displayCommentBox} tabIndex={0} role="button">
         <p className={styles.commentPromptIcon}><FaComment /> </p>
       </ div>
     )
@@ -125,7 +125,7 @@ class ArticleContent extends Component {
     })
   }
 
-  // Hilighted comment Component
+  // Highlighted comment Component
   HighlightCommentBox = () => {
     const cssId = this.elementId
     const highlighted = this.hilightedText
@@ -133,14 +133,15 @@ class ArticleContent extends Component {
 
     const { commentBoxStyle } = this.state
     return (
-      <div className={styles.showCommentBox} style={commentBoxStyle} onClick={this.styleHighlighted}>
+      <div className={styles.showCommentBox} style={commentBoxStyle} onClick={this.styleHighlighted} tabIndex={0} role="button">
         <CommentBox hideHighlightBox={() => { this.hideCommentBox(); this.hideCommentPrompt() }} highlightedObject={{ articleBody, highlighted, cssId }} />
       </div>
     )
   }
+
   // displays comment box
   displayCommentBox = () => {
-    const { offsetLeft, offsetTop, offsetHeight } = document.getElementById(`${this.elementId}`)
+    const { offsetTop, offsetHeight } = document.getElementById(`${this.elementId}`)
     const { commentBoxStyle } = this.state
     this.setState({
       commentBoxStyle: {
@@ -185,9 +186,8 @@ class ArticleContent extends Component {
     const { id } = decoded;
 
     const { article, loading } = this.props;
-
-    const { highlight, promptStyle } = this.state;
-    const { CommentPrompt } = this
+    const { highlight } = this.state;
+    const { CommentPrompt, HighlightCommentBox } = this
     const { authorId, slug } = article;
     return (
       <div className="card col-md-7 p-0">
@@ -231,20 +231,20 @@ class ArticleContent extends Component {
                       </span>
                     </div>
                   </div>
-                  <div className="text-left mt-2">
-                    <p className={styles.content}>{article.body}</p>
-                  </div>
-                  {
-                    article && authorId === id ?
-                      <Link to={`/me/articles/${slug}/edit`} className={styles.updateLink}>
-                        Edit article
-                  </Link> : null
-                  }
+
+
                   <div className={`${styles.content} text-left mt-2`}>
-                    <div onMouseUp={this.highlightAndComment}>
-                      {article.body}
-                      <CommentPrompt />
+                    <div onMouseUp={this.highlightAndComment} className={styles.articleBody} id={styles.articleBody} tabIndex={0} role="button">
+                      {ReactHtmlParser(article.body)}
                     </div>
+                    {
+                      article && authorId === id ?
+                        <Link to={`/me/articles/${slug}/edit`} className={styles.updateLink}>
+                          Edit article
+                  </Link> : null
+                    }
+                    <CommentPrompt />
+                    {highlight && <HighlightCommentBox />}
                   </div>
                   <ArticleTag tags={article.tags} />
                   <ArticleReaction articleId={article.id} />
@@ -255,9 +255,8 @@ class ArticleContent extends Component {
           </div>
         </div>
       </div>
-    </div >
+    )
   }
-
 }
 
 ArticleContent.propTypes = {

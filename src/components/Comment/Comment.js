@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
 import styles from './comment.module.scss';
 // images
 import likeIcon from "../../assets/up.png";
@@ -29,8 +27,22 @@ class Comment extends Component {
     return handleDislike(e.target.dataset.key, comment.id, articleSlug);
   }
 
+  // Renders highlighted text of comment
+  Highlighted = (props) => {
+    const { highlighted, cssId } = props.comment
+    const style = { display: cssId ? 'block' : 'none' }
+    return (
+      <div className={`card p-3 ${styles.highlight}`} style={style}>
+        <a href={`#${cssId}`}>
+          {highlighted}
+        </a>
+      </div>
+    )
+  }
+
   render() {
-    const { comment, id } = this.props;
+    const { comment, id } = this.props
+    const { Highlighted } = this
     return (
       <div className={`card p-3 ${styles.comment}`}>
         <div className="d-flex ">
@@ -45,6 +57,7 @@ class Comment extends Component {
             </span>
           </div>
         </div>
+        <Highlighted comment={comment} />
         <p className="text-secondary text-left my-4">
           {comment.body}
         </p>

@@ -34,16 +34,14 @@ class CommentBox extends Component {
       showError: false,
     });
 
-
     const { handleCommentSubmit, highlightedObject } = this.props;
-    const { articleBody, highlighted, cssId } = highlightedObject
-
-    const commentObject = (articleBody && highlighted && cssId) ? { ...highlightedObject, comment } : { comment }
+    const commentObject = (highlightedObject) ? { ...highlightedObject, comment } : { comment }
 
     handleCommentSubmit(commentObject, articleSlug)
       .then((result) => {
+        const { hideHighlightBox } = this.props
         if (result.data && result.data.status === 'success') {
-          this.props.hideHighlightBox()
+          if(hideHighlightBox) hideHighlightBox()
           return this.setState({
             comment: ''
           });
@@ -82,8 +80,6 @@ class CommentBox extends Component {
 CommentBox.propTypes = {
   handleCommentSubmit: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
-  highlightedObject: PropTypes.object,
-  hideHighlightBox: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
