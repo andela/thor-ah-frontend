@@ -101,21 +101,19 @@ export const getArticleComments = (articleSlug) => (dispatch) => {
     });
 };
 
-const createComment = (commentData, articleSlug) => (dispatch) => {
+const createComment = (commentObject, articleSlug) => (dispatch) => {
   dispatch(createCommentRequest(true));
   const {
     token
   } = localStorage;
   return axios.post(
-      `${API}/api/articles/${articleSlug}/comments`, {
-        comment: commentData
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
+    `${API}/api/articles/${articleSlug}/comments`, commentObject, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
       }
-    )
+    }
+  )
     .then((response) => {
       dispatch(createCommentRequest(false));
       dispatch(createCommentSuccess(response.data.comment));

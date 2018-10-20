@@ -27,8 +27,22 @@ class Comment extends Component {
     return handleDislike(e.target.dataset.key, comment.id, articleSlug);
   }
 
+  // Renders highlighted text of comment
+  Highlighted = (props) => {
+    const { highlighted, cssId } = props.comment
+    const style = { display: cssId ? 'block' : 'none' }
+    return (
+      <div className={`card p-3 ${styles.highlight}`} style={style}>
+        <a href={`#${cssId}`}>
+          {highlighted}
+        </a>
+      </div>
+    )
+  }
+
   render() {
-    const { comment, id } = this.props;
+    const { comment, id } = this.props
+    const { Highlighted } = this
     return (
       <div className={`card p-3 ${styles.comment}`}>
         <div className="d-flex ">
@@ -43,6 +57,7 @@ class Comment extends Component {
             </span>
           </div>
         </div>
+        <Highlighted comment={comment} />
         <p className="text-secondary text-left my-4">
           {comment.body}
         </p>
@@ -52,7 +67,7 @@ class Comment extends Component {
             <span>{comment.likesCount || 0}</span>
           </div>
           <div className="px-2">
-            <img className={styles.reaction} onClick={this.handleClick} data-key={id} data-action="dislike" data-comment={comment.id}  src={dislikeIcon} alt="icon" />
+            <img className={styles.reaction} onClick={this.handleClick} data-key={id} data-action="dislike" data-comment={comment.id} src={dislikeIcon} alt="icon" />
             <span>{comment.dislikesCount || 0}</span>
           </div>
         </div>
