@@ -11,6 +11,8 @@ import AuthMenu from './AuthMenu';
 import styles from './header.module.scss'
 // image
 import logoImage from '../../logo.png'
+// actions
+import { logOutUser } from '../../actions/auth';
 
 class Header extends Component {
   constructor(props) {
@@ -18,6 +20,7 @@ class Header extends Component {
     const { windowWidth } = this.props;
     this.state = { mobileCategory: windowWidth <= 900 ? 'hidden' : 'visible' };
     this.triggerMobileCategory = this.triggerMobileCategory.bind(this);
+    this.handleLogOut = this.handleLogOut.bind(this);
   }
 
   triggerMobileCategory(newState) {
@@ -26,14 +29,19 @@ class Header extends Component {
     })
   }
 
+  handleLogOut() {
+    const { dispatch } = this.props;
+    dispatch(logOutUser());
+  }
+
   render() {
     const { mobileCategory } = this.state;
 
     // set menu based on authentication state
-    let displayedMenu = <AuthMenu triggerCategory={this.triggerMobileCategory} mobileCategory={mobileCategory} />; // regular
+    let displayedMenu = <AuthMenu logOut={this.handleLogOut} triggerCategory={this.triggerMobileCategory} mobileCategory={mobileCategory} />; // regular
     const { auth } = this.props;
     if (auth && auth.isAuthenticated) {
-      displayedMenu = <Menu user={auth.user} triggerCategory={this.triggerMobileCategory} mobileCategory={mobileCategory} />;
+      displayedMenu = <Menu logOut={this.handleLogOut} user={auth.user} triggerCategory={this.triggerMobileCategory} mobileCategory={mobileCategory} />;
     }
 
     return (

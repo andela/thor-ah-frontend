@@ -46,7 +46,7 @@ class Comment extends Component {
     return (
       <div className={`card p-3 ${styles.comment}`}>
         <div className="d-flex ">
-          <img className={styles.commenterImg} src={`http://i.pravatar.cc/150?u=${comment.commenter.firstName}`} alt="profile" />
+          <img className={styles.commenterImg} src={comment.commenter.image || `http://i.pravatar.cc/150?u=${comment.commenter.firstName}`} alt="profile" />
           <div>
             <span className="font-weight-bold text-secondary p-2">
               {comment.commenter.firstName}

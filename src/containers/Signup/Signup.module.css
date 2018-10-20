@@ -132,16 +132,15 @@
    width: 20px;
    top: 2px;
  }
- .socialLogin a:first-child{
+ .socialLogin .twitter{
    background-color: #00ACEE;
    margin-top: 30px;
  }
- .socialLogin a:nth-of-type(2){
+ .socialLogin .facebook{
    background-color: #49639F;
  }
- .socialLogin a:nth-of-type(3){
-   color: #010204;
-   border: 1px outset #eef;
+ .socialLogin .google{
+   background-color: #D84F45;
  }
 
  #regDivider{
