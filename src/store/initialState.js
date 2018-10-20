@@ -64,6 +64,23 @@ const initialState = {
     articles: [],
     loading: true,
     error: ""
-  }
+  },
+  drafts: {
+    newDraft: {
+      data: {},
+      error: "",
+      loading: false
+    },
+    allDrafts: {
+      data: [],
+      error: "",
+      loading: false
+    },
+  },
+  articleUpdate: {
+    data: {},
+    loading: false,
+    error: ""
+  },
 };
 export default initialState;

@@ -12,6 +12,8 @@ import AllCategories from "./containers/Categories/Categories";
 import ArticleCategory from "./containers/Categories/SingleCategory";
 import CreateArticle from "./containers/CreateArticle/CreateArticlePage";
 import NotFound from "./containers/NotFound/NotFound";
+import GetDrafts from './containers/Drafts/Drafts';
+import UpdateArticle from "./containers/UpdateArticle/UpdateArticle";
 
 const AppRoutes = () => (
   <Router>
@@ -27,6 +29,9 @@ const AppRoutes = () => (
         <ProtectedRoute path="/articles/:slug" component={ArticlePage} />
         <ProtectedRoute path="/profile/user" component={ProfilePage} />
         <ProtectedRoute exact path='/article/create' component={CreateArticle} />
+        <ProtectedRoute path="/me/drafts" component={ GetDrafts } />
+        <ProtectedRoute path="/me/articles/:slug/edit" component={ UpdateArticle } />
+        <Route exact path="/signin" component={Signin} />
         {/* will always render when no other path is matched */}
         <Route component={NotFound} />
       </Switch>

@@ -1,0 +1,41 @@
+.draftsBody {
+  min-height: 70vh;
+
+  .topMargin {
+    margin-top: 90px;
+  }
+
+  .draftDiv {
+    padding: 10px;
+
+    
+    .draftLink {
+      color: #000;
+      text-decoration: none;
+
+      h4 {
+        font-weight: 700;
+      }
+
+      p {
+        font-weight: lighter;
+      }
+
+      span {
+        color: #757575;
+        font-size: .8rem;
+        font-style: italic;
+        font-weight: bold;
+      }
+
+      .dot {
+        height: .3rem;
+        width: .3rem;
+        background-color: #000;
+        border: 50px;
+        border-radius: 50%;
+        display: inline-block;
+      }
+    }
+  }
+}

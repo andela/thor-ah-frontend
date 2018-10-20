@@ -10,6 +10,9 @@ import TextEditor from "./TextEditor";
 import stripHtml from "../../utils/stripHtml";
 import styles from "./CreateArticle.module.scss";
 
+// Save article as draft
+import { draftArticle, getDrafts } from '../../actions/drafts';
+
 class CreateArticle extends Component {
   constructor(props) {
     super(props);
@@ -26,6 +29,8 @@ class CreateArticle extends Component {
         message: ""
       }
     };
+
+    // this.draftArticle = this.draftArticle.bind(this);
   }
 
   clearErrorMessages = () => {
@@ -158,7 +163,7 @@ class CreateArticle extends Component {
     const articleData = {
       title,
       body,
-      description
+      description,
     };
 
     if (this.validateArticle() === false) {
@@ -206,6 +211,48 @@ class CreateArticle extends Component {
     }
   };
 
+  draftSuccess() {
+    this.setState({
+      title: "Title",
+      body: "Share your thoughts...",
+      loading: false,
+      message: "You have successfully created a draft. You can always update and publish when ready"
+    });
+  }
+
+  draftArticle = async () => {
+    const { title, body, error } = this.state;
+    const { draftArticle } = this.props;
+    const description = stripHtml(body).slice(0, 200);
+    const draft = {
+      title,
+      body,
+      description,
+      published: false
+    };
+
+    if (this.validateArticle() === false) {
+      return;
+    }
+
+    this.setState({
+      loading: true
+    });
+
+    await draftArticle(draft);
+  }
+
+  handleDraft = () => {
+    this.draftArticle().then(() => {
+      this.draftSuccess();
+    })
+  }
+
+  componentWillUnmount() {
+    return this.draftArticle()
+  }
+
+
   render() {
     const { title, body, error, loading, message } = this.state;
     return (
@@ -251,12 +298,20 @@ class CreateArticle extends Component {
             </div>
           </div>
           <div className={styles.buttonDiv}>
-            <button
-              className={styles.publishButton}
-              onClick={this.handleSubmit}
-            >
-              Publish
-            </button>
+            <div>
+              <button
+                className={styles.publishButton}
+                onClick={this.handleSubmit}
+              >
+                Publish
+              </button>
+              <button
+                className={styles.draftButton}
+                onClick={this.handleDraft}
+              >
+                Save as Draft
+              </button>
+            </div>
           </div>
         </div>
       </Fragment>
@@ -266,15 +321,18 @@ class CreateArticle extends Component {
 
 CreateArticle.propTypes = {
   createArticle: PropTypes.func.isRequired,
+  draftArticle: PropTypes.func.isRequired,
+  getDrafts: PropTypes.func.isRequired,
   article: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   article: state.article,
+  draft: state.drafts.newDraft,
   error: state.error
 });
 
 export default connect(
   mapStateToProps,
-  { createArticle }
+  { createArticle, draftArticle, getDrafts }
 )(CreateArticle);
