@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 // import get all articles action
-import { getAllArticle } from '../../actions/article'
+import { getFeaturedArticles } from '../../actions/article'
 
 // import component
 import HeroArticles from './HeroArticles';
@@ -22,7 +22,7 @@ class HeroFeatured extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(getAllArticle());
+    dispatch(getFeaturedArticles());
   }
 
   render() {
@@ -83,9 +83,9 @@ class HeroFeatured extends Component {
 
 
 const mapStateToProps = state => {
-  const { allArticleReducer } = state;
+  const { featuredReducer } = state;
   return {
-    articles: allArticleReducer.data,
+    articles: featuredReducer.data,
   }
 }
 
