@@ -17,13 +17,11 @@ export default function reducer(state = initialState.favoriteArticle, action) {
                 ...state,
                 error: action.payload
             }
-
         case FAVORITE_SUCCESS:
             return {
                 ...state,
                 message: action.payload
             }
-
         default:
             return state
     }

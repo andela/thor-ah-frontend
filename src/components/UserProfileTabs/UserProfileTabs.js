@@ -17,7 +17,7 @@ class UserProfileTabs extends Component {
     this.processAction = this.processAction.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { user } = this.props;
     const { role } = user;
 
