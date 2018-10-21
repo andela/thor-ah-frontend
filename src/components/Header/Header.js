@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import windowSize from 'react-window-size';
 import { connect } from 'react-redux';
 // components
-import Search from '../Search/Search';
+import SearchButton from '../SearchButton/SearchButton';
 import Category from '../Category/Category';
 import Menu from './Menu';
 import AuthMenu from './AuthMenu';
@@ -55,7 +55,7 @@ class Header extends Component {
           <Category mobileCategory={mobileCategory} />
         </div>
         <div className={styles.header_half}>
-          <Search />
+          <SearchButton />
           {displayedMenu}
         </div>
       </header>

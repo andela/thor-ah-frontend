@@ -119,6 +119,11 @@ const initialState = {
     loading: false,
     error: '',
     articles: []
+  },
+  articleSearch: {
+    articles: [],
+    error: '',
+    loading: false
   }
 };
 

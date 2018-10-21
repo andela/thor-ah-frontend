@@ -42,7 +42,7 @@ class TextEditor extends Component {
             "paste"
           ],
           selection_toolbar:
-            "bold italic underline strikethrough| blockquote quicklink | alignleft aligncenter alignright alignfull | numlist bullist",
+            "bold italic underline strikethrough| blockquote quicklink | alignleft aligncenter alignright alignfull | numlist bullist | h1  h2 h3 h4",
           images_upload_handler: imageUploadHandler,
           images_reuse_filename: true,
           toolbar: "emoticons",

@@ -9,9 +9,10 @@ import ArticleTitle from "./ArticleTitle";
 import TextEditor from "./TextEditor";
 import stripHtml from "../../utils/stripHtml";
 import styles from "./CreateArticle.module.scss";
+import Loading from "../../components/Loading/Loading";
 
 // Save article as draft
-import { draftArticle, getDrafts } from '../../actions/drafts';
+import { draftArticle, getDrafts } from "../../actions/drafts";
 
 class CreateArticle extends Component {
   constructor(props) {
@@ -100,7 +101,11 @@ class CreateArticle extends Component {
   };
 
   imageUploadHandler = (blobInfo, success, failure) => {
-    const { REACT_APP_CLOUDINARY_API_KEY, REACT_APP_UPLOAD_PRESET, REACT_APP_UPLOAD_URL } = process.env;
+    const {
+      REACT_APP_CLOUDINARY_API_KEY,
+      REACT_APP_UPLOAD_PRESET,
+      REACT_APP_UPLOAD_URL
+    } = process.env;
     try {
       const formData = new FormData();
       formData.append("file", blobInfo.blob());
@@ -143,7 +148,7 @@ class CreateArticle extends Component {
     ) {
       this.setState({
         error: {
-          body: "Publishing will be available when you start typing"
+          body: "Publishing will be available when you provide more content"
         }
       });
       return false;
@@ -158,13 +163,13 @@ class CreateArticle extends Component {
 
   handleSubmit = async () => {
     const { title, body, error } = this.state;
-    const strippedBody = body.replace(/<br \/>/g, '<br>')
+    const strippedBody = body.replace(/<br \/>/g, "<br>");
     const { createArticle } = this.props;
     const description = stripHtml(strippedBody).slice(0, 200);
     const articleData = {
       title,
       body: strippedBody,
-      description,
+      description
     };
 
     if (this.validateArticle() === false) {
@@ -217,7 +222,8 @@ class CreateArticle extends Component {
       title: "Title",
       body: "Share your thoughts...",
       loading: false,
-      message: "You have successfully created a draft. You can always update and publish when ready"
+      message:
+        "You have successfully created a draft. You can always update and publish when ready"
     });
   }
 
@@ -241,18 +247,17 @@ class CreateArticle extends Component {
     });
 
     await draftArticle(draft);
-  }
+  };
 
   handleDraft = () => {
     this.draftArticle().then(() => {
       this.draftSuccess();
-    })
-  }
+    });
+  };
 
   componentWillUnmount() {
-    return this.draftArticle()
+    return this.draftArticle();
   }
-
 
   render() {
     const { title, body, error, loading, message } = this.state;
@@ -268,9 +273,7 @@ class CreateArticle extends Component {
             ))}
           </div>
         )}
-        <div className="text-center">
-          {loading ? <i className="fa fa-3x fa-spinner fa-spin" /> : null}
-        </div>
+        <div className="text-center">{loading ? <Loading /> : null}</div>
         <div className="col-md-8 col-sm-10 col-12 mx-auto my-5">
           <div className={styles.createArticle}>
             <div className={styles.articleTitle}>
@@ -306,10 +309,7 @@ class CreateArticle extends Component {
               >
                 Publish
               </button>
-              <button
-                className={styles.draftButton}
-                onClick={this.handleDraft}
-              >
+              <button className={styles.draftButton} onClick={this.handleDraft}>
                 Save as Draft
               </button>
             </div>
@@ -323,8 +323,7 @@ class CreateArticle extends Component {
 CreateArticle.propTypes = {
   createArticle: PropTypes.func.isRequired,
   draftArticle: PropTypes.func.isRequired,
-  getDrafts: PropTypes.func.isRequired,
-  article: PropTypes.object.isRequired
+  getDrafts: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

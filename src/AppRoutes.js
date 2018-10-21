@@ -14,6 +14,7 @@ import NotFound from "./containers/NotFound/NotFound";
 import GetDrafts from './containers/Drafts/Drafts';
 import UpdateArticle from "./containers/UpdateArticle/UpdateArticle";
 import SocialAuth from "./containers/SocialAuth";
+import SearchResults from './containers/SearchResults/SearchResults';
 
 const AppRoutes = () => (
   <Router>
@@ -31,6 +32,7 @@ const AppRoutes = () => (
         <ProtectedRoute path="/articles/:slug" component={ArticlePage} />
         <ProtectedRoute path="/profile/user" component={ProfilePage} />
         <ProtectedRoute exact path='/article/create' component={CreateArticle} />
+        <ProtectedRoute path='/search' component={SearchResults} />
         <ProtectedRoute path="/me/drafts" component={ GetDrafts } />
         <ProtectedRoute path="/me/articles/:slug/edit" component={ UpdateArticle } />
         {/* will always render when no other path is matched */}
