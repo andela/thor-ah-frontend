@@ -352,19 +352,7 @@ module.exports = {
     new ModuleNotFoundPlugin(paths.appPath),
     // Makes some environment variables available to the JS code, for example:
     // if (process.env.NODE_ENV === 'development') { ... }. See `./env.js`.
-    new webpack.DefinePlugin({
-      PRODUCTION: JSON.stringify(true),
-      BROWESER_SUPPORTS_HTML5: true,
-      DEBUG: process.env.NODE_ENV !== "production",
-      "process.env": {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV || "development"),
-        REACT_APP_API: JSON.stringify(process.env.REACT_APP_API),
-        EDITOR_API_KEY: JSON.stringify(process.env.EDITOR_API_KEY),
-        CLOUDINARY_API_KEY: JSON.stringify(process.env.CLOUDINARY_API_KEY),
-        UPLOAD_PRESET: JSON.stringify(process.env.UPLOAD_PRESET),
-        UPLOAD_URL: JSON.stringify(process.env.UPLOAD_URL)
-      }
-    }),
+    new webpack.DefinePlugin(env.stringified),
     // This is necessary to emit hot updates (currently CSS only):
     new webpack.HotModuleReplacementPlugin(),
     // Watcher doesn't work well if you mistype casing in a path so we use
