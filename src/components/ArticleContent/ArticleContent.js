@@ -63,8 +63,13 @@ class ArticleContent extends Component {
 
       const element = document.createElement('span')
       element.id = this.elementId
-      element.appendChild(range.extractContents());
-      range.insertNode(element);
+      try {
+        range.surroundContents(element)
+      } catch {
+        return false
+      }
+      selection.removeAllRanges()
+      selection.addRange(range)
 
       this.injectedArticleBody = document.getElementById(`${styles.articleBody}`).innerHTML;
       // set highlight state

@@ -38,13 +38,18 @@ class TextEditor extends Component {
             "mediaembed",
             "textcolor",
             "image",
-            "emoticons"
+            "emoticons",
+            "paste"
           ],
           selection_toolbar:
             "bold italic underline strikethrough| blockquote quicklink | alignleft aligncenter alignright alignfull | numlist bullist",
           images_upload_handler: imageUploadHandler,
           images_reuse_filename: true,
-          toolbar: "emoticons"
+          toolbar: "emoticons",
+          force_br_newlines: true,
+          force_p_newlines: false,
+          forced_root_block: '',
+          paste_as_text: true
         }}
       />
     );

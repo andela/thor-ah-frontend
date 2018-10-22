@@ -158,11 +158,12 @@ class CreateArticle extends Component {
 
   handleSubmit = async () => {
     const { title, body, error } = this.state;
+    const strippedBody = body.replace(/<br \/>/g, '<br>')
     const { createArticle } = this.props;
-    const description = stripHtml(body).slice(0, 200);
+    const description = stripHtml(strippedBody).slice(0, 200);
     const articleData = {
       title,
-      body,
+      body: strippedBody,
       description,
     };
 
