@@ -39,7 +39,19 @@ const initialState = {
     allArticle: {
       isLoading: false,
       error: false,
-      data: []
+      data: [],
+      count: 0,
+    },
+    featuredArticles: {
+      isLoading: false,
+      error: '',
+      data: [],
+    },
+    recommendedArticles: {
+      isLoading: false,
+      error: '',
+      data: [],
+      count: 0,
     },
     oneArticle: {
       article: {

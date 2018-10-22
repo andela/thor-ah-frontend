@@ -1,3 +1,5 @@
+$red: #C40018;
+
 .not_found_message {
   text-align: center;
   margin: auto;
@@ -40,27 +42,32 @@
   }
 
   & > div {
-    display: none !important;
+    display: none;
     transition: .5s ease-in-out;
 
-    &::after {
-      content: '';
+    &.active {
       display: block;
-      clear: both;
     }
 
-    &.active {
-      display: grid !important;
-      grid-template-columns: auto auto auto auto;
+    & > div {
+      &::after {
+        content: '';
+        display: block;
+        clear: both;
+      }
+
+      display: inline-grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
       grid-gap: 20px;
+      padding: 15px 0;
 
       @media only screen and (max-width: 1100px) {
-        grid-template-columns: auto auto auto;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-gap: 15px;
       }
 
       @media only screen and (max-width: 800px) {
-        grid-template-columns: auto auto;
+        grid-template-columns: 1fr 1fr;
         grid-gap: 20px;
       }
 
@@ -69,11 +76,11 @@
       }
 
       @media only screen and (max-width: 480px) {
-        grid-template-columns: auto;
+        grid-template-columns: 1fr;
       }
 
       @media only screen and (max-width: 400px) {
-        grid-template-columns: auto;
+        grid-template-columns: 1fr;
         grid-gap: 20px;
       }
     }
@@ -84,4 +91,72 @@
   min-height: 70vh;
   width: 80%;
   margin: auto;
+}
+
+.content_pagination {
+  text-align: center;
+  display: block !important;
+
+  .pagination {
+    background: #FBFBFB;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 40px;
+    border: 1px solid #FBFBFB;
+    list-style: none;
+    padding: 15px 5px;
+    margin: 0;
+
+    li {
+      display: inline-block;
+      height: 30px !important;
+      width: 30px !important;
+      border: 1px solid $red;
+      margin: 0 10px;
+      border-radius: 50%;
+      position: relative;
+      cursor: pointer;
+      transition: .3s ease-in-out;
+
+      &.disabled {
+        cursor: no-drop !important;
+        background: #ccc;
+        border: 1px solid #ccc;
+
+        [role=button] {
+          cursor: no-drop !important;
+          background: #ccc;
+          border: 1px solid #ccc;
+        }
+      }
+
+      &:hover {
+        background: $red;
+
+        [role=button] {
+          color: #fff;
+        }
+      }
+
+      &.active {
+        background: $red;
+        border: 1px solid #fbfbfb;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+
+        [role=button] {
+          color: #fff;
+        }
+      }
+
+      [role=button] {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: $red;
+        text-decoration: none;
+        cursor: pointer;
+        font-size: .9em;
+      }
+    }
+  }
 }

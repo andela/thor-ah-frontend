@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 // components
 import ArticlesTab from '../ArticlesTab/ArticlesTab';
 import Articles from '../Articles/Articles';
-import ArticlesPagination from '../ArticlesPagination/ArticlesPagination';
 // styles
 import style from './homeArticles.module.scss';
 
@@ -29,7 +28,6 @@ class HomeArticles extends Component {
       <div className={style.homeArticles}>
         <ArticlesTab toggle={ this.toggleTab } active={ activeTab } />
         <Articles content={ tabContent } />
-        <ArticlesPagination />
       </div>
     )
   }

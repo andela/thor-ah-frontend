@@ -1,4 +1,4 @@
-import { oneArticleReducer, allArticleReducer } from "../../reducers/article";
+import { oneArticleReducer, allArticleReducer,featuredReducer, recommendedReducer } from "../../reducers/article";
 import * as types from "../../actionTypes/article";
 
 describe("article reducer", () => {
@@ -51,32 +51,42 @@ describe("article reducer", () => {
       isLoading: false,
       error: false,
       data: [],
+      count: 0,
     });
   });
   it("should handle FETCH_ARTICLES_SUCCESS", () => {
     const action = {
       type: types.FETCH_ARTICLES_SUCCESS,
       payload: {
-        data: [
+        articles: [
           {
-            id: 0,
-            title: "taying fit",
-            description: "A short story about a life well lived of Raquel"
+            author: {
+              username: "randomAuthor2",
+              email: "author2@mail.com",
+              bio: null,
+              image:null
+            },
+            authorId: 3,
+            createdAt: "2018-10-21T13:22:28.965Z",
+            description: "vcybunjecbuencjkec nece de ev",
+            id: 12,
+            slug: "Hello813832",
+            tags: [],
+            timeToRead: 1,
+            title: "Hello",
+            updatedAt: "2018-10-21T13:22:28.965Z",
           },
-          {
-            id: 1,
-            title: "stayin fit",
-            description: "A short story about a life well lived of Raquel"
-          },
-          {
-            id: 2,
-            title: "stayng fit",
-            description: "A short story about a life well lived of Raquel"
-          },
-        ]
+        ],
+        pagination: {
+          currentPage: 1,
+          currentPageSize: 4,
+          totalPages: 3,
+          totalRecords: 3,
+        },
+        status: 'success',
       }
     };
-    expect(allArticleReducer({}, action)).toEqual({ data: action.payload });
+    expect(allArticleReducer({}, action)).toEqual({ data: action.payload.articles, count: action.payload.pagination.totalRecords });
   });
   it("should handle FETCH_ARTICLES_LOADING", () => {
     const action = {
@@ -93,6 +103,121 @@ describe("article reducer", () => {
       payload: "error"
     };
     expect(allArticleReducer({}, action)).toEqual({
+      error: action.payload
+    });
+  });
+
+  it("should return initial state", () => {
+    expect(featuredReducer(undefined, {})).toEqual({
+      isLoading: false,
+      error: '',
+      data: []
+    });
+  });
+  it("should handle FETCH_FEATURED_SUCCESS", () => {
+    const action = {
+      type: types.FETCH_FEATURED_SUCCESS,
+      payload: {
+        articles: [
+          {
+            author: {
+              username: "randomAuthor2",
+              email: "author2@mail.com",
+              bio: null,
+              image:null
+            },
+            authorId: 3,
+            createdAt: "2018-10-21T13:22:28.965Z",
+            description: "vcybunjecbuencjkec nece de ev",
+            id: 12,
+            slug: "Hello813832",
+            tags: [],
+            timeToRead: 1,
+            title: "Hello",
+            updatedAt: "2018-10-21T13:22:28.965Z",
+          },
+        ],
+        status: 'success',
+      }
+    };
+    expect(featuredReducer({}, action)).toEqual({ data: action.payload.articles });
+  });
+  it("should handle FETCH_FEATURED_LOADING", () => {
+    const action = {
+      type: types.FETCH_FEATURED_LOADING,
+      payload: { isLoading: true }
+    };
+    expect(featuredReducer({}, action)).toEqual({
+      isLoading: action.payload
+    });
+  });
+  it("should handle FETCH_FEATURED_ERROR", () => {
+    const action = {
+      type: types.FETCH_FEATURED_ERROR,
+      payload: "error"
+    };
+    expect(featuredReducer({}, action)).toEqual({
+      error: action.payload
+    });
+  });
+
+  it("should return initial state", () => {
+    expect(recommendedReducer(undefined, {})).toEqual({
+      isLoading: false,
+      error: '',
+      data: [],
+      count: 0
+    });
+  });
+  it("should handle FETCH_RECOMMENDED_SUCCESS", () => {
+    const action = {
+      type: types.FETCH_RECOMMENDED_SUCCESS,
+      payload: {
+        articles: [
+          {
+            author: {
+              username: "randomAuthor2",
+              email: "author2@mail.com",
+              bio: null,
+              image:null
+            },
+            authorId: 3,
+            createdAt: "2018-10-21T13:22:28.965Z",
+            description: "vcybunjecbuencjkec nece de ev",
+            id: 12,
+            slug: "Hello813832",
+            tags: [],
+            timeToRead: 1,
+            title: "Hello",
+            updatedAt: "2018-10-21T13:22:28.965Z",
+          },
+        ],
+        pagination: {
+          currentPage: 1,
+          currentPageSize: 4,
+          totalPages: 3,
+          totalRecords: 3,
+        },
+        status: 'success',
+      }
+    };
+    expect(recommendedReducer({}, action)).toEqual({ data: action.payload.articles, count: action.payload.pagination.totalRecords });
+  });
+  it("should handle FETCH_RECOMMENDED_LOADING", () => {
+    const action = {
+      type: types.FETCH_RECOMMENDED_LOADING,
+      payload: { isLoading: true }
+    };
+    expect(recommendedReducer({}, action)).toEqual({
+      isLoading: action.payload
+    });
+  });
+  it("should handle FETCH_RECOMMENDED_ERROR", () => {
+    const action = {
+      type: types.FETCH_RECOMMENDED_ERROR,
+      payload: "error"
+    };
+    expect(recommendedReducer({}, action)).toEqual({
       error: action.payload
     });
   });

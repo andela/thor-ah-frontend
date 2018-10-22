@@ -449,7 +449,19 @@ module.exports = {
     // if (process.env.NODE_ENV === 'production') { ... }. See `./env.js`.
     // It is absolutely essential that NODE_ENV was set to production here.
     // Otherwise React will be compiled in the very slow development mode.
-    new webpack.DefinePlugin(env.stringified),
+    new webpack.DefinePlugin({
+      PRODUCTION: JSON.stringify(true),
+      BROWESER_SUPPORTS_HTML5: true,
+      DEBUG: process.env.NODE_ENV !== "production",
+      "process.env": {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV || "development"),
+        REACT_APP_API: JSON.stringify(process.env.REACT_APP_API),
+        EDITOR_API_KEY: JSON.stringify(process.env.EDITOR_API_KEY),
+        CLOUDINARY_API_KEY: JSON.stringify(process.env.CLOUDINARY_API_KEY),
+        UPLOAD_PRESET: JSON.stringify(process.env.UPLOAD_PRESET),
+        UPLOAD_URL: JSON.stringify(process.env.UPLOAD_URL)
+      }
+    }),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
