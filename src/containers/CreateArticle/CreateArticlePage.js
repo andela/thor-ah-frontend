@@ -100,14 +100,14 @@ class CreateArticle extends Component {
   };
 
   imageUploadHandler = (blobInfo, success, failure) => {
-    const { CLOUDINARY_API_KEY, UPLOAD_PRESET, UPLOAD_URL } = process.env;
+    const { REACT_APP_CLOUDINARY_API_KEY, REACT_APP_UPLOAD_PRESET, REACT_APP_UPLOAD_URL } = process.env;
     try {
       const formData = new FormData();
       formData.append("file", blobInfo.blob());
-      formData.append("upload_preset", UPLOAD_PRESET);
-      formData.append("api_key", CLOUDINARY_API_KEY);
+      formData.append("upload_preset", REACT_APP_UPLOAD_PRESET);
+      formData.append("api_key", REACT_APP_CLOUDINARY_API_KEY);
       return axios
-        .post(UPLOAD_URL, formData, {
+        .post(REACT_APP_UPLOAD_URL, formData, {
           headers: {
             "Content-Type": "Application/x-www-form-urlencoded",
             "X-Requested-With": "XMLHttpRequest"

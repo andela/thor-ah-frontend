@@ -83,14 +83,14 @@ class UpdateArticle extends Component {
 
 
   imageUploadHandler = (blobInfo, success, failure) => {
-    const { CLOUDINARY_API_KEY, UPLOAD_PRESET, UPLOAD_URL } = process.env;
+    const { REACT_APP_CLOUDINARY_API_KEY, REACT_APP_UPLOAD_PRESET, REACT_APP_UPLOAD_URL } = process.env;
     try {
       const formData = new FormData();
       formData.append("file", blobInfo.blob());
-      formData.append("upload_preset", UPLOAD_PRESET);
-      formData.append("api_key", CLOUDINARY_API_KEY);
+      formData.append("upload_preset", REACT_APP_UPLOAD_PRESET);
+      formData.append("api_key", REACT_APP_CLOUDINARY_API_KEY);
       return axios
-        .post(UPLOAD_URL, formData, {
+        .post(REACT_APP_UPLOAD_URL, formData, {
           headers: {
             "Content-Type": "Application/x-www-form-urlencoded",
             "X-Requested-With": "XMLHttpRequest"
@@ -139,7 +139,7 @@ class UpdateArticle extends Component {
       }
     })
   }
-  
+
 
   handleUpdate = () => {
     const { title, body } = this.state;
@@ -147,8 +147,8 @@ class UpdateArticle extends Component {
       match: { params: { slug } },
       article
     } = this.props;
-    
-    
+
+
     const description = stripHtml(body).slice(0, 200);
     const updates = {
       title,
@@ -180,8 +180,8 @@ class UpdateArticle extends Component {
     const { publishDraft,
       match: { params: { slug } }
     } = this.props;
-    
-    
+
+
     const description = stripHtml(body).slice(0, 200);
     const updates = {
       title,
@@ -230,7 +230,7 @@ class UpdateArticle extends Component {
             <div className={styles.articleTitle}>
               <ArticleTitle
                 value={title}
-                titleChangeHandler={this.titleChangeHandler}       
+                titleChangeHandler={this.titleChangeHandler}
               />
             </div>
             <div className={styles.textEditor}>
@@ -252,7 +252,7 @@ class UpdateArticle extends Component {
                 Update
               </button>
               {
-                !article.published ? 
+                !article.published ?
               <button
                 className={styles.draftButton}
                 onClick={this.handlePublish}

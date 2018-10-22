@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import PropTypes from "prop-types";
 
-const { EDITOR_API_KEY } = process.env;
+const { REACT_APP_EDITOR_API_KEY } = process.env;
 
 /* eslint-disable-next-line */
 class TextEditor extends Component {
@@ -16,7 +16,7 @@ class TextEditor extends Component {
     } = this.props;
     return (
       <Editor
-        apiKey={EDITOR_API_KEY}
+        apiKey={REACT_APP_EDITOR_API_KEY}
         value={value}
         onEditorChange={editorChangeHandler}
         onFocusIn={bodyPlaceholderFocusInHandler}
