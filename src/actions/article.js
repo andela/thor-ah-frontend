@@ -1,55 +1,86 @@
 import axios from "axios";
-
-import {
-  FETCH_ARTICLE_SUCCESS,
-  FETCH_ARTICLE_ERROR,
-  FETCH_ARTICLE_LOADING,
-  FETCH_ARTICLES_SUCCESS,
-  FETCH_ARTICLES_LOADING,
-  FETCH_ARTICLES_ERROR,
-  FETCH_FEATURED_LOADING,
-  FETCH_FEATURED_SUCCESS,
-  FETCH_FEATURED_ERROR,
-  FETCH_RECOMMENDED_LOADING,
-  FETCH_RECOMMENDED_SUCCESS,
-  FETCH_RECOMMENDED_ERROR,
-} from "../actionTypes/article";
+import * as types from "../actionTypes/article";
 
 const API = process.env.REACT_APP_API;
 
 const fetchArticleSuccess = payload => ({
-  type: FETCH_ARTICLE_SUCCESS,
+  type: types.FETCH_ARTICLE_SUCCESS,
   payload
 });
 
 const fetchArticleLoading = payload => ({
-  type: FETCH_ARTICLE_LOADING,
+  type: types.FETCH_ARTICLE_LOADING,
   payload
 });
 
 const fetchArticleError = payload => ({
-  type: FETCH_ARTICLE_ERROR,
+  type: types.FETCH_ARTICLE_ERROR,
+  payload
+});
+
+const likeDislike = payload => ({
+  type: types.LIKE_DISLIKE_ARTICLE,
+  payload
+});
+
+const reactionCount = payload => ({
+  type: types.FETCH_REACTION_COUNT,
   payload
 });
 
 const fetchFeaturedSuccess = article => ({
-  type: FETCH_FEATURED_SUCCESS,
+  type: types.FETCH_FEATURED_SUCCESS,
   payload: article,
 });
 
 const fetchFeaturedLoading = state => ({
-  type: FETCH_FEATURED_LOADING,
+  type: types.FETCH_FEATURED_LOADING,
   payload: state,
 });
 
 const fetchFeaturedError = error => ({
-  type: FETCH_FEATURED_ERROR,
+  type: types.FETCH_FEATURED_ERROR,
   payload: error,
 });
 
 
-// Get one article
-export const getArticle = (articleSlug) => (dispatch) => {
+export const articleReactionCount = articleId => dispatch => {
+  const { token } = localStorage;
+  return axios
+    .get(`${API}/api/articles/${articleId}/reactions`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      }
+    })
+    .then(response => {
+      dispatch(reactionCount(response.data.reactions));
+    });
+};
+
+export const articleReaction = (articleId, reactionType) => dispatch => {
+  dispatch(likeDislike(reactionType));
+  const { token } = localStorage;
+  return axios
+    .post(
+      `${API}/api/articles/${articleId}/reactions`,
+      { reaction: reactionType },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+        }
+      }
+    )
+    .then(response => {
+      dispatch(likeDislike(response.data));
+      dispatch(articleReactionCount(articleId));
+    });
+};
+
+//  Get a single article
+
+export const getArticle = articleSlug => dispatch => {
   dispatch(fetchArticleLoading(true));
   const { token } = localStorage;
   return axios
@@ -76,38 +107,37 @@ export const getArticle = (articleSlug) => (dispatch) => {
     });
 };
 
-
 // Get all articles
 
 const fetchAllArticleSuccess = payload => ({
-  type: FETCH_ARTICLES_SUCCESS,
+  type: types.FETCH_ARTICLES_SUCCESS,
   payload
 });
 
 const fetchAllArticleLoading = payload => ({
-  type: FETCH_ARTICLES_LOADING,
+  type: types.FETCH_ARTICLES_LOADING,
   payload
 });
 
 const fetchAllArticleError = payload => ({
-  type: FETCH_ARTICLES_ERROR,
+  type: types.FETCH_ARTICLES_ERROR,
   payload
 });
 
 // Get all recommendedArticles
 
 const fetchRecommendedSuccess = payload => ({
-  type: FETCH_RECOMMENDED_SUCCESS,
+  type: types.FETCH_RECOMMENDED_SUCCESS,
   payload
 });
 
 const fetchRecommendedLoading = payload => ({
-  type: FETCH_RECOMMENDED_LOADING,
+  type: types.FETCH_RECOMMENDED_LOADING,
   payload
 });
 
 const fetchRecommendedError = payload => ({
-  type: FETCH_RECOMMENDED_ERROR,
+  type: types.FETCH_RECOMMENDED_ERROR,
   payload
 });
 
@@ -129,7 +159,7 @@ export const getAllArticle = (page) => (dispatch) => {
       }
       return dispatch(fetchAllArticleError(response));
     })
-    .catch((error) => dispatch(fetchAllArticleError(error)));
+    .catch(error => dispatch(fetchAllArticleError(error)));
 };
 
 

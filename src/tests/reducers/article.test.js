@@ -1,4 +1,10 @@
-import { oneArticleReducer, allArticleReducer,featuredReducer, recommendedReducer } from "../../reducers/article";
+import {
+  oneArticleReducer,
+  allArticleReducer,
+  featuredReducer,
+  recommendedReducer,
+  reactionCount
+} from "../../reducers/article";
 import * as types from "../../actionTypes/article";
 
 describe("article reducer", () => {
@@ -7,6 +13,10 @@ describe("article reducer", () => {
       article: {
         author: {},
         tags: [{}]
+      },
+      reactions: {
+        likes: 0,
+        dislikes: 0
       },
       loading: false,
       error: ""
@@ -51,7 +61,7 @@ describe("article reducer", () => {
       isLoading: false,
       error: false,
       data: [],
-      count: 0,
+      count: 0
     });
   });
   it("should handle FETCH_ARTICLES_SUCCESS", () => {
@@ -64,7 +74,7 @@ describe("article reducer", () => {
               username: "randomAuthor2",
               email: "author2@mail.com",
               bio: null,
-              image:null
+              image: null
             },
             authorId: 3,
             createdAt: "2018-10-21T13:22:28.965Z",
@@ -74,19 +84,22 @@ describe("article reducer", () => {
             tags: [],
             timeToRead: 1,
             title: "Hello",
-            updatedAt: "2018-10-21T13:22:28.965Z",
-          },
+            updatedAt: "2018-10-21T13:22:28.965Z"
+          }
         ],
         pagination: {
           currentPage: 1,
           currentPageSize: 4,
           totalPages: 3,
-          totalRecords: 3,
+          totalRecords: 3
         },
-        status: 'success',
+        status: "success"
       }
     };
-    expect(allArticleReducer({}, action)).toEqual({ data: action.payload.articles, count: action.payload.pagination.totalRecords });
+    expect(allArticleReducer({}, action)).toEqual({
+      data: action.payload.articles,
+      count: action.payload.pagination.totalRecords
+    });
   });
   it("should handle FETCH_ARTICLES_LOADING", () => {
     const action = {
@@ -110,7 +123,7 @@ describe("article reducer", () => {
   it("should return initial state", () => {
     expect(featuredReducer(undefined, {})).toEqual({
       isLoading: false,
-      error: '',
+      error: "",
       data: []
     });
   });
@@ -124,7 +137,7 @@ describe("article reducer", () => {
               username: "randomAuthor2",
               email: "author2@mail.com",
               bio: null,
-              image:null
+              image: null
             },
             authorId: 3,
             createdAt: "2018-10-21T13:22:28.965Z",
@@ -134,13 +147,15 @@ describe("article reducer", () => {
             tags: [],
             timeToRead: 1,
             title: "Hello",
-            updatedAt: "2018-10-21T13:22:28.965Z",
-          },
+            updatedAt: "2018-10-21T13:22:28.965Z"
+          }
         ],
-        status: 'success',
+        status: "success"
       }
     };
-    expect(featuredReducer({}, action)).toEqual({ data: action.payload.articles });
+    expect(featuredReducer({}, action)).toEqual({
+      data: action.payload.articles
+    });
   });
   it("should handle FETCH_FEATURED_LOADING", () => {
     const action = {
@@ -164,7 +179,7 @@ describe("article reducer", () => {
   it("should return initial state", () => {
     expect(recommendedReducer(undefined, {})).toEqual({
       isLoading: false,
-      error: '',
+      error: "",
       data: [],
       count: 0
     });
@@ -179,7 +194,7 @@ describe("article reducer", () => {
               username: "randomAuthor2",
               email: "author2@mail.com",
               bio: null,
-              image:null
+              image: null
             },
             authorId: 3,
             createdAt: "2018-10-21T13:22:28.965Z",
@@ -189,19 +204,22 @@ describe("article reducer", () => {
             tags: [],
             timeToRead: 1,
             title: "Hello",
-            updatedAt: "2018-10-21T13:22:28.965Z",
-          },
+            updatedAt: "2018-10-21T13:22:28.965Z"
+          }
         ],
         pagination: {
           currentPage: 1,
           currentPageSize: 4,
           totalPages: 3,
-          totalRecords: 3,
+          totalRecords: 3
         },
-        status: 'success',
+        status: "success"
       }
     };
-    expect(recommendedReducer({}, action)).toEqual({ data: action.payload.articles, count: action.payload.pagination.totalRecords });
+    expect(recommendedReducer({}, action)).toEqual({
+      data: action.payload.articles,
+      count: action.payload.pagination.totalRecords
+    });
   });
   it("should handle FETCH_RECOMMENDED_LOADING", () => {
     const action = {
@@ -220,5 +238,12 @@ describe("article reducer", () => {
     expect(recommendedReducer({}, action)).toEqual({
       error: action.payload
     });
+  });
+  it("should handle FETCH_REACTION_COUNT", () => {
+    const action = {
+      type: types.FETCH_REACTION_COUNT,
+      reactions: { reactions: { dislikes: 1, likes: 0 } }
+    };
+    expect(reactionCount({}, action)).toEqual({ reactions: action.payload });
   });
 });

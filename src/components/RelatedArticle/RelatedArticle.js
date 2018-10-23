@@ -27,6 +27,7 @@ class RelatedArticle extends Component {
 
   render() {
     const { relatedArticles, loading } = this.props;
+
     return (
       <div className="col-md-4">
         {loading ? (
@@ -37,7 +38,11 @@ class RelatedArticle extends Component {
             {relatedArticles.map(article => (
               <div className="card mt-4" key={article.id}>
                 <a href={`/articles/${article.slug}`} className={styles.link}>
-                  <img src={sceneImage} className={styles.img} alt="banner" />
+                  <img
+                    src={sceneImage || article.author.image}
+                    className={styles.img}
+                    alt="banner"
+                  />
                   <h3 className={`${styles.card_title} pt-4 mx-2 text-left`}>
                     {article.title}
                   </h3>

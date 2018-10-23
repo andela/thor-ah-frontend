@@ -2,7 +2,13 @@ import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
-import { getArticle, getAllArticle, getRecommended, getFeaturedArticles } from "../../actions/article";
+import {
+  getArticle,
+  getAllArticle,
+  getRecommended,
+  getFeaturedArticles,
+  articleReactionCount
+} from "../../actions/article";
 import * as types from "../../actionTypes/article";
 
 const API = process.env.REACT_APP_API;
@@ -58,7 +64,7 @@ describe("view article actions", () => {
   describe("getAllArticle", () => {
     it("dispatches FETCH_ARTICLES_SUCCESS after fetching articles", () => {
       moxios.onGet(`${API}/api/articles?page=${1}`).reply(200, {
-        status: 'success',
+        status: "success",
         articles: [
           {
             id: 1,
@@ -74,7 +80,7 @@ describe("view article actions", () => {
             id: 3,
             title: "stayng fit",
             description: "A short story about a life well lived of Raquel"
-          },
+          }
         ]
       });
 
@@ -83,9 +89,8 @@ describe("view article actions", () => {
         { type: types.FETCH_ARTICLES_LOADING, payload: false },
         {
           type: types.FETCH_ARTICLES_SUCCESS,
-          
           payload: {
-            status: 'success',
+            status: "success",
             articles: [
               {
                 id: 1,
@@ -101,7 +106,7 @@ describe("view article actions", () => {
                 id: 3,
                 title: "stayng fit",
                 description: "A short story about a life well lived of Raquel"
-              },
+              }
             ]
           }
         }
@@ -112,7 +117,6 @@ describe("view article actions", () => {
         expect(store.getActions()).toEqual(expectedActions);
       });
     });
-
 
     it("dispatches FETCH_ARTICLES_ERROR", () => {
       moxios.onGet(`${API}/api/articles?page=1`).networkError("server error");
@@ -130,7 +134,7 @@ describe("view article actions", () => {
   describe("getRecommended", () => {
     it("dispatches FETCH_RECOMMENDED_SUCCESS after fetching articles", () => {
       moxios.onGet(`${API}/api/articles?page=${1}`).reply(200, {
-        status: 'success',
+        status: "success",
         articles: [
           {
             id: 1,
@@ -146,7 +150,7 @@ describe("view article actions", () => {
             id: 3,
             title: "stayng fit",
             description: "A short story about a life well lived of Raquel"
-          },
+          }
         ]
       });
 
@@ -155,9 +159,8 @@ describe("view article actions", () => {
         { type: types.FETCH_RECOMMENDED_LOADING, payload: false },
         {
           type: types.FETCH_RECOMMENDED_SUCCESS,
-          
           payload: {
-            status: 'success',
+            status: "success",
             articles: [
               {
                 id: 1,
@@ -173,7 +176,7 @@ describe("view article actions", () => {
                 id: 3,
                 title: "stayng fit",
                 description: "A short story about a life well lived of Raquel"
-              },
+              }
             ]
           }
         }
@@ -201,7 +204,7 @@ describe("view article actions", () => {
   describe("getFeaturedArticles", () => {
     it("dispatches FETCH_FEATURED_SUCCESS after fetching articles", () => {
       moxios.onGet(`${API}/api/articles`).reply(200, {
-        status: 'success',
+        status: "success",
         articles: [
           {
             id: 1,
@@ -217,7 +220,7 @@ describe("view article actions", () => {
             id: 3,
             title: "stayng fit",
             description: "A short story about a life well lived of Raquel"
-          },
+          }
         ]
       });
 
@@ -226,9 +229,8 @@ describe("view article actions", () => {
         { type: types.FETCH_FEATURED_LOADING, payload: false },
         {
           type: types.FETCH_FEATURED_SUCCESS,
-          
           payload: {
-            status: 'success',
+            status: "success",
             articles: [
               {
                 id: 1,
@@ -244,7 +246,7 @@ describe("view article actions", () => {
                 id: 3,
                 title: "stayng fit",
                 description: "A short story about a life well lived of Raquel"
-              },
+              }
             ]
           }
         }
@@ -265,6 +267,24 @@ describe("view article actions", () => {
           action => action.type === types.FETCH_FEATURED_ERROR
         );
         expect(failureAction).toBeTruthy();
+      });
+    });
+  });
+  describe("getArticleReactionCount", () => {
+    it("it dispatches FETCH_REACTION_COUNT", () => {
+      moxios.onGet(`${API}/api/articles/2/reactions`).reply(200, {
+        reactions: {
+          likes: 1,
+          dislikes: 0
+        }
+      });
+      const expectedActions = [
+        { type: types.FETCH_REACTION_COUNT, payload: { likes: 1, dislikes: 0 } }
+      ];
+
+      const store = mockStore({ article: {} });
+      return store.dispatch(articleReactionCount(2)).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
       });
     });
   });
