@@ -2,11 +2,11 @@ import axios from 'axios';
 import {
   UPDATE_USER_INFO_REQUEST,
   UPDATE_USER_INFO_FAILED,
+  UPDATE_USER_INFO_SUCCESS,
   UPLOAD_PHOTO_FAILED,
   UPLOAD_PHOTO_SUCCESS,
   UPLOAD_PHOTO_REQUEST,
 } from '../actionTypes/updateUser';
-import { setLoggedInUser } from './auth';
 
 const API = process.env.REACT_APP_API;
 const { token } = window.localStorage;
@@ -19,6 +19,11 @@ const updateUserFailed = error => ({
 const updateUserRequest = state => ({
   type: UPDATE_USER_INFO_REQUEST,
   payload: state,
+});
+
+const updateUserSuccess = user => ({
+  type: UPDATE_USER_INFO_SUCCESS,
+  payload: user,
 });
 
 const uploadPhotoRequest = state => ({
@@ -41,13 +46,13 @@ export const uploadPhoto = file => dispatch => {
 
   const formData = new FormData();
   formData.append('file', file);
-  formData.append('upload_preset', process.env.CLOUDINARY_UPLOAD_PRESET);
+  formData.append('upload_preset', process.env.REACT_APP_UPLOAD_PRESET);
 
   return axios({
     method: 'POST',
-    url: process.env.CLOUDINARY_URL,
+    url: process.env.REACT_APP_UPLOAD_URL,
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-type': 'application/x-www-form-urlencoded',
     },
     data: formData,
   })
@@ -66,7 +71,8 @@ export const uploadPhoto = file => dispatch => {
 const updateUser = data => dispatch => {
   dispatch(updateUserRequest(true));
   const { role, email, username, profilePhoto, rNewPassword, newPassword, ...rest } = data;
-  axios
+
+  return axios
     .put(`${API}/api/users`, { ...rest }, {
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -76,7 +82,7 @@ const updateUser = data => dispatch => {
     .then((response) => {
       localStorage.removeItem('user');
       localStorage.setItem('user', JSON.stringify(response.data.user));
-      dispatch(setLoggedInUser(response.data.user));
+      dispatch(updateUserSuccess(response.data.user));
       return dispatch(updateUserRequest(false));
     })
     .catch((error) => {

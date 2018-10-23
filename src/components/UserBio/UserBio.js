@@ -7,8 +7,6 @@ import UserFollow from '../UserFollow/UserFollow';
 import UpdateProfile from '../UpdateProfile/UpdateProfile';
 // styles
 import styles from './UserBio.module.scss';
-// images
-import avatar from '../../assets/avatar.png';
 
 class UserBio extends Component {
   constructor(props) {
@@ -31,7 +29,7 @@ class UserBio extends Component {
 
     return (
       <div className={styles.profileHeader}>
-        <img src={image || avatar} alt={username} className={styles.profileImage} />
+        <img src={image || `https://ui-avatars.com/api/?name=${firstName}+${lastName}&background=C40018&color=fff&size=300`} alt={username} className={styles.profileImage} />
         <span className={styles.userNames}>{`${firstName} ${lastName}`}</span>
         <div className={styles.bioDiv}>
           <div className={styles.userBio}>

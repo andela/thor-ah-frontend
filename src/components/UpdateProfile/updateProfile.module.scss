@@ -143,6 +143,10 @@ form {
       padding: 8px 10px;
       resize: none;
 
+      &:read-only {
+        cursor: not-allowed;
+      }
+
       button {
         background: transparent !important;
         border: none !important;

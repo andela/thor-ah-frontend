@@ -88,25 +88,25 @@ class UserInfo extends Component {
           </div>
           <div className={styles.form_input_group}>
             <label htmlFor="Twitter">Twitter</label>
-            <input type="text" onChange={this.onChange} name="twitter" value={twitter || ' '} placeholder="Twitter profile URL" />
+            <input type="text" onChange={this.onChange} name="twitter" value={twitter || ''} placeholder="Twitter profile URL" />
           </div>
           <div className={styles.form_input_group}>
             <label htmlFor="LinkedinURL">Linkedin</label>
-            <input type="url" onChange={this.onChange} name="linkedin" value={linkedin || ' '} placeholder="Linkedin Profile URL" />
+            <input type="url" onChange={this.onChange} name="linkedin" value={linkedin || ''} placeholder="Linkedin Profile URL" />
           </div>
           <div className={styles.form_input_group}>
             <label htmlFor="Bio">Bio</label>
             <textarea row="4" onChange={this.onChange} name="bio" value={bio || ''} placeholder="Bio" />
           </div>
           <div className={ styles.form_message_foot }>
-            {userStore.error ? <div className={styles.form_message_foot_error}> {userStore.error} </div> : ''}
+            {userStore.error ? <div className={styles.form_message_foot_error}> { userStore.error } </div> : ''}
             {Object.keys(userStore.user).length > 1 && !userStore.error ? <div className={styles.form_message_foot_success}> Profile update successfully </div> : ''}
           </div>
           <div className={styles.form_input_group}>
             <button type="submit"
             disabled={ userStore.loading ? 'disabled': '' }
             style={ userStore.loading ? { background: '#ccc', border: '1px solid #ccc', color: '#eee', cursor: 'no-drop', } : {} }>
-            {userStore.loading ? <span><i className='fa fa-1x fa-spinner fa-spin' /> loading</span>  : 'Update Profile' }
+            {userStore.loading ? <span><i className='fa fa-1x fa-spinner fa-spin' /> Updating profile</span>  : 'Update Profile' }
             </button>
           </div>
         </form>

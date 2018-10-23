@@ -16,7 +16,7 @@ $desktop-large: 1100px;
   }
 }
 
-.followDiv {
+.follow_container {
   padding: 10px;
   margin: 0;
 
@@ -24,12 +24,36 @@ $desktop-large: 1100px;
     list-style: none;
     padding: 0;
     margin: 0;
+    position: relative;
+
+    &.with_error {
+      li {
+        span {
+          &.counts {
+            color: firebrick !important;
+            font-weight: bold;
+          }
+        }
+      }
+    }
 
     li {
       text-align: center;
       font-size: .9em;
       display: inline-block;
       padding: 5px 10px;
+
+      &.follow_error {
+        color: firebrick !important;
+        font-size: xx-small;
+        padding: 0 !important;
+        margin: 0 !important;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+      }
 
       span {
         display: block;

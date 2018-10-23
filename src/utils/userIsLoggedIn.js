@@ -1,16 +1,16 @@
 import jwtDecode from 'jwt-decode';
 
 const userIsLoggedIn = () => {
+  const { token } = localStorage;
   // early return if user is not set
-  if (!localStorage.user) {
+  if (!token) {
     return false;
   }
-  const user = JSON.parse(localStorage.user);
 
   let decoded;
 
   try {
-    decoded = jwtDecode(user.token);
+    decoded = jwtDecode(token);
     const { exp } = decoded;
     const currentDate = new Date();
 
