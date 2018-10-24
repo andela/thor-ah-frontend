@@ -33,23 +33,9 @@ class SearchResults extends Component {
   };
 
   selectFilter = event => {
-    const filter = event.target.innerText;
-    switch (filter) {
-      case "Keywords":
-        return this.setState({
-          filter: firstLetterToLowerCase(filter)
-        });
-      case "Author":
-        return this.setState({
-          filter: firstLetterToLowerCase(filter)
-        });
-      case "Tags":
-        return this.setState({
-          filter: "tag"
-        });
-      default:
-        return null;
-    }
+    this.setState({
+      filter: event.target.value
+    })
   };
 
   focusHandler = event => {
@@ -102,7 +88,7 @@ class SearchResults extends Component {
   };
 
   render() {
-    const { searchActive, searchValue } = this.state;
+    const { searchActive, searchValue, filter } = this.state;
     const { articles, loading, error } = this.props;
     return (
       <Fragment>
@@ -117,13 +103,14 @@ class SearchResults extends Component {
               ref={input => (this.inputText = input)}
             />
           </form>
-          <div className={searchActive ? styles.filter : styles.filterHidden}>
-            <ul>
-              <span className={styles.filterText}>Filter By</span>
-              <li onClick={this.selectFilter}>Keywords</li>
-              <li onClick={this.selectFilter}>Tags</li>
-              <li onClick={this.selectFilter}>Author</li>
-            </ul>
+          <div className={styles.selectStyle}>
+            <span className={styles.filterBy}>Filter By</span>
+            {/* eslint-disable-next-line */}
+            <select onChange={this.selectFilter} value={filter}>
+              <option value="keywords">Keywords</option>
+              <option value="tag">Tags</option>
+              <option value="author">Author</option>
+            </select>
           </div>
           <div className="col-12 text-center">
             {loading ? <Loading /> : null}
@@ -131,11 +118,11 @@ class SearchResults extends Component {
           <div className="text-center">
             {error ? <span>{error}</span> : null}
           </div>
-          <div className="row" style={{ minHeight: "65vh" }}>
+          <div className="row" style={{ minHeight: "500px" }}>
             {typeof articles === "string" ? (
               <div className="col-md-8 col-12 mt-4 mx-auto text-center">
                 <h3 style={{ color: "#777" }}>
-                  {`No articles found for ${searchValue}. Please try again.`}
+                  {`No articles found for <strong>${searchValue}</strong>. Please try again.`}
                 </h3>
               </div>
             ) : (
