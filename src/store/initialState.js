@@ -71,10 +71,15 @@ const initialState = {
     loading: false,
     error: {}
   },
-  favoriteArticle: {
+  favouriteArticles: {
     loading: false,
-    error: "",
-    message: ""
+    error: '',
+    articles: []
+  },
+  favoriteArticle: {
+    error: '',
+    loading: false,
+    message: '',
   },
   relatedArticles: {
     articles: [],
@@ -109,6 +114,12 @@ const initialState = {
         disliked: 0
       },
     }
+  },
+  publishedArticles: {
+    loading: false,
+    error: '',
+    articles: []
   }
 };
+
 export default initialState;

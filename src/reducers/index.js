@@ -16,6 +16,8 @@ import relatedArticle from "./relatedArticle";
 import drafts from './drafts';
 import articleUpdate from './updateArticle';
 import readingStats from './readingStats';
+import favouriteArticles from './favouriteArticles';
+import publishedArticles from './publishedArticles';
 
 const rootReducer = combineReducers({
   auth,
@@ -33,6 +35,8 @@ const rootReducer = combineReducers({
   drafts,
   articleUpdate,
   readingStats,
+  favouriteArticles,
+  publishedArticles,
 });
 
 export default rootReducer;

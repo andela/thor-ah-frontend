@@ -164,7 +164,11 @@ $mobile: 590px;
       color: #0013cd;
     }
   }
+}
 
+.loadingArticles {
+  text-align: center;
+  padding: 10px;
 }
 
 .loading {
@@ -177,4 +181,10 @@ $mobile: 590px;
   font-size: 1.5em;
   font-weight: 600;
   text-align: center;
+}
+
+.error_container {
+  font-size: 1.5em;
+  text-align: center;
+  padding: 10px;
 }

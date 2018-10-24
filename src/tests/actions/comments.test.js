@@ -178,7 +178,6 @@ describe('comment actions', () => {
       const store = mockStore({});
       return store.dispatch(dislikeComment(0, 3, 'some-slug'))
         .then(() => {
-          console.log(store.getActions());
           expect(store.getActions()).toEqual(expectedActions);
         });
     });
