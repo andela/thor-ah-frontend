@@ -141,7 +141,7 @@ class UpdateArticle extends Component {
   }
 
 
-  handleUpdate = () => {
+  updateContent = async () => {
     const { title, body } = this.state;
     const { updateArticle,
       match: { params: { slug } },
@@ -159,11 +159,24 @@ class UpdateArticle extends Component {
     if (this.validateArticle() === false) {
       return;
     }
-    this.setState({ loading: true }, async () => {
-      await updateArticle(updates, slug)
-      this.updateSuccess(article)
-    })
+
+    this.setState({
+      loading: true
+    });
+    
+    await updateArticle(updates, slug)
   };
+
+  handleUpdate = () => {
+    const { article } = this.props;
+    this.updateContent().then(() => {
+      this.updateSuccess(article);
+    })
+  }
+
+  componentWillUnmount() {
+    return this.updateContent();
+  }
 
   publishSuccess() {
     this.setState({

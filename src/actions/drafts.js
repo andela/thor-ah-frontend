@@ -70,7 +70,7 @@ export const getDrafts = () => dispatch => {
     )
     .then(response => {
       if (response.data.status === 'success') {
-        return dispatch(fetchDraftsSuccess(response.data.drafts));
+        return dispatch(fetchDraftsSuccess(response.data.drafts.rows));
       }
       return dispatch(fetchDraftsError());
     })

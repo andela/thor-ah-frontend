@@ -5,23 +5,39 @@ import format from "date-fns/format";
 import jwtDecode from 'jwt-decode';
 import { Link } from 'react-router-dom';
 import ReactHtmlParser from 'react-html-parser';
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  EmailShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  EmailIcon
+} from 'react-share';
+
 // icons
 import { FaComment } from 'react-icons/fa';
+
 // components
 import ArticleReaction from "../ArticleReaction/ArticleReaction";
 import ArticleComment from "../ArticleComment/ArticleComment";
 import ArticleTag from "../ArticleTag/ArticleTag";
 import ArticleLoader from "../ArticleLoader";
 import CommentBox from "../Comment/CommentBox";
+
 // actions
 import { getArticle } from "../../actions/article";
+
 // styles
 import styles from "./ArticleContent.module.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
+
 // images
 import profileImage from "../../assets/profile.png";
 import pointIcon from "../../assets/circle.png";
 import bannerImage from "../../assets/image.png";
+
+// API
+const WEB = process.env.REACT_APP_WEB_URL;
 
 class ArticleContent extends Component {
   constructor(props) {
@@ -193,73 +209,108 @@ class ArticleContent extends Component {
     const { article, loading } = this.props;
     const { highlight } = this.state;
     const { CommentPrompt, HighlightCommentBox } = this
-    const { authorId, slug } = article;
+    const { authorId, slug, title } = article;
+
+
+    const shareUrl = `${WEB}/articles/${slug}`;
+    const myImg = 'https://res.cloudinary.com/dgbmeqmyf/image/upload/v1540323349/logo.png';
+    const mimg = React.createElement('img', {src: myImg });
+    
     return (
-      <div className="card col-md-7 p-0">
-        <div>
-          <img
-            className="card-img-top"
-            src={bannerImage}
-            alt="banner"
-            width="100%"
-          />
-          <div className="content p-5 ">
-            {loading ? (
-              <ArticleLoader />
-            ) : (
-                <Fragment>
-                  <h3 className="h1 text-left">{article.title}</h3>
-                  <div className="d-flex justify-content-start">
-                    <div>
-                      <img
-                        src={profileImage}
-                        className="rounded-circle"
-                        alt="profile"
-                      />
-                    </div>
-                    <div
-                      className={`${
-                        styles.article_text
-                        } d-flex px-2 flex-column `}
-                    >
-                      <span className="text-center">
-                        {article.author.username}
-                      </span>
-                      <span className="font-italic">
-                        {format(new Date(article.createdAt), ["MMM DD"])}
-                      </span>
-                    </div>
-                    <div className="my-3 text-secondary">
-                      <img src={pointIcon} alt="icon" height="7px" />
-                      <span className="pl-1">
-                        {`${article.timeToRead} min read`}
-                      </span>
-                    </div>
-                  </div>
-
-
-                  <div className={`${styles.content} text-left mt-2`}>
-                    <div onMouseUp={this.highlightAndComment} className={styles.articleBody} id={styles.articleBody} tabIndex={0} role="button">
-                      {ReactHtmlParser(article.body)}
-                    </div>
-                    {
-                      article && authorId === id ?
-                        <Link to={`/me/articles/${slug}/edit`} className={styles.updateLink}>
-                          Edit article
-                  </Link> : null
-                    }
-                    <CommentPrompt />
-                    {highlight && <HighlightCommentBox />}
-                  </div>
-                  <ArticleTag tags={article.tags} />
-                  <ArticleReaction articleId={article.id} />
-                  <hr className={styles.divider} />
-                  <ArticleComment />
-                </Fragment>
-              )}
+      <Fragment>
+        <div className="card col-md-1 text-center sm-share-div">
+          <div>
+            <FacebookShareButton 
+            url={shareUrl}
+            quote={title}
+            picture={mimg}>
+              <FacebookIcon size={35} round className={styles.shareCursor}/>
+            </FacebookShareButton>
+          </div>
+          <div>
+            <TwitterShareButton 
+              url={shareUrl}
+              title={`${title} \n`}
+              via="AuthorsHaven">
+              <TwitterIcon size={35} round className={styles.shareCursor}/>
+            </TwitterShareButton>
+          </div>
+          <div>
+            <EmailShareButton url={shareUrl}
+              subject={title}
+              body={`New Article share from Authors' Haven \n\n ${title}: ${shareUrl}`}
+            >
+              <EmailIcon size={35} round className={styles.shareCursor}/>
+            </EmailShareButton>
           </div>
         </div>
-      </div>
+        <div className="card col-md-8 p-0">
+          <div>
+            <img
+              className="card-img-top"
+              src={bannerImage}
+              alt="banner"
+              width="100%"
+            />
+            <div className="content p-5 ">
+              {loading ? (
+                <ArticleLoader />
+              ) : (
+                  <Fragment>
+                    <h3 className="h1 text-left">{article.title}</h3>
+                    <div className="d-flex justify-content-start">
+                      <div>
+                        <img
+                          src={profileImage}
+                          className="rounded-circle"
+                          alt="profile"
+                        />
+                      </div>
+                      <div
+                        className={`${
+                          styles.article_text
+                          } d-flex px-2 flex-column `}
+                      >
+                        <span className="text-center">
+                          {article.author.username}
+                        </span>
+                        <span className="font-italic">
+                          {format(new Date(article.createdAt), ["MMM DD"])}
+                        </span>
+                      </div>
+                      <div className="my-3 text-secondary">
+                        <img src={pointIcon} alt="icon" height="7px" />
+                        <span className="pl-1">
+                          {`${article.timeToRead} min read`}
+                        </span>
+                      </div>
+                    </div>
+
+
+                    <div className={`${styles.content} text-left mt-2`}>
+                      <div onMouseUp={this.highlightAndComment} className={styles.articleBody} id={styles.articleBody} tabIndex={0} role="button">
+                        {ReactHtmlParser(article.body)}
+                      </div>
+                      <br /> <br /> <br />
+                      {
+                        article && authorId === id ?
+                        <Link to={`/me/articles/${slug}/edit`} className={styles.updateLink}>
+                          Edit article
+                        </Link> : null
+                      }
+                      <CommentPrompt />
+                      {highlight && <HighlightCommentBox />}
+                    </div>
+                    <ArticleTag tags={article.tags} />
+                    <ArticleReaction articleId={article.id} />
+                    <hr className={styles.divider} />
+                    <ArticleComment />
+                  </Fragment>
+                )}
+            </div>
+          </div>
+        </div>
+      </Fragment>
     )
   }
 }

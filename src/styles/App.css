@@ -91,3 +91,12 @@ body {
   min-height: 80vh;
   margin-top: 100px;
 }
+
+.sm-share-div {
+  margin-top: 30%;
+  border: none !important;
+}
+
+.sm-share-div > div {
+  margin-top: 70%;
+}

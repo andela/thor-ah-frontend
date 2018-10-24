@@ -61,13 +61,15 @@ describe('draft actions', () => {
       mockAxios.onGet(`${API}/api/articles/drafts`)
         .reply(200, {
           status: "success",
-          drafts: [
-            [{id: 16,
-              title: "this is a title that means nothing",
-              slug: "this-is-a-title-that-means-nothing22242",
-              description: "Sohvhbjbjm with the title and the description",
-            }]
-          ]
+          drafts: {
+            rows: [
+              [{id: 16,
+                title: "this is a title that means nothing",
+                slug: "this-is-a-title-that-means-nothing22242",
+                description: "Sohvhbjbjm with the title and the description",
+              }]
+            ]
+          }
         });
 
         const expectedActions = [
