@@ -155,6 +155,22 @@ const initialState = {
   notification: {
     error: "",
     notifications: []
+  },
+  community: {
+    followers: {
+      loading: false,
+      data: [],
+      error: '',
+    },
+    following: {
+      loading: false,
+      data: [],
+      error: '',
+    }
+  },
+  userProfile: {
+    user: {},
+    loading: false,
   }
 };
 

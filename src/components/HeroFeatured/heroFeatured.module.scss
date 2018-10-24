@@ -16,7 +16,7 @@ $red: #C40018;
   }
 
   a {
-    color: #000 !important;
+    color: #000;
     text-decoration: none !important;
   }
 
@@ -62,7 +62,7 @@ $red: #C40018;
       }
 
       a {
-        color: #fff !important;
+        color: #fff;
         font-size: 1.7em;
         font-weight: bold;
 
@@ -75,15 +75,20 @@ $red: #C40018;
         }
       }
 
-      p {
+      .authorlink, p {
         color: #CCC;
         padding: 10px 0 0;
         font-size: .9em;
         text-transform: uppercase;
+        transition: .5s ease-in-out;
 
         @media only screen and (max-width: 400px) {
           font-size: .7em;
         }
+      }
+
+      .authorlink:hover {
+        color: #000;
       }
     }
   }

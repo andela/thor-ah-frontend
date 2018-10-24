@@ -12,7 +12,7 @@
   @include box-shadow(0px 3px 6px 0px rgba(0, 0, 0, 0.103));
 
   a {
-    color: #000 !important;
+    color: #000;
     font-weight: bold !important;
     text-decoration: none !important;
     cursor: pointer !important;
@@ -30,7 +30,7 @@
 
   .content {
     padding: 10px;
-    
+
     h4 {
       padding: 0;
       margin: 0;
@@ -45,11 +45,16 @@
   .details {
     padding: 10px 10px 20px;
 
-    p {
+    .authorlink, p {
       padding: 0;
       margin: 0;
       color: #ABABAB;
       font-weight: bold;
+      transition: .5s ease-in-out;
+    }
+
+    .authorlink:hover {
+      color: #000;
     }
 
     ul {

@@ -21,6 +21,9 @@ import UpdateArticle from "./containers/UpdateArticle/UpdateArticle";
 import SocialAuth from "./containers/SocialAuth";
 import SearchResults from './containers/SearchResults/SearchResults';
 import Settings from './components/Settings/Settings';
+import Followers from "./containers/Followers/Followers";
+import Following from "./containers/Following/Following";
+import UsersProfile from "./containers/UsersProfile/UsersProfile";
 
 const AppRoutes = () => (
   <Router>
@@ -39,7 +42,10 @@ const AppRoutes = () => (
         <Route path="/category/:name" component={ArticleCategory} />
         {/* protected routes can be rendered using the ProtectedRoutes component */}
         <ProtectedRoute path="/articles/:slug" component={ArticlePage} />
-        <ProtectedRoute path="/profile/user" component={ProfilePage} />
+        <ProtectedRoute exact path="/profile/user" component={ProfilePage} />
+        <ProtectedRoute exact path="/profile/user/following" component={Following} />
+        <ProtectedRoute exact path="/profile/user/followers" component={Followers} />
+        <ProtectedRoute exact path="/users/:username" component={UsersProfile} />
         <ProtectedRoute exact path='/article/create' component={CreateArticle} />
         <ProtectedRoute path='/search' component={SearchResults} />
         <ProtectedRoute path="/settings" component={Settings} />

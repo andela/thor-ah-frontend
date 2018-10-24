@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import styles from './heroFeatured.module.scss';
 
 const MainFeature = (props) => {
-  const { title, slug, details } = props;
+  const { title, slug, details, profileUrl } = props;
   return (
 
     <div>
       <Link to={`/articles/${slug}`}>{title}</Link>
-      <p>{details}</p>
+      <p>BY <a className={styles.authorlink} href={profileUrl}>{details}</a></p>
     </div>
 
   )

@@ -51,7 +51,8 @@ class HeroFeatured extends Component {
           {heroArticle.map(article => {
             const { id, title, slug, author } = article;
             const details = {
-              author: `${author.firstName} ${author.lastName}`
+              author: `${author.firstName} ${author.lastName}`,
+              profileUrl: `/users/${author.username}`,
             }
             return (
               <HeroArticles
@@ -72,6 +73,7 @@ class HeroFeatured extends Component {
               title={mainArticle.title}
               slug={mainArticle.slug}
               details={`${mainArticle.author.firstName} ${mainArticle.author.lastName}`}
+              profileUrl={`/users/${mainArticle.author.username}`}
             />
 
           </div>
