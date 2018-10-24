@@ -9,8 +9,7 @@ import cinema from "../../assets/cinema.png";
 
 class SearchResults extends Component {
   state = {
-    filter: "",
-    saerchValue: ""
+    filter: ""
   };
 
   componentDidMount = () => {
