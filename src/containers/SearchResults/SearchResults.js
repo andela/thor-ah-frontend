@@ -93,7 +93,7 @@ class SearchResults extends Component {
             {typeof articles === "string" ? (
               <div className="col-md-8 col-12 mt-4 mx-auto text-center">
                 <h3 style={{ color: "#777" }}>
-                  {`No articles found for <strong>${searchValue}</strong>. Please try again.`}
+                  {`No articles found for ${searchValue}. Please try again.`}
                 </h3>
               </div>
             ) : (
