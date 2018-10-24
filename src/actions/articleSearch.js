@@ -20,14 +20,9 @@ const articleSearchLoading = loading => ({
   payload: loading
 });
 
-const articleSearch = (filter, searchValue) => dispatch => {
+const articleSearch = (filter = 'keywords', searchValue) => dispatch => {
   const { token } = localStorage;
   dispatch(articleSearchLoading(true));
-
-  if (filter === "" || filter === undefined || filter === null) {
-    /* eslint-disable-next-line */
-    filter = 'keywords'
-  }
 
   return axios
     .get(`${REACT_APP_API}/api/articles/search?${filter}=${searchValue}`, {

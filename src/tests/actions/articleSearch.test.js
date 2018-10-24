@@ -37,7 +37,16 @@ describe("category actions", () => {
         }
       ];
 
-      const store = mockStore({ articleSearch: [] });
+      const store = mockStore({
+        articleSearch: [
+          {
+            id: 1,
+            title: "Sample Title",
+            description: "Sample description",
+            body: "Sample body"
+          }
+        ]
+      });
       return store.dispatch(articleSearch("keywords", "software")).then(() => {
         expect(store.getActions()).toEqual(expectedAction);
       });

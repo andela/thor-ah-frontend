@@ -7,27 +7,21 @@ import Loading from "../../components/Loading/Loading";
 import styles from "./SearchResults.module.scss";
 import cinema from "../../assets/cinema.png";
 
-const firstLetterToLowerCase = string =>
-  string[0].toLowerCase() + string.slice(1);
-
 class SearchResults extends Component {
   state = {
     filter: "",
-    searchActive: false,
     saerchValue: ""
   };
 
   componentDidMount = () => {
     this.setState({
-      searchActive: false,
       filter: "keywords"
     });
   };
 
-  componentWillMount = () => {
+  componentWillUnmount = () => {
     this.setState({
       filter: "",
-      searchActive: "",
       searchValue: ""
     });
   };
@@ -35,15 +29,7 @@ class SearchResults extends Component {
   selectFilter = event => {
     this.setState({
       filter: event.target.value
-    })
-  };
-
-  focusHandler = event => {
-    if (event.type === "focus") {
-      this.setState({
-        searchActive: true
-      });
-    }
+    });
   };
 
   handleSubmit = event => {
@@ -61,44 +47,30 @@ class SearchResults extends Component {
     const { filterSearch, history } = this.props;
 
     // if user does not type anything, the search is not processed
-    if (searchValue === "" || typeof searchValue === "undefined") {
-      this.setState({
-        searchActive: true
-      });
+    if (searchValue === "" || searchValue.length === 0) {
       return;
-    }
-
-    if (filter === "" || filter === undefined || filter === null) {
-      /* eslint-disable-next-line */
-      this.setState({
-        filter: "keywords"
-      });
     }
 
     filterSearch(filter, searchValue).then(response => {
       history.push(`/search?${filter}=${searchValue}`);
       if (response && response.status === "success") {
-        console.log(response);
         history.push(`/search?${filter}=${searchValue}`);
       }
-      this.setState({
-        searchActive: false
-      });
     });
   };
 
   render() {
-    const { searchActive, searchValue, filter } = this.state;
+    const { searchValue, filter } = this.state;
     const { articles, loading, error } = this.props;
+
     return (
       <Fragment>
         <div className="container">
           <form onSubmit={this.handleSubmit} style={{ border: "none" }}>
             <input
-              placeholder="Search Here..."
+              placeholder="Search here and press enter..."
               type="text"
               className={styles.searchBox}
-              onFocus={this.focusHandler}
               /* eslint-disable-next-line */
               ref={input => (this.inputText = input)}
             />
@@ -116,13 +88,13 @@ class SearchResults extends Component {
             {loading ? <Loading /> : null}
           </div>
           <div className="text-center">
-            {error ? <span>{error}</span> : null}
+            {error ? <h3 style={{ color: "#777" }}>{error}</h3> : null}
           </div>
           <div className="row" style={{ minHeight: "500px" }}>
             {typeof articles === "string" ? (
               <div className="col-md-8 col-12 mt-4 mx-auto text-center">
                 <h3 style={{ color: "#777" }}>
-                  {`No articles found for <strong>${searchValue}</strong>. Please try again.`}
+                  {`No articles found for ${searchValue}. Please try again.`}
                 </h3>
               </div>
             ) : (
