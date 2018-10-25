@@ -88,11 +88,11 @@ class UserInfo extends Component {
           </div>
           <div className={styles.form_input_group}>
             <label htmlFor="Twitter">Twitter</label>
-            <input type="text" onChange={this.onChange} name="twitter" value={twitter || ''} placeholder="Twitter profile URL" />
+            <input type="url" onChange={this.onChange} name="twitter" value={twitter || ''} placeholder="https://twitter.com/username" />
           </div>
           <div className={styles.form_input_group}>
             <label htmlFor="LinkedinURL">Linkedin</label>
-            <input type="url" onChange={this.onChange} name="linkedin" value={linkedin || ''} placeholder="Linkedin Profile URL" />
+            <input type="url" onChange={this.onChange} name="linkedin" value={linkedin || ''} placeholder="https://linkedin.com/in/username" />
           </div>
           <div className={styles.form_input_group}>
             <label htmlFor="Bio">Bio</label>

@@ -8,9 +8,9 @@ import {
 const API = process.env.REACT_APP_API;
 const { token } = window.localStorage;
 
-const fetchUserFollowSuccess = stat => ({
+const fetchUserFollowSuccess = data => ({
   type: FETCH_USER_FOLLOW_SUCCESS,
-  payload: stat,
+  payload: data,
 });
 
 const fetchUserFollowRequest = state => ({
