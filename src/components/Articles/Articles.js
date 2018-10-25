@@ -111,7 +111,7 @@ class Articles extends Component {
               const { id, title, image: thumbnail, slug, description, timeToRead, author, createdAt } = article;
               const snippet = description;
               const details = {
-                author: `${author.username}`,
+                author: `${author.firstName} ${author.lastName}`,
                 timeToRead: `${timeToRead} min read`,
                 date: moment(createdAt).format("Do MMM, YY"),
               }
@@ -135,7 +135,7 @@ class Articles extends Component {
               const { id, title, image: thumbnail, slug, description, timeToRead, author, createdAt } = article;
               const snippet = description;
               const details = {
-                author: `${author.username}`,
+                author: `${author.firstName} ${author.lastName}`,
                 timeToRead: `${timeToRead} min read`,
                 date: moment(createdAt).format("Do MMM, YY"),
               }

@@ -51,7 +51,7 @@ class HeroFeatured extends Component {
           {heroArticle.map(article => {
             const { id, title, slug, author } = article;
             const details = {
-              author: `${author.username}`
+              author: `${author.firstName} ${author.lastName}`
             }
             return (
               <HeroArticles
@@ -71,7 +71,7 @@ class HeroFeatured extends Component {
               key={mainArticle.id}
               title={mainArticle.title}
               slug={mainArticle.slug}
-              details={mainArticle.author.username}
+              details={`${mainArticle.author.firstName} ${mainArticle.author.lastName}`}
             />
 
           </div>
