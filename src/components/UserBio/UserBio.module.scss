@@ -30,15 +30,17 @@ $desktop-large: 1100px;
   margin-bottom: 30px;
 
   .profileImage {
-    width: 115px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     margin: 20px auto 5px auto;
+    border: 1px solid rgb(247, 246, 246);
   }
 
   .userNames {
     display: block;
     font-family: 'PT Sans';
-    font-size: 1.6em;
+    font-size: 1.4em;
     font-weight: bold;
   }
 
@@ -61,12 +63,28 @@ $desktop-large: 1100px;
     }
 
     .socialMedia {
-      align-items: center;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      padding: $padding * 2 $padding;
+      padding: 0 !important;
       margin: auto;
-      width: 30%;
+
+      ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        font-size: 1.5em;
+        color: #000;
+        text-align: center;
+        margin: 0 !important;
+
+        li {
+          display: inline-block;
+          padding: 5px 10px;
+
+          a {
+            color: #000;
+            text-decoration: none;
+          }
+        }
+      }
 
       @include tab {
         margin: auto;
@@ -80,31 +98,23 @@ $desktop-large: 1100px;
     }
 
     .btnAction {
-      padding: $padding;
+      padding: 0;
+      margin: 5px 0;
 
       button {
-        width: 50%;
         border: 1px solid #C40018;
-        padding: $padding * 2 $padding * 3;
         border-radius: 5px;
         background-color: #fff;
         color: #C40018;
         cursor: pointer;
         font-size: 1em;
+        padding: 6px 30px;
+        font-size: small;
+        transition: .5s ease-in-out;
 
-        @include tab {
-          margin: auto;
-          width: 30%;
-        }
-
-        @include desktop-small {
-          margin: auto;
-          width: 20%;
-        }
-
-        @include desktop-large {
-          margin: auto;
-          width: 15%;
+        &:hover {
+          background: #C40018;
+          color: #fff;
         }
       }
     }

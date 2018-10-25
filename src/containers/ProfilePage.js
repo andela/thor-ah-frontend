@@ -5,7 +5,7 @@ import UserBio from '../components/UserBio/UserBio';
 import UserProfiletabs from '../components/UserProfileTabs/UserProfileTabs';
 
 const ProfilePage = () => (
-  <div className='user-profile'>
+  <div className='user-profile' style={{ paddingTop: '0px' }}>
     <UserBio />
     <UserProfiletabs />
   </div>

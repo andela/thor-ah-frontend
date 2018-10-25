@@ -21,18 +21,15 @@ $mobile: 590px;
   margin: auto;
 
   .tabButtons {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    justify-items: start;
-    margin-bottom: -10px;
+    display: flex;
     border-bottom: 1px solid #aaa;
     margin: 0 0 10px;
-    padding: 0;
+    padding: 0 10px 0 0;
 
     .tabLink {
       bottom: -1px;
       position: relative;
-      padding: 6px 12px;
+      padding: 7px 20px 7px 0;
       cursor: pointer;
       list-style: none;
       outline: none;
@@ -44,7 +41,7 @@ $mobile: 590px;
     .active {
       bottom: -1px;
       position: relative;
-      padding: 6px 12px;
+      padding: 7px 20px 7px 0;
       cursor: pointer;
       list-style: none;
       outline: none;

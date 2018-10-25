@@ -1,3 +1,4 @@
+import { UPDATE_USER_INFO_SUCCESS } from '../../actionTypes/updateUser';
 import auth from '../../reducers/auth';
 import * as types from '../../actionTypes/auth';
 
@@ -10,6 +11,27 @@ describe('user reducer', () => {
       user: {}
     }
     );
+  });
+
+  it('should handle UPDATE_USER_INFO_SUCCESS', () => {
+    const action = {
+      type: UPDATE_USER_INFO_SUCCESS,
+      payload: {
+        firstName: 'Uche',
+        lastName: 'Jude',
+        email: 'test@test.com',
+        image: null,
+      }
+    }
+    expect(auth({}, action)).toEqual({
+      isAuthenticated: true,
+      user: {
+        firstName: 'Uche',
+        lastName: 'Jude',
+        email: 'test@test.com',
+        image: null,
+      }
+    });
   });
 
   it('should handle SET_CURRENT_USER', () => {

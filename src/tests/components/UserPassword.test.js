@@ -2,13 +2,13 @@ import React from "react";
 import { Provider } from 'react-redux';
 import { shallow } from 'enzyme';
 
-import UserFollow from '../../components/UserFollow/UserFollow';
+import UserPassword from '../../components/UpdateProfile/UserPassword';
 
 describe('UserFollow component', () => {
   test("renders the UserFollow component", () => {
     const wrapper = shallow(
       <Provider>
-        <UserFollow />
+        <UserPassword/>
       </Provider>
     );
     expect(wrapper.exists()).toBe(true);

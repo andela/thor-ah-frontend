@@ -30,7 +30,7 @@ class Menu extends React.Component {
 
     const { user, mobileCategory, logOut } = this.props;
     const { profileMenuVisibility } = this.state;
-    const { username, role, image } = user;
+    const { username, role, image, firstName, lastName } = user;
     const profileToggleStyle = {
       display: profileMenuVisibility ? 'block' : 'none',
     }
@@ -44,7 +44,7 @@ class Menu extends React.Component {
           </li>
           <li className={styles.small}>
             <button type="button" className={styles.transparentBtn} onClick={this.toggleProfile}>
-              <img src={image || `http://i.pravatar.cc/150?u=${username}`} alt={username} className="avatar" />
+              <img src={image || `https://ui-avatars.com/api/?name=${firstName}+${lastName}&background=C40018&color=fff&size=300`} alt={username} className={styles.avatar} />
             </button>
           </li>
           <li>

@@ -16,20 +16,61 @@ $desktop-large: 1100px;
   }
 }
 
-.followDiv {
-  align-items: center;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  padding: $padding * 2 $padding;
+.follow_container {
+  padding: 10px;
+  margin: 0;
 
-  @include tab {
-    margin: auto;
-    width: 50%;
-  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
 
-  @include desktop-large {
-    margin: auto;
-    width: 22%;
+    &.with_error {
+      li {
+        span {
+          &.counts {
+            color: firebrick !important;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+
+    li {
+      text-align: center;
+      font-size: .9em;
+      display: inline-block;
+      padding: 5px 10px;
+
+      &.follow_error {
+        color: firebrick !important;
+        font-size: xx-small;
+        padding: 0 !important;
+        margin: 0 !important;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+      }
+
+      span {
+        display: block;
+
+        &.counts {
+          display: block;
+          font-size: 1.4em;
+          font-weight: bold;
+          color: #222;
+        }
+
+        &.names {
+          color: #111;
+          font-size: .9em;
+        }
+      }
+    }
   }
 
   div {
