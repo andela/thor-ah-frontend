@@ -1,0 +1,50 @@
+.searchBox {
+  padding: 10px 30px;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 1.6em;
+  border-radius: 40px;
+  margin-top: 30px;
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.searchBox::placeholder {
+  color: #b9b9b9;
+}
+
+.btnRed {
+  border: 1px solid #c40018;
+  font-size: 0.7em;
+  color: #444;
+}
+
+.articleCard {
+  padding: 0 !important;
+}
+
+a {
+  color: #111;
+
+  &:hover {
+    text-decoration: none;
+    color: #111;
+  }
+
+  &:active {
+    text-decoration: none;
+    color: #111;
+  }
+}
+
+.selectStyle {
+  margin-top: 10px;
+
+  .filterBy {
+    margin-right: 5px;
+    color: #b9b9b9;
+  }
+
+  select {
+    font-size: 0.9em;
+  }
+}
