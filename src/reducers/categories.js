@@ -27,7 +27,8 @@ const articleCategoryReducer = (state = initialState.articleCategory, action) =>
       const category = {
         isLoading: false,
         isError: false,
-        data: action.payload
+        data: action.payload,
+        count: action.payload.pagination.totalRecords
       };
   
       return {

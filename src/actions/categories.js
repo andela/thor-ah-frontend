@@ -60,13 +60,13 @@ const fetchCategoryError = () => ({
 
 
 // Get Article Category
-export const fetchCategoryAction = (categoryName) => dispatch => {
-  dispatch(fetchCategory());
+export const fetchCategoryAction = (categoryName, page) => dispatch => {
+  // dispatch(fetchCategory());
   return axios
-    .get(`${API}/api/article-categories/${categoryName}/articles`)
+    .get(`${API}/api/article-categories/${categoryName}/articles?page=${page}`)
     .then(response => {
       if (response.data.status === 'success') {
-        return dispatch(fetchCategorySuccess(response.data.category));
+        return dispatch(fetchCategorySuccess(response.data));
       }
       return dispatch(fetchCategoryError());
     })

@@ -24,25 +24,26 @@ export const fetchFavouriteRequest = state => ({
   payload: state,
 });
 
-export const fetchFavouriteArticles = () => dispatch => {
-  dispatch(fetchFavouriteRequest(true));
+export const fetchFavouriteArticles = (page) => dispatch => {
+
+  // dispatch(fetchFavouriteRequest(true));
   return axios
-    .get(`${API}/api/user/articles/favorite`, {
+    .get(`${API}/api/user/articles/favorite?page=${page}`, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-type': 'application/json'
       }
     })
     .then(response => {
-      const { status, articles } = response.data;
-      if (status !== 'success') {
+      if (response.data.status !== 'success') {
         dispatch(fetchFavouriteFailed(response.data.error.message));
         return dispatch(fetchFavouriteRequest(false));
       }
-      dispatch(fetchFavouriteSuccess(articles))
+      dispatch(fetchFavouriteSuccess(response.data))
       return dispatch(fetchFavouriteRequest(false));
     })
-    .catch(() => {
+    .catch((err) => {
+      console.log(err)
       dispatch(fetchFavouriteFailed('Unexpected error occurred. Refresh the page to retry.'));
       dispatch(fetchFavouriteRequest(false));
     })

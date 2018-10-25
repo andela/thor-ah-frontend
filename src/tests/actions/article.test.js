@@ -33,7 +33,7 @@ describe("view article actions", () => {
       });
       const expectedActions = [
         { type: types.FETCH_ARTICLE_LOADING, payload: true },
-        { type: types.FETCH_ARTICLE_LOADING, payload: false },
+        // { type: types.FETCH_ARTICLE_LOADING, payload: false },
         {
           type: types.FETCH_ARTICLE_SUCCESS,
           payload: {

@@ -20,19 +20,19 @@ class Articles extends Component {
   }
 
   componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(getAllArticle(1))
-    dispatch(getRecommended(1))
+    const { fetchAllArticles, fetchRecommended } = this.props;
+    fetchAllArticles(1);
+    fetchRecommended(1)
   }
 
   handleArticlePageChange = (page) => {
-    const { dispatch } = this.props;
-    dispatch(getAllArticle(page.selected + 1));
+    const { fetchAllArticles } = this.props;
+    fetchAllArticles(page.selected + 1);
   }
 
   handleRecommendedPageChange = (page) => {
-    const { dispatch } = this.props;
-    dispatch(getRecommended(page.selected + 1));
+    const { fetchRecommended } = this.props;
+    fetchRecommended(page.selected + 1);
   }
 
   renderArticlePagination = (passedCount) => {
@@ -168,4 +168,6 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(Articles);
+const mapDispatchToProps = { fetchAllArticles: getAllArticle, fetchRecommended: getRecommended }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Articles);
