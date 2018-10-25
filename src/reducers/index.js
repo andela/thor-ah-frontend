@@ -22,6 +22,7 @@ import articleSearch from './articleSearch';
 import updateUser from './updateUser';
 import userFollow from './userFollow';
 import uploadPhoto from './uploadPhoto';
+import notification from './notification';
 
 const rootReducer = combineReducers({
   auth,
@@ -45,6 +46,7 @@ const rootReducer = combineReducers({
   userStore: updateUser,
   userFollow,
   uploadPhoto,
+  notification
 });
 
 export default rootReducer;

@@ -53,9 +53,15 @@ class ArticleContent extends Component {
   }
 
   componentDidMount() {
-    const articleSlug = window.location.pathname.split("/articles/")[1];
-    const { fetchArticle } = this.props;
-    fetchArticle(articleSlug);
+    const { fetchArticle, slug } = this.props;
+    fetchArticle(slug);
+  }
+
+  componentDidUpdate(prevProps) {
+    const { slug, fetchArticle } = this.props
+    if (slug !== prevProps.slug) {
+      fetchArticle(slug);
+    }
   }
 
   // returns id to be used to associate comment position to article
@@ -326,7 +332,8 @@ ArticleContent.propTypes = {
   */
 const mapStateToProps = state => ({
   article: state.oneArticleReducer.article,
-  loading: state.oneArticleReducer.loading
+  loading: state.oneArticleReducer.loading,
+  reload: state.notification.reload
 });
 
 /**

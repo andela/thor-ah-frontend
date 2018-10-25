@@ -141,7 +141,10 @@ const initialState = {
   profilePhoto: {
     loading: false,
     error: '',
-    photo: '',
+    photo: ''
+  },
+  notification: {
+    notifications: []
   }
 };
 
