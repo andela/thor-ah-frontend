@@ -80,7 +80,7 @@ class FavouriteArticles extends Component {
       }
       return (
         <div>
-          {articles.map(article => {
+          {articles.articles && articles.articles.map(article => {
             const { id, Article } = article;
             const { description, title, slug, createdAt, thumbnail, author, timeToRead } = Article
             const { firstName, lastName } = author;

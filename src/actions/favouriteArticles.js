@@ -14,9 +14,9 @@ export const fetchFavouriteFailed = error => ({
   payload: error,
 });
 
-export const fetchFavouriteSuccess = data => ({
+export const fetchFavouriteSuccess = payload => ({
   type: FETCH_FAVOURITE_ARTICLES_SUCCESS,
-  payload: data,
+  payload
 });
 
 export const fetchFavouriteRequest = state => ({
@@ -24,10 +24,8 @@ export const fetchFavouriteRequest = state => ({
   payload: state,
 });
 
-export const fetchFavouriteArticles = (page) => dispatch => {
-
-  // dispatch(fetchFavouriteRequest(true));
-  return axios
+export const fetchFavouriteArticles = (page) => dispatch =>
+  axios
     .get(`${API}/api/user/articles/favorite?page=${page}`, {
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -47,4 +45,3 @@ export const fetchFavouriteArticles = (page) => dispatch => {
       dispatch(fetchFavouriteFailed('Unexpected error occurred. Refresh the page to retry.'));
       dispatch(fetchFavouriteRequest(false));
     })
-}

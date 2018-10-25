@@ -35,7 +35,7 @@ describe('category actions', () => {
           }
         ]
 
-      const store = mockStore({articleCategory: []});
+      const store = mockStore({data: []});
       return store.dispatch(getAllCategories())
         .then(() => {
           expect(store.getActions()).toEqual(expectedActions);
@@ -45,7 +45,7 @@ describe('category actions', () => {
 
   describe('get articles for a single category', () => {
     it('fetches all articles on single category', () => {
-      mockAxios.onGet(`${API}/api/article-categories/Technology/articles`)
+      mockAxios.onGet(`${API}/api/article-categories/Technology/articles?page=1`)
         .reply(200, {
           status: 'success',
           category: {
@@ -55,21 +55,20 @@ describe('category actions', () => {
 
         const expectedActions = [
           {
-            type: types.FETCH_CATEGORY,
-          },
-          {
             type: types.FETCH_CATEGORY_SUCCESS,
             payload: {
-              category: [{id: 12, title: "self-driving car"}]
+              category: {
+                category: [{id: 12, title: "self-driving car"}]
+              },
+              status: 'success',
             },
           }
-        ]
+        ];
 
-      const store = mockStore({articleCategory: []});
-      return store.dispatch(fetchCategoryAction('Technology'))
-        .then(() => {
-          expect(store.getActions()).toEqual(expectedActions);
-        });
-    })
-  })
+      const store = mockStore({data: []});
+      return store.dispatch(fetchCategoryAction('Technology', 1)).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+    });
+  });
 });

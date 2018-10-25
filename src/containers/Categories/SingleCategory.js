@@ -113,28 +113,30 @@ class SingleCategory extends Component {
         <hr/>
         <div className={ styles.articles }>
           <div className={ styles.active }>
-            {data.articles && data.articles.map(article => {
-              const { id, title, image, slug, description, timeToRead, author, createdAt } = article;
-              const snippet = description;
-              const details = {
-                author: `${author.firstName} ${author.lastName}`,
-                timeToRead: `${timeToRead} min read`,
-                date: moment(createdAt).format("Do MMM, YY"),
-              }
-              return (
-                <Article
-                  key={ id }
-                  title={ title }
-                  snippet={ snippet }
-                  slug={ slug }
-                  thumbnail={ image || thumbnailImage }
-                  details={ details }
-                />
-              )
-            }) }
+            <div className={ styles.all }>
+              {data.articles && data.articles.map(article => {
+                const { id, title, image, slug, description, timeToRead, author, createdAt } = article;
+                const snippet = description;
+                const details = {
+                  author: `${author.firstName} ${author.lastName}`,
+                  timeToRead: `${timeToRead} min read`,
+                  date: moment(createdAt).format("Do MMM, YY"),
+                }
+                return (
+                  <Article
+                    key={ id }
+                    title={ title }
+                    snippet={ snippet }
+                    slug={ slug }
+                    thumbnail={ image || thumbnailImage }
+                    details={ details }
+                  />
+                )
+              }) }
+            </div>
+            {this.renderCategoryPagination(0)}
           </div>
         </div>
-        {this.renderCategoryPagination(0)}
         <hr/>
       </div>
     )
