@@ -6,6 +6,7 @@ import styles from './header.module.scss';
 import Signin from '../../containers/SignIn/SignIn'
 import signupStyle from '../../containers/Signup/Signup.module.css'
 import SignUp from '../../containers/Signup/Signup'
+import ResetPassword from '../../containers/ResetPassword/ResetPassword';
 
 class AuthMenu extends Component {
   constructor(props) {
@@ -57,6 +58,7 @@ class AuthMenu extends Component {
         </button>
         {modal}
         {signupModal}
+        <ResetPassword />
       </div>
     );
   }
