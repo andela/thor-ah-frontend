@@ -84,7 +84,17 @@
 .updateLink:hover {
   color: #fff;
   text-decoration: none;
-} 
+}
+
 img {
   max-width: 100%;
+}
+
+.shareCursor {
+  opacity: .87;
+}
+
+.shareCursor:hover {
+  cursor: pointer;
+  opacity: 1;
 }
