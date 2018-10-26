@@ -23,6 +23,8 @@ import updateUser from './updateUser';
 import userFollow from './userFollow';
 import uploadPhoto from './uploadPhoto';
 import notification from './notification';
+import settings from "./settings";
+
 
 const rootReducer = combineReducers({
   auth,
@@ -46,7 +48,8 @@ const rootReducer = combineReducers({
   userStore: updateUser,
   userFollow,
   uploadPhoto,
-  notification
+  notification,
+  settings
 });
 
 export default rootReducer;

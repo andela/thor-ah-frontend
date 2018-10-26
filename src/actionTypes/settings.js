@@ -1,0 +1,3 @@
+export const NOTIFY_STATUS = "NOTIFY_STATUS";
+export const NOTIFY_LOADING = "NOTIFY_LOADING";
+

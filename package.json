@@ -72,6 +72,7 @@
     "react-router-dom": "^4.3.1",
     "react-scrollable-anchor": "^0.6.1",
     "react-share": "^2.3.1",
+    "react-switch": "^3.0.4",
     "react-tabs": "^2.3.0",
     "react-window-size": "^1.2.2",
     "redux": "^4.0.0",
