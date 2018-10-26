@@ -38,10 +38,9 @@ describe("Notifications", () => {
         it('dispatches NOTIFICATION_SUCCESS ', () => {
             moxios.onDelete(`${API}/api/users/notifications/2`).reply(200, {
             })
-            const expectedActions = []
             const store = mockStore({ notification: {} });
             return store.dispatch(deleteNotification(2)).then(() => {
-                expect(store.getActions()).toEqual(expectedActions);
+                expect(store.getActions()).toEqual([{ "payload": "server unreachable", "type": "NOTIFICATION_ERROR" }]);
             });
         })
     })

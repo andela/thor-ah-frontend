@@ -6,10 +6,9 @@ import { connect } from 'react-redux';
 import styles from './Notification.module.css'
 import { fetchNotifications, deleteNotification } from '../../actions/notification'
 
-
-const pusher = new Pusher('4ae9ed5cdec2db4a53e6', {
-    cluster: 'eu',
-    forceTLS: true
+const pusher = new Pusher(process.env.REACT_APP_PUSHER_KEY, {
+    cluster: process.env.REACT_APP_PUSHER_CLUSTER,
+    forceTLS: process.env.REACT_APP_PUSHER_ENC
 });
 
 class Notification extends React.Component {
@@ -65,7 +64,7 @@ class Notification extends React.Component {
     render() {
         const { notificationVisibility } = this.state
         const { notification } = this.props
-        const { notifications } = notification
+        const { notifications, error } = notification
 
         const notificationStyle = {
             display: notificationVisibility ? 'block' : 'none'
@@ -83,7 +82,7 @@ class Notification extends React.Component {
                 </span>
                 <div className={styles.notification} style={notificationStyle}>
                     <ul>
-                        <li disabled >{notifications.length ? 'Notifications' : 'No notifications'}</li>
+                        <li disabled >{`${notifications.length ? 'Notifications' : 'No notifications'} ${error}`}</li>
                         {notifications.map(notif => {
                             const { articleSlug, id, message } = notif
                             return (

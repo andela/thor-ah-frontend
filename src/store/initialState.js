@@ -144,6 +144,7 @@ const initialState = {
     photo: ''
   },
   notification: {
+    error: "",
     notifications: []
   }
 };

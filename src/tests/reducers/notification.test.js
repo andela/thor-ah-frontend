@@ -8,6 +8,7 @@ describe('notification reducer', () => {
     it('should return initial state', () => {
         expect(notification(undefined, {})).toEqual(
             {
+                error: '',
                 notifications: []
             }
         );
@@ -21,7 +22,9 @@ describe('notification reducer', () => {
     });
 
     it('should handle NOTIFICATION_ERROR', () => {
-        const action = { type: NOTIFICATION_ERROR };
-        expect(notification({}, action)).toEqual({});
+        const action = { type: NOTIFICATION_ERROR, payload: '' };
+        expect(notification({}, action)).toEqual({
+            error: ''
+        });
     });
 });
