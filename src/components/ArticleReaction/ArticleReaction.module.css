@@ -27,7 +27,7 @@
     padding: 0px;
     margin: 0px;
     border: 0px;
-    background-color: #eee;
+    /* background-color: #eee; */
     color: #333;
     width: 100%;
     font-size: 0.9em;
@@ -38,13 +38,14 @@
     padding-top: 5px;
   }
 
-  .popup button:last-child{
-    background-color: #fff;
-  }
-
   .transparentBtn {
     border: none;
     cursor: pointer;
     background: transparent;
     color: #FFF;
   }
+
+
+.popup button:hover {
+  background-color: #eee; 
+}

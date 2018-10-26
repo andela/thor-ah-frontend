@@ -1,0 +1,150 @@
+$primary-red: #c40018;
+
+.reportArticle {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  display: grid;
+  // justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.95);
+  // overflow: auto;
+  z-index: 900;
+
+  .reportArticleModal {
+    padding: 20px;
+    // background: #fff;
+    min-width: 500px;
+    min-height: 500px;
+    justify-self: center;
+    margin: 1rem;
+    display: grid;
+    justify-items: center;
+    align-self: start;
+
+    @media screen and (max-width: 478px) {
+      max-width: 478px;
+    }
+
+    .reportBody {
+      resize: none;
+      width: 400px;
+      height: 150px;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      padding: 10px;
+      font-size: 0.9em;
+
+      &::placeholder {
+        color: #b6b6b6;
+      }
+    }
+
+    li {
+      list-style: none;
+      color: rgba(0, 0, 0, 0.54);
+      margin: 5px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  }
+}
+
+.buttonGroup {
+  justify-self: end;
+  margin-top: 10px;
+  font-size: 0.8em;
+  justify-self: end;
+
+  .cancelButton {
+    border: 1px solid #e0e0e0;
+    color: #646464;
+    padding: 4px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-left: 10px;
+    transition: 0.2s border ease-in-out;
+
+    &:hover {
+      border: 1px solid #aaaaaa;
+      color: #8f8f8f;
+    }
+  }
+
+  .submitButton {
+    background: #c40018;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+}
+
+input[type="radio"] {
+  margin-right: 10px;
+}
+
+.reportForm {
+  border: none;
+  display: grid;
+  margin-top: 40px;
+}
+
+.listActive {
+  background: $primary-red;
+  color: white;
+}
+
+input[type="radio"]:checked ~ .check {
+  border: 5px solid $primary-red;
+}
+
+input[type="radio"]:checked ~ .check::before {
+  background: $primary-red;
+}
+
+input[type="radio"]:checked ~ label {
+  color: $primary-red;
+}
+
+.modalTitle {
+  color: rgba(0, 0, 0, 0.84);
+  font-size: 26px;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.closeButton {
+  width: 25px;
+  height: auto;
+  justify-self: end;
+  align-self: start;
+  margin-right: 20px;
+  cursor: pointer;
+  margin-top: 20px;
+
+  svg {
+    fill: rgba(98, 98, 98, 0.54);
+  }
+}
+
+.reportError {
+  background: rgb(255, 162, 162);
+  color: white;
+  margin-bottom: 30px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.reportSuccess {
+  background: #028102;
+  color: white;
+  margin-bottom: 30px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}

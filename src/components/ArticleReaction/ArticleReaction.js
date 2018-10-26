@@ -21,14 +21,14 @@ class ArticleReaction extends React.Component {
     this.setState({ optionsActive: !optionsActive });
   };
 
+  hideReaction = () => this.setState({ optionsActive: false });
+
   setMessasge = msg => {
     this.setState({ message: msg });
   };
 
   render() {
-    const { articleId } = this.props;
-    const { article } = this.props;
-
+    const { articleId, article, showModal } = this.props;
     const { optionsActive, message } = this.state;
 
     const style = {
@@ -59,14 +59,23 @@ class ArticleReaction extends React.Component {
             <img src={dotIcon} alt="icon" />
           </button>
 
-          <div className={styles.popup} id={styles.popup1} style={style}>
+          <div
+            className={styles.popup}
+            id={styles.popup1}
+            style={style}
+            onBlur={this.hideReaction}
+          >
             <Favorite
               articleId={articleId}
               setMessasge={this.setMessasge}
               hideOptions={this.toggleMoreOptions}
             />
-            <button type="button" className={styles.button}>
-              Report abuse
+            <button
+              type="button"
+              className={styles.reportButton}
+              onClick={showModal}
+            >
+              Report article
             </button>
           </div>
 
