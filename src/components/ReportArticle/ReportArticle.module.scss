@@ -148,3 +148,10 @@ input[type="radio"]:checked ~ label {
   padding: 5px 10px;
   border-radius: 5px;
 }
+
+@media screen and (max-width: 478px) {
+  .reportArticleModal {
+    max-width: 400px;
+  }
+
+}
