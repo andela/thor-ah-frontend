@@ -37,11 +37,10 @@ const reportArticle = (
       }
     )
     .then(response => {
+      dispatch(reportArticleLoading(false));
       if (response.data.status === "success") {
-        dispatch(reportArticleLoading(false));
         return dispatch(reportArticleSucess(response.data));
       }
-      dispatch(reportArticleLoading(false));
       return dispatch(reportArticleError(response));
     })
     .catch(error => {

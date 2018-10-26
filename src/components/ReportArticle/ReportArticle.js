@@ -59,7 +59,7 @@ class ReportArticle extends Component {
       return;
     }
 
-    if (reasonForReport === 'other' && reportBody === '') {
+    if (reasonForReport === "other" && reportBody === "") {
       this.setState({
         error: "Please type any other reason you might have below"
       });
@@ -74,18 +74,22 @@ class ReportArticle extends Component {
       const { closeModal } = this.props;
       if (response && response.payload.status === "success") {
         this.setState({
-          message: response.payload.message
-        })
+          message: response.payload.message,
+          loading: false
+        });
         setTimeout(() => {
           closeModal();
         }, 3000);
       }
     });
+    this.setState({
+      loading: false
+    });
   };
 
   render() {
     const { closeModal, articleslug } = this.props;
-    const { reasonForReport, error, message , loading} = this.state;
+    const { reasonForReport, error, message, loading } = this.state;
     return ReactDOM.createPortal(
       <Fragment>
         <div className={styles.reportArticle}>
@@ -99,7 +103,9 @@ class ReportArticle extends Component {
             <span className={error.length === 0 ? "" : `${styles.reportError}`}>
               {error}
             </span>
-            <span className={message.length === 0 ? "" : `${styles.reportSuccess}`}>
+            <span
+              className={message.length === 0 ? "" : `${styles.reportSuccess}`}
+            >
               {message}
             </span>
             <h2 className={styles.modalTitle}>Report article</h2>
@@ -183,7 +189,11 @@ class ReportArticle extends Component {
                   placeholder="Further complaints? Make them here"
                 />
                 <div className={styles.buttonGroup}>
-                  <button type="submit" className={styles.submitButton} disabled={loading}>
+                  <button
+                    type="submit"
+                    className={styles.submitButton}
+                    disabled={loading}
+                  >
                     Submit
                   </button>
                   <button

@@ -9,35 +9,29 @@ $primary-red: #c40018;
   bottom: 0;
   top: 0;
   display: grid;
-  // justify-content: center;
   align-items: center;
   background-color: rgba(255, 255, 255, 0.95);
-  // overflow: auto;
   z-index: 900;
 
   .reportArticleModal {
-    padding: 20px;
-    // background: #fff;
-    min-width: 500px;
-    min-height: 500px;
-    justify-self: center;
-    margin: 1rem;
     display: grid;
     justify-items: center;
-    align-self: start;
-
-    @media screen and (max-width: 478px) {
-      max-width: 478px;
-    }
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    max-width: 90%;
+    max-height: 90%;
+    transform: translate(-50%, -50%);
 
     .reportBody {
       resize: none;
-      width: 400px;
       height: 150px;
       border: 1px solid #e0e0e0;
       border-radius: 4px;
       padding: 10px;
       font-size: 0.9em;
+      justify-self: stretch;
+      width: 400px;
 
       &::placeholder {
         color: #b6b6b6;
@@ -50,6 +44,10 @@ $primary-red: #c40018;
       margin: 5px;
       border-radius: 4px;
       cursor: pointer;
+
+      input[type='radio'] {
+        margin-right: 10px;
+      }
     }
   }
 }
@@ -83,33 +81,6 @@ $primary-red: #c40018;
     padding: 5px 10px;
     cursor: pointer;
   }
-}
-
-input[type="radio"] {
-  margin-right: 10px;
-}
-
-.reportForm {
-  border: none;
-  display: grid;
-  margin-top: 40px;
-}
-
-.listActive {
-  background: $primary-red;
-  color: white;
-}
-
-input[type="radio"]:checked ~ .check {
-  border: 5px solid $primary-red;
-}
-
-input[type="radio"]:checked ~ .check::before {
-  background: $primary-red;
-}
-
-input[type="radio"]:checked ~ label {
-  color: $primary-red;
 }
 
 .modalTitle {
@@ -149,9 +120,12 @@ input[type="radio"]:checked ~ label {
   border-radius: 5px;
 }
 
-@media screen and (max-width: 478px) {
-  .reportArticleModal {
-    max-width: 400px;
-  }
+.reportForm {
+  display: grid;
+}
 
+@media screen and (max-width: 478px ){
+  .reportBody { 
+    max-width: 300px;
+  }
 }
