@@ -40,18 +40,18 @@ const initialState = {
       isLoading: false,
       error: false,
       data: [],
-      count: 0,
+      count: 0
     },
     featuredArticles: {
       isLoading: false,
-      error: '',
-      data: [],
+      error: "",
+      data: []
     },
     recommendedArticles: {
       isLoading: false,
-      error: '',
+      error: "",
       data: [],
-      count: 0,
+      count: 0
     },
     oneArticle: {
       article: {
@@ -91,7 +91,7 @@ const initialState = {
       data: [],
       error: "",
       loading: false
-    },
+    }
   },
   articleUpdate: {
     data: {},
@@ -100,14 +100,21 @@ const initialState = {
   },
   readingStats: {
     loading: false,
-    error: '',
+    error: "",
     stats: {
-      mostReadCategory: 'None',
+      mostReadCategory: "None",
       numberOfArticlesRead: 0,
       articleReactions: {
         liked: 0,
         disliked: 0
-      },
+      }
+    }
+  },
+  settings: {
+    notification: {
+      loading: false,
+      notifyArticle: true,
+      notifyComment: true
     }
   }
 };

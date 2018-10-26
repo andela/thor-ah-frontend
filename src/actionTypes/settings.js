@@ -1,0 +1,5 @@
+export const NOTIFY_OPT_IN = "NOTIFY_OPT_IN";
+export const NOTIFY_OPT_OUT = "NOTIFY_OPT_OUT";
+export const NOTIFY_STATUS = "NOTIFY_STATUS";
+export const NOTIFY_LOADING = "NOTIFY_LOADING";
+

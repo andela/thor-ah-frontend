@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 // icons
-import { FaBell, FaPencilAlt, FaUser, FaSignOutAlt, FaStar, FaEnvelope } from 'react-icons/fa';
+import { FaBell, FaPencilAlt, FaUser, FaSignOutAlt, FaStar, FaEnvelope, FaD, FaCog } from 'react-icons/fa';
 import { GoKebabVertical, GoX } from 'react-icons/go';
 // styles
 import styles from './header.module.scss';
@@ -57,6 +57,7 @@ class Menu extends React.Component {
           <ul onClick={this.toggleProfile}>
             <li><Link to='/profile/user'> {<FaUser />} Profile </Link></li>
             <li><Link to='/notifications'> {<FaBell />} Notifications</Link></li>
+            <li><Link to='/settings'> {<FaCog />} Settings</Link></li>
             {role === 'author' ? <li><Link to='/article/create'> {<FaPencilAlt />} Publish</Link></li> : null}
             {role === 'author' ? <li><Link to='/me/drafts'> {<FaEnvelope />} Drafts</Link></li> : null}
             <li><Link to='/favorite'> {<FaStar />} Favorites</Link></li>
