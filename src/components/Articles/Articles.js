@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from "prop-types";
 import ReactPaginate from 'react-paginate';
 import moment from 'moment';
 // icons
@@ -157,6 +158,11 @@ class Articles extends Component {
     );
   }
 }
+
+Articles.propTypes = {
+  fetchAllArticles: PropTypes.func.isRequired,
+  fetchRecommended: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => {
   const { allArticleReducer, recommendedReducer } = state;

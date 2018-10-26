@@ -10,7 +10,7 @@ import { fetchFavouriteArticles } from '../../actions/favouriteArticles';
 // styles
 import styles from '../UserProfileTabs/UserProfileTabs.module.scss';
 // styles
-import stylo from '../Articles/articles.module.scss'
+import paginationStyle from '../Articles/articles.module.scss'
 // images
 import appleImage from '../../assets/images/apple.jpg';
 import loadingImg from '../../assets/loading.gif';
@@ -35,7 +35,7 @@ class FavouriteArticles extends Component {
     const { articleCount } = this.props;
     if (articleCount > 6 ) {
       return (
-        <div className={ stylo.content_pagination }>
+        <div className={ paginationStyle.content_pagination }>
           <ReactPaginate
             previousLabel={
               <FaAngleLeft />
@@ -44,14 +44,14 @@ class FavouriteArticles extends Component {
               <FaAngleRight />
             }
             breakLabel={<span>...</span>}
-            breakClassName={ stylo.break_label }
+            breakClassName={ paginationStyle.break_label }
             pageCount={articleCount / 6}
             marginPagesDisplayed={2}
             pageRangeDisplayed={5}
             initialPage={passedCount}
             onPageChange ={this.handlePageChange}
-            containerClassName={ stylo.pagination }
-            activeClassName={ stylo.active }
+            containerClassName={ paginationStyle.pagination }
+            activeClassName={ paginationStyle.active }
           />
         </div>
       );

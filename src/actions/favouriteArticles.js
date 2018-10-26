@@ -40,8 +40,7 @@ export const fetchFavouriteArticles = (page) => dispatch =>
       dispatch(fetchFavouriteSuccess(response.data))
       return dispatch(fetchFavouriteRequest(false));
     })
-    .catch((err) => {
-      console.log(err)
+    .catch(() => {
       dispatch(fetchFavouriteFailed('Unexpected error occurred. Refresh the page to retry.'));
       dispatch(fetchFavouriteRequest(false));
     })
