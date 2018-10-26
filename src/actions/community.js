@@ -34,7 +34,25 @@ const fetchFollowingError = (error) => ({
   payload: error,
 });
 
+const followUserLoading = (loading) => ({
+  type: types.FOLLOW_USER_LOADING,
+  payload: loading,
+});
 
+const followUserSuccess = (data) => ({
+  type: types.FOLLOW_USER_SUCCESS,
+  payload: data,
+});
+
+const unFollowUserLoading = (loading) => ({
+  type: types.UNFOLLOW_USER_LOADING,
+  payload: loading,
+});
+
+const unFollowUserSuccess = (data) => ({
+  type: types.UNFOLLOW_USER_SUCCESS,
+  payload: data,
+});
 
 const fetchFollowers = () => dispatch => {
   dispatch(fetchFollowersLoading(true));
@@ -54,6 +72,15 @@ const fetchFollowers = () => dispatch => {
     })
 };
 
+const setIsFollowing = isFollowing => ({
+  type: types.SET_IS_FOLLOWING,
+  payload: isFollowing,
+})
+
+const checkIsFollowing = (users, username) => {
+  return setIsFollowing(users.some(user => user.username === username));
+}
+
 const fetchFollowing = () => dispatch => {
   dispatch(fetchFollowingLoading(true));
   const { token } = localStorage;
@@ -65,6 +92,8 @@ const fetchFollowing = () => dispatch => {
     .then((response) => {
       dispatch(fetchFollowingLoading(false));
       dispatch(fetchFollowingSuccess(response.data.following));
+      const { following } = response.data;
+      return following;
     })
     .catch(() => {
       dispatch(fetchFollowingLoading(false));
@@ -72,9 +101,58 @@ const fetchFollowing = () => dispatch => {
     })
 }
 
+const followUser = (username) => dispatch => {
+  dispatch(followUserLoading(true));
+  const { token } = localStorage;
+  return axios.post(
+    `${API}/api/users/follow`,
+    {
+      username,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    }
+  )
+    .then((response) => {
+      dispatch(followUserLoading(false));
+      dispatch(followUserSuccess(response.data));
+    })
+    .catch(() => {
+      dispatch(followUserLoading(false));
+    })
+}
+
+const unFollowUser = (username) => dispatch => {
+  dispatch(unFollowUserLoading(true));
+  const { token } = localStorage;
+  return axios.delete(
+    `${API}/api/users/follow`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      data: {
+        username,
+      },
+    }
+  )
+    .then((response) => {
+      dispatch(unFollowUserLoading(false));
+      dispatch(unFollowUserSuccess(response.data));
+    })
+    .catch(() => {
+      dispatch(unFollowUserLoading(false));
+    })
+}
+
 const community = {
   fetchFollowers,
   fetchFollowing,
+  followUser,
+  unFollowUser,
+  checkIsFollowing,
 };
 
 export default community;

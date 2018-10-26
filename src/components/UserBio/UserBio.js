@@ -25,7 +25,7 @@ class UserBio extends Component {
 
   render() {
     const { updateProfileActive } = this.state;
-    const { user, viewOtherUser, viewUser } = this.props;
+    const { user, viewOtherUser, viewUser, handleFollow, isFollowing } = this.props;
     const userData = viewOtherUser ? viewUser : user;
     const { firstName, lastName, username, linkedin, twitter, bio, image } = userData;
 
@@ -58,7 +58,7 @@ class UserBio extends Component {
             viewOtherUser
             ? (
                 <div className={styles.btnAction}>
-                  <button type='submit'>Follow</button>
+                  <button className={isFollowing ? styles.following: ''} type='submit' onClick={handleFollow}>{isFollowing ? 'Unfollow': 'Follow'}</button>
                 </div>
               )
             : (

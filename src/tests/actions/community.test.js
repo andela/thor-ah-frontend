@@ -5,7 +5,12 @@ import MockAdapter from 'axios-mock-adapter';
 import community from '../../actions/community';
 import * as types from '../../actionTypes/community';
 
-const { fetchFollowers, fetchFollowing } = community;
+const {
+  fetchFollowers,
+  fetchFollowing,
+  followUser,
+  checkIsFollowing,
+} = community;
 
 const API = process.env.REACT_APP_API;
 
@@ -135,6 +140,68 @@ describe('community actions', () => {
         .then(() => {
           expect(store.getActions()).toEqual(expectedActions);
         });
+    });
+  });
+
+  describe('followUser', () => {
+    it('dispatches FETCH_FOLLOWING_SUCCESS after fetching comments', () => {
+      moxios.onPost(`${API}/api/users/follow`, {
+        username: 'snow',
+      })
+        .reply(201, {
+          status: 'success',
+          message: 'you successfully followed'
+        });
+
+      const expectedActions = [
+        {
+          type: types.FOLLOW_USER_LOADING,
+          payload: true
+        },
+        {
+          type: types.FOLLOW_USER_LOADING,
+          payload: false
+        },
+        {
+          type: types.FOLLOW_USER_SUCCESS,
+          payload: {
+            status: 'success',
+            message: 'you successfully followed'
+          }
+        }
+      ]
+
+      const store = mockStore({comments: {}});
+      return store.dispatch(followUser('snow'))
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+        });
+    });
+  });
+
+  describe('checkIsFollowing', () => {
+    it('dispatches SET_IS_FOLLOWING', () => {
+      const expectedActions = [
+        {
+          type: types.SET_IS_FOLLOWING,
+          payload: false
+        },
+      ]
+
+      const users = [
+        {
+          id: 1,
+          username: 'jon'
+        },
+        {
+          id: 2,
+          username: 'jack'
+        },
+      ]
+
+      const store = mockStore();
+      store.dispatch(checkIsFollowing(users, 'matt'))
+      expect(store.getActions()).toEqual(expectedActions);
     });
   });
 });

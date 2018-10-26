@@ -171,6 +171,7 @@ const initialState = {
   userProfile: {
     user: {},
     loading: false,
+    isFollowing: false,
   }
 };
 

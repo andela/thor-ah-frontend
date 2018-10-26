@@ -29,4 +29,32 @@ describe('userProfile reducer', () => {
       loading: action.payload,
     });
   });
+
+  it('should handle SET_IS_FOLLOWING', () => {
+    const action = {
+      type: types.SET_IS_FOLLOWING,
+      payload: false
+    };
+    expect(userProfile({}, action)).toEqual({
+      isFollowing: action.payload,
+    });
+  });
+
+  it('should handle FOLLOW_USER_SUCCESS', () => {
+    const action = {
+      type: types.FOLLOW_USER_SUCCESS,
+    };
+    expect(userProfile({}, action)).toEqual({
+      isFollowing: true,
+    });
+  });
+
+  it('should handle UNFOLLOW_USER_SUCCESS', () => {
+    const action = {
+      type: types.UNFOLLOW_USER_SUCCESS,
+    };
+    expect(userProfile({}, action)).toEqual({
+      isFollowing: false,
+    });
+  });
 });

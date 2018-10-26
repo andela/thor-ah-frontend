@@ -50,7 +50,7 @@ $desktop-large: 1100px;
     .userBio {
       font-family: 'PT Sans';
       font-size: 1em;
-      
+
       @include desktop-small {
         margin: auto;
         width: 70%;
@@ -116,6 +116,12 @@ $desktop-large: 1100px;
           background: #C40018;
           color: #fff;
         }
+      }
+
+      .following {
+        background-color: #333;
+        border-color: #fff;
+        color: #fff;
       }
     }
   }
