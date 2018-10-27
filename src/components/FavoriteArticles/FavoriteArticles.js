@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ReactPaginate from 'react-paginate';
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
+// icons
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
+// action
 import { fetchFavouriteArticles } from '../../actions/favouriteArticles';
-// styles
 
 // styles
 import styles from '../UserProfileTabs/UserProfileTabs.module.scss';
+// styles
+import paginationStyle from '../Articles/articles.module.scss'
 // images
 import appleImage from '../../assets/images/apple.jpg';
 import loadingImg from '../../assets/loading.gif';
@@ -17,8 +22,41 @@ class FavouriteArticles extends Component {
   }
 
   componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(fetchFavouriteArticles());
+    const { getFavouriteArticles } = this.props;
+    getFavouriteArticles(1);
+  }
+
+  handlePageChange = (page) => {
+    const { getFavouriteArticles } = this.props;
+    getFavouriteArticles(page.selected + 1);
+  }
+
+  renderPagination = (passedCount) => {
+    const { articleCount } = this.props;
+    if (articleCount > 6 ) {
+      return (
+        <div className={ paginationStyle.content_pagination }>
+          <ReactPaginate
+            previousLabel={
+              <FaAngleLeft />
+            }
+            nextLabel= {
+              <FaAngleRight />
+            }
+            breakLabel={<span>...</span>}
+            breakClassName={ paginationStyle.break_label }
+            pageCount={articleCount / 6}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            initialPage={passedCount}
+            onPageChange ={this.handlePageChange}
+            containerClassName={ paginationStyle.pagination }
+            activeClassName={ paginationStyle.active }
+          />
+        </div>
+      );
+    }
+    return '';
   }
 
   render() {
@@ -42,7 +80,7 @@ class FavouriteArticles extends Component {
       }
       return (
         <div>
-          {articles.map(article => {
+          {articles.articles && articles.articles.map(article => {
             const { id, Article } = article;
             const { description, title, slug, createdAt, thumbnail, author, timeToRead } = Article
             const { firstName, lastName } = author;
@@ -66,6 +104,7 @@ class FavouriteArticles extends Component {
               </a>
             )
           })}
+          {this.renderPagination(0)}
         </div>
       )
     }
@@ -81,7 +120,10 @@ const mapStateToProps = state => {
   const { favouriteArticles } = state;
   return {
     favouriteArticles,
+    articleCount: favouriteArticles.count
   }
 }
 
-export default connect(mapStateToProps)(FavouriteArticles);
+const mapDispatchToProps = { getFavouriteArticles: fetchFavouriteArticles }
+
+export default connect(mapStateToProps, mapDispatchToProps)(FavouriteArticles);

@@ -1,3 +1,5 @@
+$red: #c40018;
+
 .article_text {
   color: #6d6868;
   font-size: 14px;
@@ -11,53 +13,56 @@
 }
 
 .divider {
-  border: 0.9px solid #c40018;
+  border: 0.9px solid $red;
 }
 
 .highlight {
   background: #eee;
 }
 
-.commentPrompt{
-  width: 50px;
-  background: #333;
-  height: 30px;
-  color: #fff;
-  border-radius: 4px;
-  display: none;
-}
-.commentPrompt :active {
-  display: block;
-}
-
-.commentPromptIcon {
-  width: 20px;
-  margin-right: auto;
-  margin-left: auto;
-}
-
 .highlight {
   background: #eee;
 }
 
-.commentPrompt,
-.showCommentBox{
+.showCommentBox {
   position: absolute;
   color: #fff;
   border-radius: 4px;
   display: none;
   user-select: none;
 }
-.commentPrompt{
-  background: #333;
-  width: 50px;
-  height: 30px;
-}
 
-.commentPromptIcon {
-  width: 20px;
-  margin-right: auto;
-  margin-left: auto;
+.commentPrompt {
+  border: 1px solid #eee;
+  position: absolute;
+  user-select: none;
+  display: none;
+  cursor: pointer;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  transition: .4s ease-in-out;
+
+  span {
+    color: #000;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    position: absolute;
+  }
+
+  &.active {
+    display: block;
+  }
+
+  &:hover {
+    border: 1px solid $red;
+
+    span {
+      color: $red;
+    }
+  }
 }
 
 .showCommentBox{

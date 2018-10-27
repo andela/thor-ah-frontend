@@ -7,7 +7,8 @@ describe('Categories reducer', () => {
       category: {
         isLoading: false,
         isError: false,
-        data: {}
+        data: [],
+        count: 0
       },
       categories: {
         isLoading: false,
@@ -32,12 +33,41 @@ describe('Categories reducer', () => {
   it('should handle FETCH_CATEGORY_SUCCESS', () => {
     const action = {
       type: types.FETCH_CATEGORY_SUCCESS,
+      payload: {
+        articles: [
+          {
+            author: {
+              username: "randomAuthor2",
+              email: "author2@mail.com",
+              bio: null,
+              image: null
+            },
+            authorId: 3,
+            createdAt: "2018-10-21T13:22:28.965Z",
+            description: "vcybunjecbuencjkec nece de ev",
+            id: 12,
+            slug: "Hello813832",
+            tags: [],
+            timeToRead: 1,
+            title: "Hello",
+            updatedAt: "2018-10-21T13:22:28.965Z"
+          }
+        ],
+        pagination: {
+          currentPage: 1,
+          currentPageSize: 4,
+          totalPages: 3,
+          totalRecords: 3
+        },
+        status: "success"
+      }
     };
     expect(articleCategoryReducer({}, action)).toEqual({
       category: {
         isLoading: false,
         isError: false,
-        data: action.payload
+        data: action.payload,
+        count: action.payload.pagination.totalRecords
       },
     });
   });

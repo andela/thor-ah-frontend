@@ -15,8 +15,7 @@ import {
 } from 'react-share';
 
 // icons
-import { FaComment } from 'react-icons/fa';
-
+import { GoComment } from 'react-icons/go';
 // components
 import ArticleReaction from "../ArticleReaction/ArticleReaction";
 import ArticleComment from "../ArticleComment/ArticleComment";
@@ -122,9 +121,9 @@ class ArticleContent extends Component {
   CommentPrompt = () => {
     const { promptStyle } = this.state
     return (
-      <div className={styles.commentPrompt} style={promptStyle} onClick={this.displayCommentBox} tabIndex={0} role="button">
-        <p className={styles.commentPromptIcon}><FaComment /> </p>
-      </ div>
+      <button type="button" className={styles.commentPrompt} style={promptStyle} onClick={this.displayCommentBox} tabIndex={0}>
+        <span><GoComment /></span>
+      </button>
     )
   }
 
@@ -135,7 +134,7 @@ class ArticleContent extends Component {
     this.setState({
       promptStyle: {
         ...promptStyle,
-        top: offsetTop - 30, // position just above selected on y-axis
+        top: offsetTop - 37, // position just above selected on y-axis
         left: offsetLeft + (offsetWidth / 2) - 25, // position at the center of selection on x-axis
         display: 'block'
       }

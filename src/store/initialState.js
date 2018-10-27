@@ -27,7 +27,8 @@ const initialState = {
     category: {
       isLoading: false,
       isError: false,
-      data: {}
+      data: [],
+      count: 0
     },
     categories: {
       isLoading: false,
@@ -74,7 +75,8 @@ const initialState = {
   favouriteArticles: {
     loading: false,
     error: '',
-    articles: []
+    articles: [],
+    count: 0
   },
   favoriteArticle: {
     error: '',

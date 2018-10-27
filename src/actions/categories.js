@@ -2,7 +2,6 @@
 import axios from 'axios';
 
 import {
-  FETCH_CATEGORY,
   FETCH_CATEGORY_SUCCESS,
   FETCH_CATEGORY_ERROR,
   FETCH_CATEGORIES,
@@ -45,9 +44,6 @@ export const getAllCategories = () => dispatch => {
 
 
 // Category
-const fetchCategory = () => ({
-  type: FETCH_CATEGORY,
-});
 
 const fetchCategorySuccess = (payload) => ({
   type: FETCH_CATEGORY_SUCCESS,
@@ -60,15 +56,13 @@ const fetchCategoryError = () => ({
 
 
 // Get Article Category
-export const fetchCategoryAction = (categoryName) => dispatch => {
-  dispatch(fetchCategory());
-  return axios
-    .get(`${API}/api/article-categories/${categoryName}/articles`)
+export const fetchCategoryAction = (categoryName, page) => dispatch => 
+  axios
+    .get(`${API}/api/article-categories/${categoryName}/articles?page=${page}`)
     .then(response => {
       if (response.data.status === 'success') {
-        return dispatch(fetchCategorySuccess(response.data.category));
+        return dispatch(fetchCategorySuccess(response.data));
       }
       return dispatch(fetchCategoryError());
     })
     .catch(() => dispatch(fetchCategoryError()));
-};

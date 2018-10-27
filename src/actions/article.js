@@ -142,7 +142,7 @@ const fetchRecommendedError = payload => ({
 });
 
 /**
- * @description Request to the API to get all articles
+page * @description Request to the API to get all articles
  *
  * @param  {Number} page the page number passed in
  *

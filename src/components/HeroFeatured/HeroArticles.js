@@ -11,7 +11,7 @@ const HeroArticles = (props) => {
     <Fragment>
       <div className={styles.sub_featured__single}>
         <h2><Link to={`/articles/${slug}`}>{title}</Link></h2>
-        <p>BY {author}</p>
+        <p>{author}</p>
       </div>
     </Fragment>
 

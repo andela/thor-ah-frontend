@@ -90,7 +90,7 @@ $red: #C40018;
 
   .sub_featured {
     width: 45%;
-    padding: 0px 20px 10px 0;
+    padding: 20px 20px 10px 0;
     margin-right: 20px;
 
     @media only screen and (max-width: 900px) {
@@ -105,12 +105,6 @@ $red: #C40018;
       &:first-child {
         border-top: none;
         padding-top: 0;
-      }
-
-      &:last-child {
-        @media only screen and (max-width: 1200px) {
-          display: none;
-        }
       }
 
       p {

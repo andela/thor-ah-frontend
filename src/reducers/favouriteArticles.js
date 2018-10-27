@@ -10,7 +10,8 @@ const favouriteArticles = (state = initialState.favouriteArticles, action) => {
     case FETCH_FAVOURITE_ARTICLES_SUCCESS:
       return {
         ...state,
-        articles: [...action.payload]
+        articles: action.payload,
+        count: action.payload.pagination.totalRecords
       };
     case FETCH_FAVOURITE_ARTICLES_REQUEST:
       return {

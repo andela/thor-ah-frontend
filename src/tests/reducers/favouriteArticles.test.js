@@ -6,34 +6,44 @@ describe('Published articles', () => {
     expect(favouriteArticles(undefined, {})).toEqual({
       loading: false,
       error: '',
-      articles: []
+      articles: [],
+      count: 0
     })
   })
 
   it('should handle FETCH_FAVOURITE_ARTICLES_SUCCESS', () => {
     const action = {
       type: types.FETCH_FAVOURITE_ARTICLES_SUCCESS,
-      payload: [
-        {
-          id: 10,
-          Article: {
-            author: {
-              firstName: "Testing",
-              lastName: "Man",
-              username: "testingMan"
-            },
-            body: "The conservation of wildlife is essential to ensure the ecosystem is kept in tact",
-            createdAt: "2018-10-16T15:32:12.038Z",
-            description: "wildlife",
-            slug: "wildlife-conservation",
-            timeToRead: 1,
-            title: "wildlife conservation",
+      payload: {
+        articles: [
+          {
+            id: 10,
+            Article: {
+              author: {
+                firstName: "Testing",
+                lastName: "Man",
+                username: "testingMan"
+              },
+              body: "The conservation of wildlife is essential to ensure the ecosystem is kept in tact",
+              createdAt: "2018-10-16T15:32:12.038Z",
+              description: "wildlife",
+              slug: "wildlife-conservation",
+              timeToRead: 1,
+              title: "wildlife conservation",
+            }
           }
+        ],
+        pagination: {
+          currentPage: 1,
+          currentPageSize: 4,
+          totalPages: 3,
+          totalRecords: 3
         }
-      ]
+      }
     };
     expect(favouriteArticles({}, action)).toEqual({
       articles: action.payload,
+      count: action.payload.pagination.totalRecords
     })
   })
 

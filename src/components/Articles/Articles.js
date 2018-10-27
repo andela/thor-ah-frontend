@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from "prop-types";
 import ReactPaginate from 'react-paginate';
 import moment from 'moment';
 // icons
@@ -20,19 +21,19 @@ class Articles extends Component {
   }
 
   componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(getAllArticle(1))
-    dispatch(getRecommended(1))
+    const { fetchAllArticles, fetchRecommended } = this.props;
+    fetchAllArticles(1);
+    fetchRecommended(1)
   }
 
   handleArticlePageChange = (page) => {
-    const { dispatch } = this.props;
-    dispatch(getAllArticle(page.selected + 1));
+    const { fetchAllArticles } = this.props;
+    fetchAllArticles(page.selected + 1);
   }
 
   handleRecommendedPageChange = (page) => {
-    const { dispatch } = this.props;
-    dispatch(getRecommended(page.selected + 1));
+    const { fetchRecommended } = this.props;
+    fetchRecommended(page.selected + 1);
   }
 
   renderArticlePagination = (passedCount) => {
@@ -111,7 +112,7 @@ class Articles extends Component {
               const { id, title, image: thumbnail, slug, description, timeToRead, author, createdAt } = article;
               const snippet = description;
               const details = {
-                author: `${author.username}`,
+                author: `${author.firstName} ${author.lastName}`,
                 timeToRead: `${timeToRead} min read`,
                 date: moment(createdAt).format("Do MMM, YY"),
               }
@@ -135,7 +136,7 @@ class Articles extends Component {
               const { id, title, image: thumbnail, slug, description, timeToRead, author, createdAt } = article;
               const snippet = description;
               const details = {
-                author: `${author.username}`,
+                author: `${author.firstName} ${author.lastName}`,
                 timeToRead: `${timeToRead} min read`,
                 date: moment(createdAt).format("Do MMM, YY"),
               }
@@ -158,6 +159,11 @@ class Articles extends Component {
   }
 }
 
+Articles.propTypes = {
+  fetchAllArticles: PropTypes.func.isRequired,
+  fetchRecommended: PropTypes.func.isRequired
+};
+
 const mapStateToProps = state => {
   const { allArticleReducer, recommendedReducer } = state;
   return {
@@ -168,4 +174,6 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(Articles);
+const mapDispatchToProps = { fetchAllArticles: getAllArticle, fetchRecommended: getRecommended }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Articles);

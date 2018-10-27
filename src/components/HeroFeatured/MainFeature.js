@@ -7,7 +7,7 @@ const MainFeature = (props) => {
 
     <div>
       <Link to={`/articles/${slug}`}>{title}</Link>
-      <p>BY {details}</p>
+      <p>{details}</p>
     </div>
 
   )
