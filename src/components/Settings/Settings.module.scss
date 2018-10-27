@@ -1,0 +1,18 @@
+// variables
+$gray: #000;
+$gray-light: lighten($gray, 90%);
+$wide: 30px;
+
+section {
+  margin-bottom: 200px;
+}
+.heading {
+  font-size: 40px;
+  margin-top: $wide;
+  padding: 20px;
+}
+
+.setting {
+  padding: 24px;
+  border-top: 1px solid $gray-light;
+}
