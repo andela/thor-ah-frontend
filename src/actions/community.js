@@ -77,9 +77,9 @@ const setIsFollowing = isFollowing => ({
   payload: isFollowing,
 })
 
-const checkIsFollowing = (users, username) => {
-  return setIsFollowing(users.some(user => user.username === username));
-}
+const checkIsFollowing = (users, username) => setIsFollowing(
+    users.some(user => user.username === username)
+  );
 
 const fetchFollowing = () => dispatch => {
   dispatch(fetchFollowingLoading(true));
@@ -147,12 +147,18 @@ const unFollowUser = (username) => dispatch => {
     })
 }
 
+const removeUserFromFollowing = (idx) => ({
+  type: types.REMOVE_USER_FROM_LIST,
+  payload: idx,
+})
+
 const community = {
   fetchFollowers,
   fetchFollowing,
   followUser,
   unFollowUser,
   checkIsFollowing,
+  removeUserFromFollowing,
 };
 
 export default community;

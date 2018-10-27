@@ -17,6 +17,42 @@ describe('community reducer', () => {
     });
   });
 
+  it('should handle REMOVE_USER_FROM_LIST', () => {
+    const action = {
+      type: types.REMOVE_USER_FROM_LIST,
+      payload: '1',
+    }
+    const state = {
+      following: {
+        data: [
+          {
+            id: 234,
+            name: 'user'
+          },
+          {
+            id: 239,
+            name: 'another user'
+          },
+        ]
+      }
+    }
+    expect(community(state, action)).toEqual({
+    followers: {
+       data: [],
+       error: '',
+       loading: false,
+     },
+     following: {
+       data: [
+         {
+           id: 234,
+           name: 'user'
+         }
+       ],
+     },
+    });
+  });
+
   describe('followers reducer', () => {
     it('should handle FETCH_FOLLOWERS_LOADING', () => {
       const action = {

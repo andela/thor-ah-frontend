@@ -3,6 +3,15 @@ import * as types from '../actionTypes/community';
 
 const { community } = initialState;
 
+const followingList = (state = [], action) => {
+  switch (action.type) {
+    case types.REMOVE_USER_FROM_LIST:
+      return state.filter((user, idx) => idx !== Number(action.payload));
+    default:
+      return state;
+  }
+}
+
 export const followers = (state = community.followers, action) => {
   switch (action.type) {
     case types.FETCH_FOLLOWERS_LOADING:
@@ -41,6 +50,16 @@ export const following = (state = community.following, action) => {
       return {
         ...state,
         error: action.payload,
+      }
+    case types.REMOVE_USER_FROM_LIST:
+      return {
+        ...state,
+        data: followingList(state.data, action),
+      }
+    case 'DELETE':
+      return {
+        ...state,
+        data: [...state.data.slice(0, -1)],
       }
     default:
       return state;

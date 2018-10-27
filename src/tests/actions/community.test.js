@@ -10,6 +10,7 @@ const {
   fetchFollowing,
   followUser,
   checkIsFollowing,
+  removeUserFromFollowing,
 } = community;
 
 const API = process.env.REACT_APP_API;
@@ -201,6 +202,21 @@ describe('community actions', () => {
 
       const store = mockStore();
       store.dispatch(checkIsFollowing(users, 'matt'))
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  describe('removeUserFromFollowing', () => {
+    it('dispatches SET_IS_FOLLOWING', () => {
+      const expectedActions = [
+        {
+          type: types.REMOVE_USER_FROM_LIST,
+          payload: 1
+        },
+      ];
+
+      const store = mockStore();
+      store.dispatch(removeUserFromFollowing(1))
       expect(store.getActions()).toEqual(expectedActions);
     });
   });

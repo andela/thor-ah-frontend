@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './userProfile.module.scss';
 
-const UserProfileCard = ({ user }) => (
+const UserProfileCard = ({ user, showButton, idx, handleUnfollow }) => (
   <React.Fragment>
     <div className={styles.card}>
       <div className={styles.profileCard}>
         <div className={styles.profileImageContainer}>
           <a href={`/users/${user.username}`}>
-            <img className={styles.profileImg} src={`http://i.pravatar.cc/150?u=${user.username}`} alt="user profile" />
+            <img className={styles.profileImg} src={user.image || `http://i.pravatar.cc/150?u=${user.username}`} alt="user profile" />
           </a>
         </div>
         <div>
@@ -18,9 +18,15 @@ const UserProfileCard = ({ user }) => (
             </a>
           </div>
           <div>
-            <button type="button">
-              follow
-            </button>
+            {
+              showButton
+              ? (
+                  <button data-index={idx} data-user={user.username} onClick={handleUnfollow} type="button">
+                    unfollow
+                  </button>
+                )
+              : null
+            }
           </div>
         </div>
       </div>
@@ -30,6 +36,12 @@ const UserProfileCard = ({ user }) => (
 
 UserProfileCard.propTypes = {
   user: PropTypes.object.isRequired,
+  showButton: PropTypes.bool,
+  idx: PropTypes.number.isRequired,
+}
+
+UserProfileCard.defaultProps = {
+  showButton: false,
 }
 
 export default UserProfileCard;
