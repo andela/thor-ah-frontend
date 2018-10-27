@@ -28,4 +28,13 @@ describe("settings reducer", () => {
     };
     expect(settings({}, action)).toEqual({ loading: action.payload });
   });
+  it("should handle NOTIFY_ERROR", () => {
+    const action = {
+      type: types.NOTIFY_ERROR,
+      payload: {
+        error: {}
+      }
+    };
+    expect(settings({}, action)).toEqual({ error: action.payload });
+  });
 });

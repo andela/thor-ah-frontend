@@ -14,7 +14,13 @@ const NotifyLoading = payload => ({
   payload
 });
 
-export const emailNotifyStatus = email => dispatch => axios
+const NotifyError = payload => ({
+  type: types.NOTIFY_ERROR,
+  payload
+});
+
+export const emailNotifyStatus = email => dispatch =>
+  axios
     .get(`${URL}/asm/suppressions/${email}`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -24,15 +30,20 @@ export const emailNotifyStatus = email => dispatch => axios
     .then(response => {
       dispatch(NotifyLoading(true));
       dispatch(NotifyStatus(response.data.suppressions));
-    });
+    })
+    .catch(() =>
+      dispatch(
+        NotifyError({
+          error: { message: "Server unavailable at the moment" }
+        })
+      )
+    );
 
 export const emailNotifyOptOut = (groupId, email) => dispatch =>
   axios
     .post(
       `${URL}/asm/groups/${groupId}/suppressions`,
-      {
-        recipient_emails: [email]
-      },
+      { recipient_emails: [email] },
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -42,7 +53,14 @@ export const emailNotifyOptOut = (groupId, email) => dispatch =>
     )
     .then(() => {
       dispatch(emailNotifyStatus(email));
-    });
+    })
+    .catch(() =>
+      dispatch(
+        NotifyError({
+          error: { message: "Server unavailable at the moment" }
+        })
+      )
+    );
 
 export const emailNotifyOptIn = (groupId, email) => dispatch =>
   axios
@@ -54,4 +72,11 @@ export const emailNotifyOptIn = (groupId, email) => dispatch =>
     })
     .then(() => {
       dispatch(emailNotifyStatus(email));
-    });
+    })
+    .catch(() =>
+      dispatch(
+        NotifyError({
+          error: { message: "Server unavailable at the moment" }
+        })
+      )
+    );

@@ -18,6 +18,11 @@ export default function reducer(
         ...state,
         loading: action.payload
       };
+    case types.NOTIFY_ERROR:
+      return {
+        ...state,
+        error: action.payload
+      };
     default:
       return state;
   }

@@ -17,7 +17,7 @@ describe("notification actions", () => {
   });
 
   describe("emailNotifyStatus", () => {
-    it("dispaches NOTIFY_STATUS", () => {
+    it("dispatches NOTIFY_STATUS", () => {
       moxios.onGet(`${URL}/asm/suppressions/author@mail.com`).reply(200, {
         suppressions: [
           {
@@ -51,6 +51,17 @@ describe("notification actions", () => {
       const store = mockStore({ settings: {} });
       return store.dispatch(emailNotifyStatus("author@mail.com")).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
+      });
+    });
+    it("dispatches NOTIFY_ERROR", () => {
+      moxios
+        .onGet(`${URL}/asm/suppressions/author@mail.com`)
+        .networkError("server error");
+      const store = mockStore({ settings: {} });
+      return store.dispatch(emailNotifyStatus("author@mail.com")).then(() => {
+        const recievedActions = store.getActions();
+        const failureAction = recievedActions.find(action => action.type === types.NOTIFY_ERROR);
+        expect(failureAction).toBeTruthy();
       });
     });
   });
