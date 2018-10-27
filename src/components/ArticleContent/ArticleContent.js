@@ -53,9 +53,15 @@ class ArticleContent extends Component {
   }
 
   componentDidMount() {
-    const articleSlug = window.location.pathname.split("/articles/")[1];
-    const { fetchArticle } = this.props;
-    fetchArticle(articleSlug);
+    const { fetchArticle, slug } = this.props;
+    fetchArticle(slug);
+  }
+
+  componentDidUpdate(prevProps) {
+    const { slug, fetchArticle } = this.props
+    if (slug !== prevProps.slug) {
+      fetchArticle(slug);
+    }
   }
 
   // returns id to be used to associate comment position to article
@@ -214,25 +220,25 @@ class ArticleContent extends Component {
 
     const shareUrl = `${WEB}/articles/${slug}`;
     const myImg = 'https://res.cloudinary.com/dgbmeqmyf/image/upload/v1540323349/logo.png';
-    const mimg = React.createElement('img', {src: myImg });
-    
+    const mimg = React.createElement('img', { src: myImg });
+
     return (
       <Fragment>
         <div className="card col-md-1 text-center sm-share-div">
           <div>
-            <FacebookShareButton 
-            url={shareUrl}
-            quote={title}
-            picture={mimg}>
-              <FacebookIcon size={35} round className={styles.shareCursor}/>
+            <FacebookShareButton
+              url={shareUrl}
+              quote={title}
+              picture={mimg}>
+              <FacebookIcon size={35} round className={styles.shareCursor} />
             </FacebookShareButton>
           </div>
           <div>
-            <TwitterShareButton 
+            <TwitterShareButton
               url={shareUrl}
               title={`${title} \n`}
               via="AuthorsHaven">
-              <TwitterIcon size={35} round className={styles.shareCursor}/>
+              <TwitterIcon size={35} round className={styles.shareCursor} />
             </TwitterShareButton>
           </div>
           <div>
@@ -240,7 +246,7 @@ class ArticleContent extends Component {
               subject={title}
               body={`New Article share from Authors' Haven \n\n ${title}: ${shareUrl}`}
             >
-              <EmailIcon size={35} round className={styles.shareCursor}/>
+              <EmailIcon size={35} round className={styles.shareCursor} />
             </EmailShareButton>
           </div>
         </div>
@@ -294,8 +300,8 @@ class ArticleContent extends Component {
                       <br /> <br /> <br />
                       {
                         article && authorId === id ?
-                        <Link to={`/me/articles/${slug}/edit`} className={styles.updateLink}>
-                          Edit article
+                          <Link to={`/me/articles/${slug}/edit`} className={styles.updateLink}>
+                            Edit article
                         </Link> : null
                       }
                       <CommentPrompt />

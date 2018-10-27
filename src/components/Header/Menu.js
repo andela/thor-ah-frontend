@@ -5,6 +5,7 @@ import { FaBell, FaPencilAlt, FaUser, FaSignOutAlt, FaEnvelope } from 'react-ico
 import { GoKebabVertical, GoX } from 'react-icons/go';
 // styles
 import styles from './header.module.scss';
+import Notification from '../Notification/Notification'
 
 class Menu extends React.Component {
   constructor(props) {
@@ -13,6 +14,22 @@ class Menu extends React.Component {
     this.triggerMobileCategory = this.triggerMobileCategory.bind(this);
     this.state = {
       profileMenuVisibility: false
+    }
+  }
+
+  componentDidMount() {
+    document.addEventListener('mousedown', this.handleClickOutside);
+  }
+
+  // to enable hide dropdown when on click outside target
+  // https://stackoverflow.com/questions/32553158/detect-click-outside-react-component
+  setWrapperRef = (node) => {
+    this.wrapperRef = node;
+  }
+
+  handleClickOutside = (event) => {
+    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+      this.setState({ profileMenuVisibility: false })
     }
   }
 
@@ -36,11 +53,11 @@ class Menu extends React.Component {
     }
 
     return (
-      <div className={styles.menu}>
+      <div className={styles.menu} ref={this.setWrapperRef}>
         <ul>
           {role === 'author' ? <li><Link to='/article/create'> {<FaPencilAlt />}</Link></li> : null}
           <li >
-            <Link to="/notifications">{<FaBell />}</Link>
+            <Notification />
           </li>
           <li className={styles.small}>
             <button type="button" className={styles.transparentBtn} onClick={this.toggleProfile}>
@@ -54,7 +71,7 @@ class Menu extends React.Component {
           </li>
         </ul>
         <div className={styles.profile} style={profileToggleStyle}>
-          <ul onClick={this.toggleProfile}>
+          <ul onClick={this.toggleProfile} >
             <li><Link to='/profile/user'> {<FaUser />} Profile </Link></li>
             <li><Link to='/notifications'> {<FaBell />} Notifications</Link></li>
             {role === 'author' ? <li><Link to='/article/create'> {<FaPencilAlt />} Publish</Link></li> : null}

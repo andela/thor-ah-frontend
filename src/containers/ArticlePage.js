@@ -11,18 +11,18 @@ class ArticlePage extends Component {
   }
 
   render() {
-    const { tags } = this.props;
+    const { tags, match } = this.props;
     let relatedTag;
     if (tags.length) {
       relatedTag = tags[0].tag;
     }
     return <div className="container">
-        <div className="row p-3">
-          <ArticleContent />
-          <div className="col-md-1" />
-          {tags.length ? <RelatedArticle relatedTag={relatedTag} /> : null}
-        </div>
-      </div>;
+      <div className="row p-3">
+        <ArticleContent slug={match.params.slug} />
+        <div className="col-md-1" />
+        {tags.length ? <RelatedArticle relatedTag={relatedTag} /> : null}
+      </div>
+    </div>;
   }
 }
 const mapStateToProps = state => ({
