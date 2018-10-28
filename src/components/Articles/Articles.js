@@ -115,6 +115,7 @@ class Articles extends Component {
                 author: `${author.firstName} ${author.lastName}`,
                 timeToRead: `${timeToRead} min read`,
                 date: moment(createdAt).format("Do MMM, YY"),
+                profileUrl: `/users/${author.username}`,
               }
               return (
                 <Article
@@ -139,6 +140,7 @@ class Articles extends Component {
                 author: `${author.firstName} ${author.lastName}`,
                 timeToRead: `${timeToRead} min read`,
                 date: moment(createdAt).format("Do MMM, YY"),
+                profileUrl: `/users/${author.username}`,
               }
               return (
                 <Article

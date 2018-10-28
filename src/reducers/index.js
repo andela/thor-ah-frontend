@@ -24,7 +24,8 @@ import userFollow from './userFollow';
 import uploadPhoto from './uploadPhoto';
 import notification from './notification';
 import settings from "./settings";
-
+import community from './community';
+import userProfile from './userProfile';
 
 const rootReducer = combineReducers({
   auth,
@@ -49,7 +50,9 @@ const rootReducer = combineReducers({
   userFollow,
   uploadPhoto,
   notification,
-  settings
+  settings,
+  community,
+  userProfile,
 });
 
 export default rootReducer;

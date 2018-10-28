@@ -19,22 +19,26 @@ class UserFollow extends Component {
   render() {
     const { userFollow } = this.props;
     const { loading, follows, errors } = userFollow;
-    
+
     return (
       <div className={styles.follow_container }>
         <ul className={ errors ? styles.with_error : '' }>
           <li>
-            {loading ? 
-              <span className={styles.loading} ><i className='fa fa-1x fa-spinner fa-spin' /></span> : 
-              <span className={styles.counts}>{ follows.followers }</span> }
-            <span className={styles.names}>Followers</span>
+            <a href="/profile/user/followers">
+              {loading ?
+                <span className={styles.loading} ><i className='fa fa-1x fa-spinner fa-spin' /></span> :
+                <span className={styles.counts}>{ follows.followers }</span> }
+              <span className={styles.names}>Followers</span>
+            </a>
           </li>
           { errors ? <li className={ styles.follow_error }>Error Occurred</li> : '' }
           <li>
-            {loading ? 
-              <span className={styles.loading} ><i className='fa fa-1x fa-spinner fa-spin' /></span> : 
-              <span className={styles.counts}>{ follows.following }</span> }
-            <span className={ styles.names }>Following</span>
+            <a href="/profile/user/following">
+              {loading ?
+                <span className={styles.loading} ><i className='fa fa-1x fa-spinner fa-spin' /></span> :
+                <span className={styles.counts}>{ follows.following }</span> }
+              <span className={ styles.names }>Following</span>
+            </a>
           </li>
         </ul>
       </div>

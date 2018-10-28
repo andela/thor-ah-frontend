@@ -34,14 +34,14 @@ class UserProfileTabs extends Component {
 
   render() {
     const { user } = this.props;
-    const { activeTab } = this.state; 
+    const { activeTab } = this.state;
     const { role } = user;
 
     return(
       <Tabs className={ styles.tabs }>
 
         <TabList className={ styles.tabButtons }>
-          { role === 'author' ? <Tab data-tab="published" 
+          { role === 'author' ? <Tab data-tab="published"
             onClick={ this.processAction }
             className={ activeTab === 'published' ? styles.active : styles.tabLink }>
             Published Articles

@@ -7,6 +7,7 @@ import UserFollow from '../UserFollow/UserFollow';
 import UpdateProfile from '../UpdateProfile/UpdateProfile';
 // styles
 import styles from './UserBio.module.scss';
+import isEmpty from '../../utils/isEmpty';
 
 class UserBio extends Component {
   constructor(props) {
@@ -24,12 +25,19 @@ class UserBio extends Component {
 
   render() {
     const { updateProfileActive } = this.state;
-    const { user } = this.props;
-    const { firstName, lastName, username, linkedin, twitter, bio, image } = user;
+    const { user, viewOtherUser, viewUser, handleFollow, isFollowing } = this.props;
+    const userData = viewOtherUser ? viewUser : user;
+    const { firstName, lastName, username, linkedin, twitter, bio, image } = userData;
+
+    // prevent UI from rendering 'undefined' for some values
+    // while fetching data;
+    if(isEmpty(userData)) return null;
 
     return (
       <div className={styles.profileHeader}>
-        <img src={image || `https://ui-avatars.com/api/?name=${firstName}+${lastName}&background=C40018&color=fff&size=300`} alt={username} className={styles.profileImage} />
+        <a href="/profile/user">
+          <img src={image || `https://ui-avatars.com/api/?name=${firstName}+${lastName}&background=C40018&color=fff&size=300`} alt={username} className={styles.profileImage} />
+        </a>
         <span className={styles.userNames}>{`${firstName} ${lastName}`}</span>
         <div className={styles.bioDiv}>
           <div className={styles.userBio}>
@@ -45,10 +53,20 @@ class UserBio extends Component {
               </li>}
             </ul>
           </div>}
-          <UserFollow />
-          <div className={styles.btnAction}>
-            <button type='submit' onClick={this.toggleUpdateProfile}>Edit profile</button>
-          </div>
+          {viewOtherUser ? '' : <UserFollow />}
+          {
+            viewOtherUser
+            ? (
+                <div className={styles.btnAction}>
+                  <button className={isFollowing ? styles.following: ''} type='submit' onClick={handleFollow}>{isFollowing ? 'Unfollow': 'Follow'}</button>
+                </div>
+              )
+            : (
+                <div className={styles.btnAction}>
+                  <button type='submit' onClick={this.toggleUpdateProfile}>Edit profile</button>
+                </div>
+              )
+          }
         </div>
         <UpdateProfile active={updateProfileActive} toggle={this.toggleUpdateProfile} />
       </div>
@@ -61,6 +79,7 @@ const mapStateToProps = (state) => {
   const { user } = auth;
   return {
     user,
+    viewUser: state.userProfile.user,
   }
 }
 

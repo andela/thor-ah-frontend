@@ -1,0 +1,43 @@
+.card {
+  // max-width: 60%;
+  margin: 10px auto 15px;
+  padding: 15px 20px;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+
+  p {
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+
+  button {
+    padding: 5px;
+    padding-left: 0;
+    margin: 0;
+    color: #C40018;
+    outline: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+}
+
+.profileImageContainer {
+  margin-right: 15px;
+}
+
+.profileImg {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.profileCard {
+  display: flex;
+  align-items: center;
+}
+
+.username {
+  font-size: 18px;
+  font-weight: bold;
+}

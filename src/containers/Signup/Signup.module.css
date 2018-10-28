@@ -139,6 +139,9 @@
  .socialLogin .facebook{
    background-color: #49639F;
  }
+ .facebook:hover, .google:hover {
+   color: white;
+ }
  .socialLogin .google{
    background-color: #D84F45;
  }

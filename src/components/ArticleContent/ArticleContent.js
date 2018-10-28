@@ -206,9 +206,8 @@ class ArticleContent extends Component {
   }
 
   render() {
-
-    const user = JSON.parse(localStorage.user);
-    const decoded = jwtDecode(user.token);
+    const {token} = localStorage;
+    const decoded = jwtDecode(token);
     const { id } = decoded;
 
     const { article, loading } = this.props;
@@ -265,11 +264,13 @@ class ArticleContent extends Component {
                     <h3 className="h1 text-left">{article.title}</h3>
                     <div className="d-flex justify-content-start">
                       <div>
-                        <img
-                          src={profileImage}
-                          className="rounded-circle"
-                          alt="profile"
-                        />
+                        <a href={`/users/${article.author.username}`}>
+                          <img
+                            src={profileImage}
+                            className="rounded-circle"
+                            alt="profile"
+                          />
+                        </a>
                       </div>
                       <div
                         className={`${
@@ -277,7 +278,9 @@ class ArticleContent extends Component {
                           } d-flex px-2 flex-column `}
                       >
                         <span className="text-center">
-                          {article.author.username}
+                          <a href={`/users/${article.author.username}`}>
+                            {article.author.username}
+                          </a>
                         </span>
                         <span className="font-italic">
                           {format(new Date(article.createdAt), ["MMM DD"])}
