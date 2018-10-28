@@ -231,8 +231,8 @@ class ArticleContent extends Component {
   };
 
   render() {
-    const user = JSON.parse(localStorage.user);
-    const decoded = jwtDecode(user.token);
+    const {token} = localStorage;
+    const decoded = jwtDecode(token);
     const { id } = decoded;
 
     const { article, loading } = this.props;
