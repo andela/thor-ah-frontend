@@ -26,6 +26,7 @@ import notification from './notification';
 import settings from "./settings";
 import community from './community';
 import userProfile from './userProfile';
+import reportArticle from './reportArticle';
 
 const rootReducer = combineReducers({
   auth,
@@ -53,6 +54,7 @@ const rootReducer = combineReducers({
   settings,
   community,
   userProfile,
+  reportArticle
 });
 
 export default rootReducer;

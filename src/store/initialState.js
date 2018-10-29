@@ -79,9 +79,9 @@ const initialState = {
     count: 0
   },
   favoriteArticle: {
-    error: '',
+    error: "",
     loading: false,
-    message: '',
+    message: ""
   },
   relatedArticles: {
     articles: [],
@@ -126,18 +126,18 @@ const initialState = {
   },
   publishedArticles: {
     loading: false,
-    error: '',
+    error: "",
     articles: []
   },
   articleSearch: {
     articles: [],
-    error: '',
+    error: "",
     loading: false
   },
   updateUser: {
     loading: false,
-    error: '',
-    user: {},
+    error: "",
+    user: {}
   },
   userFollow: {
     loading: false,
@@ -145,7 +145,7 @@ const initialState = {
       followers: 0,
       following: 0
     },
-    errors: ''
+    errors: ""
   },
   profilePhoto: {
     loading: false,
@@ -171,7 +171,12 @@ const initialState = {
   userProfile: {
     user: {},
     loading: false,
-    isFollowing: false,
+    isFollowing: false
+  },
+  reportArticle: {
+    loading: false,
+    error: "",
+    message: ""
   }
 };
 

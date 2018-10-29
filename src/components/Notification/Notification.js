@@ -6,9 +6,9 @@ import { connect } from 'react-redux';
 import styles from './Notification.module.css'
 import { fetchNotifications, deleteNotification } from '../../actions/notification'
 
-const pusher = new Pusher(process.env.REACT_APP_PUSHER_KEY, {
-    cluster: process.env.REACT_APP_PUSHER_CLUSTER,
-    forceTLS: process.env.REACT_APP_PUSHER_ENC
+const pusher = new Pusher(`${process.env.REACT_APP_PUSHER_KEY}`, {
+    cluster: `${process.env.REACT_APP_PUSHER_CLUSTER}`,
+    forceTLS: `${process.env.REACT_APP_PUSHER_ENC}`
 });
 
 class Notification extends React.Component {
